@@ -1,0 +1,28 @@
+.header__navigation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+  background: linear-gradient(40deg,#389BF2,#2C51BF);
+  z-index: 150;
+}
+
+.navigation {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.navigation__link {
+  padding: 1rem 0;
+  font-size: 1.8rem;
+  color: $color-light;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}

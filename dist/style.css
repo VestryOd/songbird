@@ -508,6 +508,39 @@ h5 {
   border-radius: 10px;
 }
 
+.hamburger__line, .hamburger:after, .hamburger:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 3px;
+  width: 3rem;
+  height: 4px;
+}
+
+.hamburger {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: #389BF2;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.hamburger:before {
+  top: 10px;
+  left: 7.5px;
+}
+.hamburger:after {
+  bottom: 11px;
+  left: 7.5px;
+}
+
+.hamburger__line {
+  top: calc( 50% - 2px );
+  left: 7.5px;
+}
+
 .wrapper {
   max-width: 1320px;
   margin: auto;
@@ -521,6 +554,122 @@ h5 {
   .wrapper {
     padding: 0 21px;
   }
+}
+
+.content {
+  width: 100%;
+  height: 900px;
+  background-color: #389BF2;
+  z-index: 5;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 2rem 1.5rem;
+  z-index: 100;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__navigation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+  background: linear-gradient(40deg, #389BF2, #2C51BF);
+  z-index: 150;
+}
+
+.navigation {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.navigation__link {
+  padding: 1rem 0;
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.toggle {
+  position: relative;
+  width: 120px;
+  height: 45px;
+}
+
+.toggle__switch .toggle__input {
+  display: none;
+}
+
+.toggle__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #389BF2;
+  transition: 0.4s;
+  border-radius: 45px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.toggle__slider:before {
+  position: absolute;
+  content: "";
+  height: 37px;
+  width: 37px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggle__input:checked + .toggle__slider {
+  background-color: #5F49F2;
+}
+
+.toggle__input:focus + .toggle__slider {
+  box-shadow: 0 0 1px #389BF2;
+}
+
+.toggle__input:checked + .toggle__slider:before {
+  transform: translateX(75px);
+}
+
+.toggle__slider:after {
+  content: "TRAIN";
+  color: white;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 65%;
+  font-size: 22px;
+}
+
+.toggle__input:checked + .toggle__slider:after {
+  content: "PLAY";
+  left: 30%;
 }
 
 /*# sourceMappingURL=style.css.map*/

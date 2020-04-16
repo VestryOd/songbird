@@ -7,32 +7,33 @@
   <title>English for Kids</title>
 </head>
 <body>
+  <nav class="header__navigation">
+    <ul class="navigation">
+      <li class="navigation__link">animals</li>
+      <li class="navigation__link">daily activities</li>
+      <li class="navigation__link">aquatic animals</li>
+      <li class="navigation__link">emotions</li>
+      <li class="navigation__link">furniture</li>
+      <li class="navigation__link">plants</li>
+      <li class="navigation__link">wild animals</li>
+      <li class="navigation__link">toys</li>
+      <li class="navigation__link">transport</li>
+    </ul>
+  </nav>
   <header class="header">
     <div class="wrapper header__wrapper">
-      <div class="hamburger">
-        <span class="header__hamburger"><span class="hamburger__line"></span></span>
+      <div class="hamburger header__hamburger">
+        <span class="hamburger__line"></span>
       </div>
-      <nav class="header__navigation">
-        <ul class="navigation">
-          <li class="navigation__link">animals</li>
-          <li class="navigation__link">daily activities</li>
-          <li class="navigation__link">aquatic animals</li>
-          <li class="navigation__link">emotions</li>
-          <li class="navigation__link">furniture</li>
-          <li class="navigation__link">plants</li>
-          <li class="navigation__link">wild animals</li>
-          <li class="navigation__link">toys</li>
-          <li class="navigation__link">transport</li>
-        </ul>
-      </nav>
-      <div class="toggle-mode toggle-mode__wrapper">
-        <label class="switch">
-          <input type="checkbox" id="togBtn">
-          <div class="slider round"></div>
+
+        <label class="toggle toggle__switch"><input class="toggle__input" type="checkbox" id="toggleMode">
+          <div class="toggle__slider toggle__slider_round"></div>
         </label>
-      </div>
     </div>
   </header>
+  <section class="content">
+
+  </section>
   <script src="./src/index.js"></script>
 </body>
 </html>
