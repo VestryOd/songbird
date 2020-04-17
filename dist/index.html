@@ -4,10 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
   <title>English for Kids</title>
 <link href="style.css" rel="stylesheet"></head>
 <body>
-  <nav class="header__navigation">
+  <input type="checkbox" id="toggleNav" hidden>
+  <nav class="header__navigation" id="main-nav">
+    <div class="nav__toggle-wrapper">
+      <label class="nav__toggle-container" for="toggleNav">
+        <span class="nav__close-btn"></span>
+      </label>
+    </div>
     <ul class="navigation">
       <li class="navigation__link">animals</li>
       <li class="navigation__link">daily activities</li>
@@ -22,13 +29,22 @@
   </nav>
   <header class="header">
     <div class="wrapper header__wrapper">
-      <div class="hamburger header__hamburger">
-        <span class="hamburger__line"></span>
-      </div>
-
-        <label class="toggle toggle__switch"><input class="toggle__input" type="checkbox" id="toggleMode">
-          <div class="toggle__slider toggle__slider_round"></div>
+      <div class="hamburger">
+        <label class="nav__toggle-container" for="toggleNav">
+          <span class="header__hamburger"></span>
         </label>
+      </div>
+      <label class="toggle toggle__switch"><input class="toggle__input" type="checkbox" id="toggleMode">
+        <div class="toggle__slider toggle__slider_round"></div>
+      </label>
+    </div>
+    <div class="wrapper state-string">
+      <div class="breadcrumbs">
+
+      </div>
+      <div class="playmode-options">
+
+      </div>
     </div>
   </header>
   <section class="content">
