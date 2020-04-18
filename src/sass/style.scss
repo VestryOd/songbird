@@ -11,6 +11,7 @@
 
 //Layouts
 @import "layouts/wrapper";
+@import "layouts/columns";
 @import "layouts/content";
 
 
@@ -18,3 +19,4 @@
 @import "components/header";
 @import "components/navigation";
 @import "components/switcher";
+@import "components/card";

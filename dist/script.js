@@ -86,6 +86,109 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./cards-data.js":
+/*!***********************!*\
+  !*** ./cards-data.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ([{
+  category: "activities",
+  cards: [{
+    word: "breakfast",
+    translation: "завтрак",
+    image: "/src/img/pictures/activities/breakfast.png"
+  }, {
+    word: "exercises",
+    translation: "упражнения",
+    image: "/src/img/pictures/activities/exercises.png"
+  }, {
+    word: "painting",
+    translation: "рисование",
+    image: "/src/img/pictures/activities/painting.png"
+  }, {
+    word: "rope jumping",
+    translation: "прыгать на скакалке",
+    image: "/src/img/pictures/activities/rope jumping.png"
+  }, {
+    word: "sleeping",
+    translation: "сон",
+    image: "/src/img/pictures/activities/sleeping.png"
+  }, {
+    word: "studying",
+    translation: "обучение",
+    image: "/src/img/pictures/activities/studying.png"
+  }, {
+    word: "teeth cleaning",
+    translation: "чистка зубов",
+    image: "/src/img/pictures/activities/teeth cleaning.png"
+  }, {
+    word: "waking up",
+    translation: "пробуждение",
+    image: "/src/img/pictures/activities/waking up.png"
+  }, {
+    word: "walking",
+    translation: "прогулка",
+    image: "/src/img/pictures/activities/walking.png"
+  }]
+}, {
+  category: "emotions",
+  cards: [{
+    word: "angry",
+    translation: "злой",
+    image: "/src/img/pictures/emotions/angry.png"
+  }, {
+    word: "anxious",
+    translation: "озабоченный",
+    image: "/src/img/pictures/emotions/anxious.png"
+  }, {
+    word: "bored",
+    translation: "скучающий",
+    image: "/src/img/pictures/emotions/bored.png"
+  }, {
+    word: "confident",
+    translation: "уверенный",
+    image: "/src/img/pictures/emotions/confident.png"
+  }, {
+    word: "disappointed",
+    translation: "расстроенный",
+    image: "/src/img/pictures/emotions/disappointed.png"
+  }, {
+    word: "frightened",
+    translation: "испуганный",
+    image: "/src/img/pictures/emotions/frightened.png"
+  }, {
+    word: "guilty",
+    translation: "виноватый",
+    image: "/src/img/pictures/emotions/guilty.png"
+  }, {
+    word: "happy",
+    translation: "счастливый",
+    image: "/src/img/pictures/emotions/happy.png"
+  }, {
+    word: "jealous",
+    translation: "ревнивый",
+    image: "/src/img/pictures/emotions/jealous.png"
+  }, {
+    word: "sad",
+    translation: "грустный",
+    image: "/src/img/pictures/emotions/sad.png"
+  }, {
+    word: "satisfied",
+    translation: "довольный",
+    image: "/src/img/pictures/emotions/satisfied.png"
+  }, {
+    word: "surprised",
+    translation: "удивленный",
+    image: "/src/img/pictures/emotions/surprised.png"
+  }]
+}]);
+
+/***/ }),
+
 /***/ "./node_modules/ansi-html/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/ansi-html/index.js ***!
@@ -9788,10 +9891,133 @@ module.exports.formatError = function(err) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards-data */ "./cards-data.js");
+/* harmony import */ var _js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/voiceSpeak */ "./src/js/voiceSpeak.js");
 
 
+
+window.onload = function () {
+  var CONTENT_CONTAINER = document.querySelector('#content-container');
+  var SWITCHER = document.querySelector('#toggleMode');
+  var cardsSwitchMode = document.querySelectorAll('.card__inner');
+  console.log('Hello, my checker)');
+  CONTENT_CONTAINER.addEventListener('click', function (e) {
+    if (e.target.classList.contains('card__rotate-icon')) {
+      rotateCard(e.target);
+    } else {
+      sayText(e.target);
+    }
+  });
+};
+
+function rotateCard(target) {
+  var side = target.closest('.card__inner');
+  side.classList.toggle('translate');
+
+  side.onmouseleave = function () {
+    side.classList.remove('translate');
+    side.onmouseleave = null;
+  };
+}
+
+function sayText(target) {
+  var word = target.closest('.card').dataset.action;
+  console.log(word);
+  Object(_js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__["default"])(word);
+}
+
+function randomizeCardsOrder(arr) {
+  var indexArray = [];
+
+  for (var i = 0; i < arr.length; i++) {
+    indexArray.push(i);
+  }
+
+  var j, temp;
+
+  for (var _i = indexArray.length - 1; _i > 0; _i--) {
+    j = Math.floor(Math.random() * (_i + 1));
+    temp = indexArray[j];
+    indexArray[j] = indexArray[_i];
+    indexArray[_i] = temp;
+  }
+
+  return indexArray;
+}
+
+/***/ }),
+
+/***/ "./src/js/voiceSpeak.js":
+/*!******************************!*\
+  !*** ./src/js/voiceSpeak.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return speak; });
+// Speech synthesis
+var synth = window.speechSynthesis;
+var voices = [];
+var ENG_GB = "en-GB";
+var ENG_US = "en-US";
+
+window.onbeforeunload = function () {
+  synth.cancel();
+};
+
+function populateVoiceList() {
+  voices = synth.getVoices();
+}
+
+populateVoiceList();
+
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
+function speak(wordToSay) {
+  var pitch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var rate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.8;
+
+  if (synth.speaking) {
+    console.error('speechSynthesis.speaking');
+    synth.cancel();
+    setTimeout(speak, 300);
+  } else {
+    var utterThis = new SpeechSynthesisUtterance(wordToSay);
+
+    utterThis.onend = function (event) {
+      console.log('SpeechSynthesisUtterance.onend');
+    };
+
+    utterThis.onerror = function (event) {
+      console.error('SpeechSynthesisUtterance.onerror');
+    };
+
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].lang === ENG_GB || voices[i].name === ENG_US) {
+        utterThis.voice = voices[i];
+      }
+    }
+
+    utterThis.onpause = function (event) {
+      var _char = event.utterance.text.charAt(event.charIndex);
+
+      console.log('Speech paused at character ' + event.charIndex + ' of "' + event.utterance.text + '", which is "' + _char + '".');
+    };
+
+    utterThis.pitch = pitch;
+    utterThis.rate = rate;
+    synth.speak(utterThis);
+  }
+}
 
 /***/ }),
 

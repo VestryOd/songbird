@@ -10,17 +10,26 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-grow: 1;
     >* {
         flex-basis: $width;
     }
 }
 
-@mixin media-laptop {
+@mixin media-laptoplarge {
     @media (max-width: $content-width) { @content; }
+}
+
+@mixin media-laptop {
+    @media (max-width: $desktop-width) { @content; }
 }
 
 @mixin media-tablet {
     @media (max-width: $tablet-width) { @content; }
+}
+
+@mixin media-tabletsmall {
+    @media (max-width: $tablet-medium-width) { @content; }
 }
 
 @mixin media-mobile {

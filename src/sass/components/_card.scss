@@ -1,0 +1,103 @@
+.card {
+  margin: 15px;
+  perspective: 1000px;
+}
+
+.card__inner {
+  position: relative;
+  max-width:  300px;
+  max-height: 250px;
+  height: 18vw;
+  border-radius: 10px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.translate {
+  transform: rotateY(180deg);
+}
+
+// .card:hover .card__inner {
+//   transform: rotateY(180deg);
+// }
+
+.card__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+  background-color: $color-switcher-train;
+  text-align: center;
+  line-height: 4rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: $color-light;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.card__front, .card__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: $color-light;
+  backface-visibility: hidden;
+  @extend %background-image;
+}
+
+.card__back {
+  transform: rotateY(180deg)
+}
+
+.card__icon {
+  position: absolute;
+  top: 10px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  @extend %background-image;
+  cursor: pointer;
+  @extend %transition;
+}
+
+.card__rotate-icon {
+  right: 15px;
+  background-image: url("/assets/img/icons/rotate.svg");
+}
+
+.card__rotate-icon:hover {
+  border: 1px solid $color-additional;
+}
+
+.card__sound-icon {
+  left: 15px;
+  background-image: url("/assets/img/icons/volume-loud.svg");
+}
+
+.train_mode {
+  & div {
+    background-position: center -15px;
+  }
+  // & .card__rotate-icon {
+  //   visibility: visible;
+  // }
+  & .card__sound-icon {
+    opacity: 0;
+  }
+}
+
+.play_mode {
+  & .card__rotate-icon {
+    visibility: hidden;
+  }
+}
+
+
