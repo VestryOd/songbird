@@ -1,0 +1,49 @@
+.rate {
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rate__rank {
+  position: relative;
+  display: flex;
+  padding: 2px;
+  height: 45px;
+  border: 2px solid $color-border;
+  box-sizing: border-box;
+  border-radius: 500px;
+}
+
+.rate__score {
+  display: flex;
+  margin-right: 45px;
+  & div {
+    height: 100%;
+  }
+}
+
+.rate__point {
+  width: 33px;
+  // height: 33px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  margin: 0 2px;
+  @extend %transition;
+  & div {
+    @extend %background-image;
+  }
+}
+
+.rate-status__empty {
+  background-image: url("/assets/img/icons/star-empty.svg");
+}
+
+.rate-status__success {
+  background-image: url("/assets/img/icons/star-success.svg");
+}
+
+.rate-status__error {
+  background-image: url("/assets/img/icons/star-error.svg");
+}
+

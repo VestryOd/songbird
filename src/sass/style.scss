@@ -10,13 +10,15 @@
 @import "base/hamburger";
 
 //Layouts
+@import "layouts/header";
 @import "layouts/wrapper";
 @import "layouts/columns";
 @import "layouts/content";
 
 
 //Components
-@import "components/header";
 @import "components/navigation";
 @import "components/switcher";
 @import "components/card";
+@import "components/playmode-btn";
+@import "components/rate";

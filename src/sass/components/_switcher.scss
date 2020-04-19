@@ -15,7 +15,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  // background-color: #ca2222;
   background-color: $color-switcher-train;
   transition: .4s;
   border-radius: 45px;
@@ -35,7 +34,6 @@
 }
 
 .toggle__input:checked + .toggle__slider {
-  // background-color: #2ab934;
   background-color: $color-switcher-play;
 }
 
@@ -58,10 +56,11 @@
  font-size: 22px;
  font-weight: 300;
  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-//  font-family: Verdana, sans-serif;
+ @extend %transition;
 }
 
 .toggle__input:checked + .toggle__slider:after {
   content:'PLAY';
   left: 30%;
+  @extend %transition;
 }
