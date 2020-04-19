@@ -417,7 +417,7 @@ ul {
   box-sizing: border-box;
 }
 
-.rate__point, .playmode-button, .card__icon, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after {
+.rate__point, .playmode-button, .card__icon, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content {
   transition: all 0.5s ease-out;
 }
 
@@ -429,7 +429,7 @@ h1 {
   font-family: "Poppins", Verdana, sans-serif;
 }
 
-.rate__point div, .playmode-button span, .card__icon, .card__front, .card__back {
+.rate__point div, .playmode-button span, .card__icon, .card__front, .card__back, .nav__link .nav_icon {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -654,7 +654,7 @@ h5 {
   }
 }
 
-.header__navigation {
+.header__nav {
   position: absolute;
   left: -100%;
   top: 0;
@@ -667,7 +667,7 @@ h5 {
   transition: all 0.7s ease-in-out;
 }
 
-.navigation {
+.nav {
   margin: 0;
   padding: 20px;
   display: flex;
@@ -675,15 +675,37 @@ h5 {
   flex-wrap: wrap;
 }
 
-.navigation__link {
+.nav__link {
   padding: 1rem 0;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+.nav__link .nav_content {
   font-size: 1.8rem;
   color: #ffffff;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 1px;
-  cursor: pointer;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.nav__link .nav_icon {
+  margin: 0 2px;
+  position: absolute;
+  left: -30px;
+  top: 10px;
+  width: 2.4rem;
+  height: 2.4rem;
+  opacity: 0;
+}
+
+.nav__link:hover .nav_content {
+  padding-left: 3rem;
+}
+.nav__link:hover .nav_icon {
+  left: 0;
+  opacity: 1;
 }
 
 .nav__toggle-wrapper {
@@ -710,13 +732,13 @@ h5 {
   cursor: pointer;
 }
 
-#toggleNav:checked ~ .header__navigation {
+#toggleNav:checked ~ .header__nav {
   opacity: 1;
   transform: translateX(0);
   left: 0;
 }
 
-#toggleNav ~ .header__navigation {
+#toggleNav ~ .header__nav {
   opacity: 0;
   transform: translateX(-100%);
   left: -100%;
@@ -904,7 +926,7 @@ h5 {
   border-radius: 50%;
 }
 .playmode-button__play {
-  background-image: url("/assets/img/icons/play-btn.svg");
+  background-image: url("/assets/img/icons/play-filled-btn.svg");
 }
 .playmode-button__repeat {
   background-image: url("/assets/img/icons/refresh-btn.svg");

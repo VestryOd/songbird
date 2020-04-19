@@ -1,3 +1,4 @@
+import createDomNode from './createDomNode';
 export class Card {
   constructor(mode, card) {
     this.cardData = card;
@@ -16,35 +17,35 @@ export class Card {
     return inner;
   }
 
-  generateFront(word, image) {
+  generateFront(category, word, imgPath) {
     let front = createDomNode(front, 'div', 'card__front');
-    front.setAttribute('style', `background-image: url(${image});`);
+    front.setAttribute('style', `background-image: url(${imgPath}${category}/${word}.png);`);
     front.innerHTML = `<span class="card__icon card__sound-icon"></span>
                       <span class="card__icon card__rotate-icon"></span>
                       <div class="card__title">${word}</div>`;
     return front;
   }
 
-  generateBack(image, translation) {
+  generateBack(category, word, translation, imgPath) {
     let back = createDomNode(front, 'div', 'card__back');
-    back.setAttribute('style', `background-image: url(${image});`);
+    back.setAttribute('style', `background-image: url(${imgPath}${category}/${word}.png);`);
     back.innerHTML = `<span class="card__icon card__rotate-icon"></span>
                       <div class="card__title">${translation}</div>`;
     return back;
   }
 
-  createDomNode(node, element, ...classes) {
-    node = document.createElement(element);
-    node.classList.add(...classes);
-    return node
-  };
+  // createDomNode(node, element, ...classes) {
+  //   node = document.createElement(element);
+  //   node.classList.add(...classes);
+  //   return node
+  // };
 
   buildCard() {
     const { data } = this.cardData;
     let card = this.generateCard(data.word);
     let inner = generateCardInner(this.mode);
-    inner.append(this.generateFront(data.word, data.image));
-    inner.append(this.generateBack(data.image, data.translation));
+    inner.append(this.generateFront(data.category, data.word, data.imgPath));
+    inner.append(this.generateBack(data.category, data.word, data.translation, data.imgPath));
     card.appaned(inner);
     this.card = card;
   }

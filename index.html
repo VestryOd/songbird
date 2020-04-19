@@ -10,22 +10,49 @@
 </head>
 <body>
   <input type="checkbox" id="toggleNav" hidden>
-  <nav class="header__navigation" id="main-nav">
+  <nav class="header__nav" id="main-nav">
     <div class="nav__toggle-wrapper">
       <label class="nav__toggle-container" for="toggleNav">
         <span class="nav__close-btn"></span>
       </label>
     </div>
-    <ul class="navigation">
-      <li class="navigation__link">animals</li>
-      <li class="navigation__link">daily activities</li>
-      <li class="navigation__link">aquatic animals</li>
-      <li class="navigation__link">emotions</li>
-      <li class="navigation__link">furniture</li>
-      <li class="navigation__link">plants</li>
-      <li class="navigation__link">wild animals</li>
-      <li class="navigation__link">toys</li>
-      <li class="navigation__link">transport</li>
+    <ul class="nav">
+      <li class="nav__link" data-section="animals">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/animals_contour.svg');"></span>
+        <span class="nav_content">animals</span>
+      </li>
+      <li class="nav__link" data-section="everyday">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/everyday_contour.svg');"></span>
+        <span class="nav_content">everyday</span>
+      </li>
+      <li class="nav__link" data-section="aquatic">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/aquatic_contour.svg');"></span>
+        <span class="nav_content">aquatic</span>
+      </li>
+      <li class="nav__link" data-section="emotions">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/emotions_contour.svg');"></span>
+        <span class="nav_content">emotions</span>
+      </li>
+      <li class="nav__link" data-section="furniture">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/furniture_contour.svg');"></span>
+        <span class="nav_content">furniture</span>
+      </li>
+      <li class="nav__link" data-section="plants">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/plants_contour.svg');"></span>
+        <span class="nav_content">plants</span>
+      </li>
+      <li class="nav__link" data-section="wild">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/wild_contour.svg');"></span>
+        <span class="nav_content">wild</span>
+      </li>
+      <li class="nav__link" data-section="toys">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/toys_contour.svg');"></span>
+        <span class="nav_content">toys</span>
+      </li>
+      <li class="nav__link" data-section="transport">
+        <span class="nav_icon" style="background-image: url('/assets/img/categories/transport_contour.svg');"></span>
+        <span class="nav_content">transport</span>
+      </li>
     </ul>
   </nav>
   <header class="header">
@@ -76,12 +103,12 @@
       <div class="layout-4-column content__wrapper">
         <div class="card train_mode" data-action="breakfast">
           <div class="card__inner">
-            <div class="card__front" style="background-image: url('/assets/img/pictures/activities/breakfast.png');">
+            <div class="card__front" style="background-image: url('/assets/img/pictures/everyday/breakfast.png');">
               <span class="card__icon card__sound-icon"></span>
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">breakfast</div>
             </div>
-            <div class="card__back" style="background-image: url('/assets/img/pictures/activities/breakfast.png');">
+            <div class="card__back" style="background-image: url('/assets/img/pictures/everyday/breakfast.png');">
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">завтрак</div>
             </div>
@@ -89,12 +116,12 @@
         </div>
         <div class="card train_mode" data-action="exercises">
           <div class="card__inner">
-            <div class="card__front" style="background-image: url('/assets/img/pictures/activities/exercises.png');">
+            <div class="card__front" style="background-image: url('/assets/img/pictures/everyday/exercises.png');">
               <span class="card__icon card__sound-icon"></span>
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">exercises</div>
             </div>
-            <div class="card__back" style="background-image: url('/assets/img/pictures/activities/exercises.png');">
+            <div class="card__back" style="background-image: url('/assets/img/pictures/everyday/exercises.png');">
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">зарядка</div>
             </div>
@@ -102,12 +129,12 @@
         </div>
         <div class="card train_mode" data-action="painting">
           <div class="card__inner">
-            <div class="card__front" style="background-image: url('/assets/img/pictures/activities/painting.png');">
+            <div class="card__front" style="background-image: url('/assets/img/pictures/everyday/painting.png');">
               <span class="card__icon card__sound-icon"></span>
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">painting</div>
             </div>
-            <div class="card__back" style="background-image: url('/assets/img/pictures/activities/painting.png');">
+            <div class="card__back" style="background-image: url('/assets/img/pictures/everyday/painting.png');">
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">рисование</div>
             </div>
@@ -115,12 +142,12 @@
         </div>
         <div class="card train_mode" data-action="rope jumping">
           <div class="card__inner">
-            <div class="card__front" style="background-image: url('/assets/img/pictures/activities/rope jumping.png');">
+            <div class="card__front" style="background-image: url('/assets/img/pictures/everyday/rope jumping.png');">
               <span class="card__icon card__sound-icon"></span>
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">rope jumping</div>
             </div>
-            <div class="card__back" style="background-image: url('/assets/img/pictures/activities/rope jumping.png');">
+            <div class="card__back" style="background-image: url('/assets/img/pictures/everyday/rope jumping.png');">
               <span class="card__icon card__rotate-icon"></span>
               <div class="card__title">прыжки со скакалкой</div>
             </div>

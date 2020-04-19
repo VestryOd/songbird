@@ -1,4 +1,4 @@
-.header__navigation {
+.header__nav {
   position: absolute;
   left: -100%;
   top: 0;
@@ -11,7 +11,7 @@
   transition: all 0.7s ease-in-out;
 }
 
-.navigation {
+.nav {
   margin: 0;
   padding: 20px;
   display: flex;
@@ -19,15 +19,43 @@
   flex-wrap: wrap;
 }
 
-.navigation__link {
+.nav__link {
   padding: 1rem 0;
-  font-size: 1.8rem;
-  color: $color-light;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  & .nav_content {
+    font-size: 1.8rem;
+    color: $color-light;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    @extend %transition;
+  }
+  & .nav_icon {
+    margin: 0 2px;
+    position: absolute;
+    left: -30px;
+    top: 10px;
+    width: 2.4rem;
+    height: 2.4rem;
+    @extend %background-image;
+    opacity: 0;
+    @extend %transition;
+  }
+}
+
+.nav__link:hover {
+  & .nav_content {
+    padding-left: 3rem;
+    // background-color: $color-navlink-bgc;
+  }
+  & .nav_icon {
+    left: 0;
+    opacity: 1;
+  }
 }
 
 .nav__toggle-wrapper {
@@ -54,13 +82,13 @@
   cursor: pointer;
 }
 
-#toggleNav:checked ~ .header__navigation {
+#toggleNav:checked ~ .header__nav {
     opacity: 1;
     transform: translateX(0);
     left: 0;
   }
 
-  #toggleNav ~ .header__navigation {
+  #toggleNav ~ .header__nav {
     opacity: 0;
     transform: translateX(-100%);
     left: -100%;
