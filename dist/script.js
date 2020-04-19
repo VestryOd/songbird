@@ -9988,8 +9988,7 @@ function speak(wordToSay) {
 
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
-    synth.cancel();
-    setTimeout(speak, 300);
+    synth.cancel(); // setTimeout(speak, 300);
   } else {
     var utterThis = new SpeechSynthesisUtterance(wordToSay);
 

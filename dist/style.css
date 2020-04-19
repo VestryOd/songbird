@@ -887,8 +887,8 @@ h5 {
 
 .playmode-button {
   position: relative;
-  width: 47px;
-  height: 47px;
+  width: 45px;
+  height: 45px;
   background-color: #BF4D0B;
   border-radius: 50%;
   opacity: 1;
@@ -899,8 +899,8 @@ h5 {
   position: absolute;
   left: 0;
   top: 0;
-  width: 47px;
-  height: 47px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 .playmode-button__play {
@@ -918,6 +918,7 @@ h5 {
   padding: 0 15px;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 20px;
 }
 
 .rate__rank {

@@ -6,8 +6,8 @@
 
 .playmode-button {
   position: relative;
-  width: 47px;
-  height: 47px;
+  width: 45px;
+  height: 45px;
   background-color: $color-playmode-btn;
   border-radius: 50%;
   opacity: 1;
@@ -18,8 +18,8 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 47px;
-    height: 47px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     @extend %background-image;
   }
