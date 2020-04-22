@@ -1,5 +1,8 @@
 .category__wrapper {
   margin: 40px;
+  @include media-mobile {
+    margin: 20px;
+  }
 }
 
 .category {
@@ -32,6 +35,9 @@
   color: $color-light;
   padding-left: 55px;
   @extend %text_shadow;
+  @include media-mobile {
+    font-size: 30px;
+  }
 }
 
 .category__logo_color {

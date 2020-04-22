@@ -1,6 +1,6 @@
 import speak from "../voiceSpeak";
 
-export default function cardClick(e) {
+export default function cardTrainClick(e) {
   console.log(e.target);
   if (e.target.classList.contains('card__rotate-icon')) {
     rotateCard(e.target)

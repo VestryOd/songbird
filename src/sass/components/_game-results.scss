@@ -1,0 +1,43 @@
+.results {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: $color-background-guessed-card;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > * {
+    font-weight: 300;
+  }
+}
+
+.info__title {
+  color: $color-additional;
+  @extend %text_shadow;
+  margin: 20px 0;
+}
+
+.info__description {
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 30px;
+  & > * {
+    color: $color-info-description;
+    font-size: 2rem;
+    @extend %text_shadow;
+  }
+}
+
+.info__image {
+  @extend %background-image;
+  width: 250px;
+  height: 250px;
+  @extend %box-shadow-bold;
+}

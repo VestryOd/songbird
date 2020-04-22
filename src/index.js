@@ -1,6 +1,4 @@
 import data from '../cards-data';
-import audioPlayer from './js/audioPlayer';
-import randomizeCardsOrder from './js/randomizeCardsOrder';
 
 // import Components
 import { Nav } from "./js/Components/Nav";
@@ -9,11 +7,9 @@ import { CategoryLayout } from "./js/Components/CategoryLayout";
 // handlers
 import categoryClick from "./js/hadlers/categoryClick";
 import handleModeSwitch from "./js/hadlers/handleModeSwitch";
-import handleRouts from "./js/hadlers/handleRouts";
 
 // constants and variables
 const CATEGORIES_LAYOUT = ['layout-inline-flex'];
-let mode = 'train_mode';
 
 window.onload = function () {
   const CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
@@ -26,7 +22,7 @@ window.onload = function () {
   HEADER_NAV.addEventListener('click', categoryClick);
 
   // make categories home page
-  let homePageLayout = new CategoryLayout(data, mode, CATEGORIES_LAYOUT).createInstance();
+  let homePageLayout = new CategoryLayout(data, 'train_mode', CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout);
   homePageLayout.addEventListener('click', categoryClick);
 
@@ -34,8 +30,11 @@ window.onload = function () {
    handleModeSwitch();
  });
 
+  // init localstorage
+  localStorage.setItem('englishMode', 'train_mode');
+  localStorage.setItem('englishWord', '');
+  localStorage.setItem('englishWordsArray', '');
+  localStorage.setItem('englishWordsOrder', '');
+  // localStorage.setItem('englishWordsIndex', '');
+  console.log(localStorage.englishMode);
 }
-
-
-
-

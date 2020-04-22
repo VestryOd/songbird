@@ -4,12 +4,12 @@ import { CardsLayout } from "../Components/CardsLayout";
 import { Breadcrumbs } from "../Components/Breadcrumbs";
 import changeContent from "../changeContent";
 import createDomNode from "../createDomNode";
-import cardClick from "../hadlers/cardClick";
+import cardTrainClick from "./cardTrainClick";
+import cardPlayClick from "./cardPlayClick";
 import categoryClick from "../hadlers/categoryClick";
 import data from "../../../cards-data";
 
 export default function handleRouts(route) {
-  console.log(route);
 
   const CATEGORIES_LAYOUT = ['layout-inline-flex'];
   const CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
@@ -24,23 +24,31 @@ export default function handleRouts(route) {
     handleCategoriesPage(data, route, mode, CATEGORIES_LAYOUT, DELAY);
   }
 
+
   function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
     let categoryObject = getCategoryFromData(data, route);
     let cards = new CardsLayout(categoryObject, mode, classes).createInstance();
-    cards.addEventListener('click', cardClick);
+    let clickHandler = mode === 'train_mode' ? cardTrainClick : cardPlayClick;
+    console.log(clickHandler);
+    cards.addEventListener('click', clickHandler);
+
     let breadcrumbs = new Breadcrumbs(categoryObject).createInstance();
     changeContent('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
     changeContent('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+
     animationInProcess();
   }
+
 
   function handleCategoriesPage(data, mode, isAnimated, classes, delay) {
     let homePageLayout = new CategoryLayout(data, mode, classes).createInstance();
     homePageLayout.addEventListener('click', categoryClick);
+
     let breadcrumbs = createDomNode(breadcrumbs, 'div', 'breadcrumbs__layout');
     breadcrumbs.innerHTML = `<div></div`;
     changeContent('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
     changeContent('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+
     animationInProcess();
   }
 
@@ -49,12 +57,12 @@ export default function handleRouts(route) {
   }
 
   function animationInProcess() {
-    console.log('start---', new Date().getMilliseconds());
+    // console.log('start---', new Date().getMilliseconds());
 
     isAnimated = true;
     setTimeout(() => {
       isAnimated = false;
-      console.log('end---', new Date().getMilliseconds());
+      // console.log('end---', new Date().getMilliseconds());
     }, DELAY);
   }
 

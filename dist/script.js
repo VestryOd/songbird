@@ -10196,42 +10196,42 @@ module.exports.formatError = function(err) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards-data */ "./cards-data.js");
-/* harmony import */ var _js_audioPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/audioPlayer */ "./src/js/audioPlayer.js");
-/* harmony import */ var _js_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
-/* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
-/* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
-/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
-/* harmony import */ var _js_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
-
-
+/* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
+/* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
+/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
  // import Components
 
 
  // handlers
 
 
-
  // constants and variables
 
 var CATEGORIES_LAYOUT = ['layout-inline-flex'];
-var mode = 'train_mode';
 
 window.onload = function () {
   var CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
   var HEADER_NAV = document.querySelector('#main-nav');
   var SWITCHER = this.document.querySelector('#toggleMode'); // make nav
 
-  var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_3__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__["default"]); // make categories home page
 
-  var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_4__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
+  var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'train_mode', CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout);
-  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__["default"]);
   SWITCHER.addEventListener('click', function () {
-    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__["default"])();
-  });
+    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  }); // init localstorage
+
+  localStorage.setItem('englishMode', 'train_mode');
+  localStorage.setItem('englishWord', '');
+  localStorage.setItem('englishWordsArray', '');
+  localStorage.setItem('englishWordsOrder', ''); // localStorage.setItem('englishWordsIndex', '');
+
+  console.log(localStorage.englishMode);
 };
 
 /***/ }),
@@ -10652,6 +10652,97 @@ var CategoryLayout = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/Components/GameResults.js":
+/*!******************************************!*\
+  !*** ./src/js/Components/GameResults.js ***!
+  \******************************************/
+/*! exports provided: GameResults */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameResults", function() { return GameResults; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var GameResults = /*#__PURE__*/function () {
+  function GameResults(type, successScore, errorScore) {
+    _classCallCheck(this, GameResults);
+
+    this.type = type;
+    this.successScore = successScore;
+    this.errorScore = errorScore;
+    this.layout = '';
+  }
+
+  _createClass(GameResults, [{
+    key: "generateOverlay",
+    value: function generateOverlay() {
+      var classes = ['results'];
+      var overlay = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [overlay, 'div'].concat(classes));
+      return overlay;
+    }
+  }, {
+    key: "generateWrapper",
+    value: function generateWrapper() {
+      var classes = ['info__wrapper'];
+      var infoWrapper = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [infoWrapper, 'div'].concat(classes));
+      return infoWrapper;
+    }
+  }, {
+    key: "generatetitle",
+    value: function generatetitle() {
+      var classes = ['info__wrapper'];
+      var title = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [title, 'div'].concat(classes));
+      var text = this.type === 'success' ? 'Congratulations, you won' : 'You had errors, try again';
+      title.innerHTML = text;
+      return title;
+    }
+  }, {
+    key: "generateDescription",
+    value: function generateDescription() {
+      var classes = ['info__description'];
+      var description = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [description, 'div'].concat(classes));
+      description.innerHTML = "<span>You guessed 15 pictures, and made 0 errors</span>";
+      return description;
+    }
+  }, {
+    key: "generateImage",
+    value: function generateImage() {
+      var classes = ['info__description'];
+      var image = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [image, 'div'].concat(classes));
+      image.style = "background-image: url(/assets/img/playmode/".concat(this.type === 'success' ? 'win' : 'fail', ".png);");
+      return image;
+    }
+  }, {
+    key: "buildLayout",
+    value: function buildLayout() {
+      var overlay = this.generateOverlay();
+      var wrapper = this.generateWrapper();
+      wrapper.append(this.generatetitle());
+      wrapper.append(this.generateDescription());
+      wrapper.append(this.generateImage());
+      overlay.append(wrapper);
+      this.overlay = overlay;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildLayout();
+      return this.layout;
+    }
+  }]);
+
+  return GameResults;
+}();
+
+/***/ }),
+
 /***/ "./src/js/Components/Nav.js":
 /*!**********************************!*\
   !*** ./src/js/Components/Nav.js ***!
@@ -10818,8 +10909,8 @@ var Rate = /*#__PURE__*/function () {
   }, {
     key: "generatePlayButton",
     value: function generatePlayButton() {
-      var button = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(button, 'button', 'playmode-button');
-      button.innerHTML = "<span class=\"playmode-button__play\"></span>\n                        <span class=\"playmode-button__repeat hidden\"></span>";
+      var button = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(button, 'div', 'playmode-button');
+      button.innerHTML = "<span class=\"playmode-button__play\"></span>\n                        <span class=\"playmode-button__repeat invisible\"></span>";
       return button;
     }
   }, {
@@ -10996,19 +11087,184 @@ function createDomNode(node, element) {
 
 /***/ }),
 
-/***/ "./src/js/hadlers/cardClick.js":
-/*!*************************************!*\
-  !*** ./src/js/hadlers/cardClick.js ***!
-  \*************************************/
+/***/ "./src/js/hadlers/cardPlayClick.js":
+/*!*****************************************!*\
+  !*** ./src/js/hadlers/cardPlayClick.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardClick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
+/* harmony import */ var _Components_GameResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/GameResults */ "./src/js/Components/GameResults.js");
+/* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
+/* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
+/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+
+
+
+
+var words, order, currenIndex, isPlaying, isSpeaking;
+function cardTrainClick(e) {
+  if (e.target.classList.contains('playmode-button__play') || e.target.classList.contains('playmode-button__repeat')) {
+    if (isPlaying) {
+      clearCards();
+    } else {
+      changeIcons();
+    }
+
+    isPlaying = true;
+    initValues();
+    newGameStep();
+  } else if (e.target.classList.contains('card__front') || e.target.classList.contains('card')) {
+    if (isSpeaking) return;
+    handleGuess(e.target.closest('.card'));
+  }
+
+  console.log(e.target);
+
+  function newGameStep() {
+    console.log("words=".concat(words, ", order=").concat(order));
+    var currentWord = sayWord(words[order[currenIndex]]);
+    localStorage.setItem('englishWord', currentWord);
+  }
+
+  function prepareCards() {
+    var cards = Array.from(document.querySelectorAll('.card'));
+    var words = cards.map(function (el) {
+      return el.dataset.action;
+    });
+    return words;
+  }
+
+  function sayWord(word) {
+    Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_3__["default"])(word);
+    isSpeaking = true;
+    setTimeout(function () {
+      isSpeaking = false;
+    }, 300);
+    console.log(word);
+    return word;
+  }
+
+  function endOfGame() {
+    var ok = document.querySelector('#playmode-success').value;
+    var wrong = document.querySelector('#playmode-error').value;
+    changeIcons();
+
+    if (+document.querySelector('#playmode-error').value === 0) {
+      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/win.mp3');
+      showrResults('success', ok, wrong);
+    } else {
+      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/lose.mp3');
+      showrResults('errors', ok, wrong);
+    }
+
+    isPlaying = false;
+  }
+
+  function showrResults(type, success, errors) {
+    var results = new _Components_GameResults__WEBPACK_IMPORTED_MODULE_0__["GameResults"]().createInstance();
+    document.body.append(results);
+    setTimeout(function () {
+      results.remove();
+    }, 1000);
+  }
+
+  function guessedRight(target) {
+    if (currenIndex < words.length - 1) {
+      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/success.mp3');
+      currenIndex++;
+      resolveTotal();
+      resolveOk();
+      markRightAnswer(target);
+    } else {
+      endOfGame();
+    }
+
+    setTimeout(function () {
+      newGameStep();
+    }, 500);
+  }
+
+  function resolveOk() {
+    var elem = document.querySelector('#playmode-success');
+    var previousSuccess = +elem.value;
+    elem.value = previousSuccess + 1;
+  }
+
+  function resolveWrong() {
+    var elem = document.querySelector('#playmode-error');
+    var previousValue = +elem.value;
+    elem.value = previousValue + 1;
+  }
+
+  function resolveTotal() {
+    var elem = document.querySelector('#playmode-total');
+    var previousTotal = +elem.value;
+    elem.value = previousTotal - 1;
+  }
+
+  function notGuessed(errorElement) {
+    Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/error.mp3');
+    resolveWrong();
+  }
+
+  function handleGuess(target) {
+    var targetWord = target.dataset.action;
+    console.log(targetWord, localStorage.englishWord);
+
+    if (localStorage.englishWord === targetWord) {
+      console.log('right');
+      guessedRight(target);
+    } else {
+      console.log('wrong');
+      notGuessed();
+    }
+  }
+
+  function changeIcons() {
+    document.querySelector('.playmode-button__play').classList.toggle('invisible');
+    document.querySelector('.playmode-button__repeat').classList.toggle('invisible');
+  }
+
+  function markRightAnswer(target) {
+    var child = target.querySelector('.card__guessed');
+    child.classList.remove('hidden');
+  }
+
+  function initValues() {
+    words = prepareCards();
+    order = Object(_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__["default"])(words);
+    currenIndex = 0;
+    isSpeaking = false;
+  }
+
+  function clearCards() {
+    document.querySelectorAll('.card__guessed').forEach(function (el) {
+      if (!el.classList.contains('hidden')) {
+        el.classList.add('hidden');
+      }
+    });
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/hadlers/cardTrainClick.js":
+/*!******************************************!*\
+  !*** ./src/js/hadlers/cardTrainClick.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
 /* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
 
-function cardClick(e) {
+function cardTrainClick(e) {
   console.log(e.target);
 
   if (e.target.classList.contains('card__rotate-icon')) {
@@ -11066,16 +11322,62 @@ function categoryClick(e) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return handleModeSwitch; });
+/* harmony import */ var _cardTrainClick__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cardTrainClick */ "./src/js/hadlers/cardTrainClick.js");
+/* harmony import */ var _cardPlayClick__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cardPlayClick */ "./src/js/hadlers/cardPlayClick.js");
+
+
 function handleModeSwitch() {
-  console.log('handleswitch');
-  var rate = document.querySelector('.rate');
-  rate.classList.toggle('invisible');
-  rate.classList.toggle('hidden');
-  var cards = document.querySelectorAll('.card');
-  cards.forEach(function (el) {
-    el.classList.toggle('play_mode');
-    el.classList.toggle('train_mode');
-  });
+  var oldMode = null;
+  var newHandler = null;
+  var previousHandler = null;
+  checkMode();
+
+  if (document.querySelector('.cards-category__layout') !== null) {
+    changeContentView();
+    changeHandlers();
+  }
+
+  function checkMode() {
+    oldMode = localStorage.englishMode;
+    var newValue = null;
+
+    if (oldMode === 'train_mode') {
+      newValue = 'play_mode';
+    } else {
+      newValue = 'train_mode';
+    }
+
+    localStorage.setItem('englishMode', newValue);
+  }
+
+  function changeContentView() {
+    var rate = document.querySelector('.rate');
+
+    if (rate) {
+      rate.classList.toggle('invisible');
+      rate.classList.toggle('hidden');
+    }
+
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(function (el) {
+      el.classList.toggle('play_mode');
+      el.classList.toggle('train_mode');
+    });
+  }
+
+  function changeHandlers() {
+    if (oldMode === 'train_mode') {
+      newHandler = _cardPlayClick__WEBPACK_IMPORTED_MODULE_1__["default"];
+      previousHandler = _cardTrainClick__WEBPACK_IMPORTED_MODULE_0__["default"];
+    } else {
+      newHandler = _cardTrainClick__WEBPACK_IMPORTED_MODULE_0__["default"];
+      previousHandler = _cardPlayClick__WEBPACK_IMPORTED_MODULE_1__["default"];
+    }
+
+    var container = document.querySelector('.cards-category__layout');
+    container.removeEventListener('click', previousHandler);
+    container.addEventListener('click', newHandler);
+  }
 }
 
 /***/ }),
@@ -11095,9 +11397,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Breadcrumbs */ "./src/js/Components/Breadcrumbs.js");
 /* harmony import */ var _changeContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../changeContent */ "./src/js/changeContent.js");
 /* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
-/* harmony import */ var _hadlers_cardClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hadlers/cardClick */ "./src/js/hadlers/cardClick.js");
-/* harmony import */ var _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+/* harmony import */ var _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cardTrainClick */ "./src/js/hadlers/cardTrainClick.js");
+/* harmony import */ var _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cardPlayClick */ "./src/js/hadlers/cardPlayClick.js");
+/* harmony import */ var _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+
 
 
 
@@ -11107,7 +11411,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function handleRouts(route) {
-  console.log(route);
   var CATEGORIES_LAYOUT = ['layout-inline-flex'];
   var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
   var DELAY = 500;
@@ -11116,15 +11419,17 @@ function handleRouts(route) {
   console.log(mode);
 
   if (route !== 'category' && route !== 'statistics') {
-    handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_7__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
+    handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
   } else {
-    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_7__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
+    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
   }
 
   function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
     var categoryObject = getCategoryFromData(data, route);
     var cards = new _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__["CardsLayout"](categoryObject, mode, classes).createInstance();
-    cards.addEventListener('click', _hadlers_cardClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
+    var clickHandler = mode === 'train_mode' ? _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__["default"] : _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__["default"];
+    console.log(clickHandler);
+    cards.addEventListener('click', clickHandler);
     var breadcrumbs = new _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["Breadcrumbs"](categoryObject).createInstance();
     Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
     Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
@@ -11133,7 +11438,7 @@ function handleRouts(route) {
 
   function handleCategoriesPage(data, mode, isAnimated, classes, delay) {
     var homePageLayout = new _Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_0__["CategoryLayout"](data, mode, classes).createInstance();
-    homePageLayout.addEventListener('click', _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_6__["default"]);
+    homePageLayout.addEventListener('click', _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_7__["default"]);
     var breadcrumbs = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_4__["default"])(breadcrumbs, 'div', 'breadcrumbs__layout');
     breadcrumbs.innerHTML = "<div></div";
     Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
@@ -11148,11 +11453,10 @@ function handleRouts(route) {
   }
 
   function animationInProcess() {
-    console.log('start---', new Date().getMilliseconds());
+    // console.log('start---', new Date().getMilliseconds());
     isAnimated = true;
     setTimeout(function () {
-      isAnimated = false;
-      console.log('end---', new Date().getMilliseconds());
+      isAnimated = false; // console.log('end---', new Date().getMilliseconds());
     }, DELAY);
   }
 
@@ -11226,11 +11530,12 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 
 function speak(wordToSay) {
   var pitch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var rate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.8;
+  var rate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
 
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
-    synth.cancel(); // setTimeout(speak, 300);
+    synth.cancel();
+    setTimeout(speak, 100);
   } else {
     var utterThis = new SpeechSynthesisUtterance(wordToSay);
 

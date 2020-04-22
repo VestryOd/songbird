@@ -17,11 +17,11 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
-export default function speak(wordToSay, pitch = 1, rate = 0.8) {
+export default function speak(wordToSay, pitch = 1, rate = 1) {
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
     synth.cancel();
-    // setTimeout(speak, 300);
+    setTimeout(speak, 100);
   } else {
     const utterThis = new SpeechSynthesisUtterance(wordToSay);
     utterThis.onend = function (event) {

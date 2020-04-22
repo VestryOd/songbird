@@ -41,9 +41,9 @@ export class Rate {
   }
 
   generatePlayButton() {
-    let button = createDomNode(button, 'button', 'playmode-button');
+    let button = createDomNode(button, 'div', 'playmode-button');
     button.innerHTML = `<span class="playmode-button__play"></span>
-                        <span class="playmode-button__repeat hidden"></span>`
+                        <span class="playmode-button__repeat invisible"></span>`
     return button;
   }
 
