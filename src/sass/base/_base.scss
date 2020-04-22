@@ -47,7 +47,8 @@ h5 {
     border-radius: 10px;
 }
 
-.cards-category__layout {
+.cards-category__layout,
+.breadcrumbs__layout {
   opacity: 1;
   @extend %transition;
 }
@@ -57,7 +58,11 @@ h5 {
 }
 
 .disappear {
+  opacity: 0;
   transform: translateY(100px);
+}
+
+.invisible {
   opacity: 0;
 }
 

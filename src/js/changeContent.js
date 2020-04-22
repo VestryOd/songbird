@@ -1,39 +1,46 @@
-export default function changeContent(containerSelector, newElement, isAnimated, delay) {
+export default function changeContent(containerSelector, newElement, isAnimated, delay, animationClass) {
   if (isAnimated) return;
-  console.log('I am in process');
+
   if (newElement === undefined || newElement === null || newElement.length < 1) {
     reportError('No new content!');
     return;
   }
   let container = document.querySelector(containerSelector);
   let elements = Array.from(container.children);
+  console.log(elements);
+
 
   if (!container || !elements) {
     reportError('No target element or content!');
   } else {
-    let fadedOut = fadeOut(elements, delay);
+    setTimeout(() => {
+      fadeOut(elements, delay, animationClass);
+    }, 0);
 
-    fadeIn(container, newElement, delay)
+
+    setTimeout(() => {
+      fadeIn(container, newElement, delay, animationClass)
+    }, delay);
   }
   return true;
 }
 
 
 ////////
-function fadeOut(elements, delay) {
-  if (disappearElements(elements)) {
+function fadeOut(elements, delay, animationClass) {
+  if (disappearElements(elements, animationClass)) {
     setTimeout(() => {
       deleteElements(elements)
-    }, delay);
+    }, 300);
   };
   return true;
 }
 
-function fadeIn(container, newElement, delay) {
-  let added = addElements(container, newElement);
+function fadeIn(container, newElement, delay, animationClass) {
+  let added = addElements(container, newElement, animationClass);
   if (added) {
     setTimeout(() => {
-      appearElements(newElement);
+      appearElements(newElement, animationClass);
     }, delay);
   }
 }
@@ -44,9 +51,9 @@ function reportError(text) {
   console.error(text);
 }
 
-function disappearElements(elements) {
+function disappearElements(elements, animationClass) {
   elements.forEach(elem => {
-    elem.classList.add('disappear');
+    elem.classList.add(animationClass);
   });
   return true;
 }
@@ -58,13 +65,13 @@ function deleteElements(elements) {
   return true;
 }
 
-function addElements(container, newElement) {
-  newElement.classList.add('disappear');
+function addElements(container, newElement, animationClass) {
+  newElement.classList.add(animationClass);
   // debugger;
   container.append(newElement);
   return true;
 }
 
-function appearElements(newElement) {
-  newElement.classList.remove('disappear');
+function appearElements(newElement, animationClass) {
+  newElement.classList.remove(animationClass);
 }

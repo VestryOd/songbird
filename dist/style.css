@@ -417,7 +417,8 @@ ul {
   box-sizing: border-box;
 }
 
-.breadcrumbs__title, .category__logo_color, .category, .rate__label, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__title, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout {
+.header__breadcrumbs, .category__logo_color, .category, .rate__label, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__title, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
+.breadcrumbs__layout {
   transition: all 0.5s ease-out;
 }
 
@@ -546,7 +547,8 @@ h5 {
   border-radius: 10px;
 }
 
-.cards-category__layout {
+.cards-category__layout,
+.breadcrumbs__layout {
   opacity: 1;
 }
 
@@ -555,7 +557,11 @@ h5 {
 }
 
 .disappear {
+  opacity: 0;
   transform: translateY(100px);
+}
+
+.invisible {
   opacity: 0;
 }
 
@@ -1125,33 +1131,45 @@ h5 {
   background-color: #BF4D0B;
 }
 
+.header__breadcrumbs {
+  opacity: 1;
+}
+
 .breadcrumbs__item {
   margin-left: 10px;
   display: inline-flex;
   position: relative;
   padding: 5px;
   align-items: center;
-  cursor: pointer;
+}
+.breadcrumbs__item > * {
+  display: inline-flex;
 }
 
 .breadcrumbs__logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 37px;
-  height: 37px;
+  width: 25px;
+  height: 25px;
+}
+@media (max-width: 375px) {
+  .breadcrumbs__logo {
+    margin-left: 5px;
+    width: 35px;
+    height: 35px;
+  }
 }
 
 .breadcrumbs__title {
-  font-size: 30px;
+  margin: 0 5px;
+  font-size: 2.2rem;
+  word-spacing: 1px;
   font-weight: 300;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #5F49F2;
-  padding-left: 35px;
 }
-
-.breadcrumbs__item:hover .breadcrumbs__title {
-  color: #BF4D0B;
+@media (max-width: 375px) {
+  .breadcrumbs__title {
+    visibility: hidden;
+  }
 }
 
 /*# sourceMappingURL=style.css.map*/

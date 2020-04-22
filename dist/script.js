@@ -10204,13 +10204,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
 /* harmony import */ var _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Components/CardsLayout */ "./src/js/Components/CardsLayout.js");
 /* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
-/* harmony import */ var _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/eventHadlers/categoryClick */ "./src/js/eventHadlers/categoryClick.js");
+/* harmony import */ var _js_Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Components/Breadcrumbs */ "./src/js/Components/Breadcrumbs.js");
+/* harmony import */ var _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/eventHadlers/categoryClick */ "./src/js/eventHadlers/categoryClick.js");
 
 
 
 
 
  // import Components
+
 
 
 
@@ -10226,11 +10228,12 @@ var mode = 'play_mode';
 
 window.onload = function () {
   var CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
-  var HEADER_NAV = document.querySelector('#main-nav'); // make nav
+  var HEADER_NAV = document.querySelector('#main-nav');
+  var BREADCRUMDS_CONTAINER = document.querySelector('.breadcrumbs__wrapper'); // make nav
 
   var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_9__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_10__["default"]); // make categories home page
 
   var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout); /////////// Listeners
@@ -10241,16 +10244,17 @@ window.onload = function () {
   //     sayText(e.target)
   //   }
   // });
-};
 
-document.addEventListener('click', function () {
-  var animals = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'animals');
-  var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](animals, mode, CARDS_LAYOUT).createInstance();
-  Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY);
-  animationInProcess();
-}, {
-  once: true
-});
+  document.addEventListener('click', function () {
+    var animals = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'animals');
+    var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](animals, mode, CARDS_LAYOUT).createInstance();
+    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY, 'disappear'); //Breadcrumbs BREADCRUMDS_WRAPPER
+
+    var breadcrumbs = new _js_Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_9__["Breadcrumbs"](animals).createInstance();
+    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, DELAY, 'invisible');
+    animationInProcess();
+  }); //, { once: true }
+};
 
 function rotateCard(target) {
   var side = target.closest('.card__inner');
@@ -10282,6 +10286,92 @@ function animationInProcess() {
     console.log('end---', new Date().getMilliseconds());
   }, DELAY);
 }
+
+function handleRouts(route) {
+  if (!route === 'category') {
+    var categoryObject = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], route);
+    var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](categoryObject, mode, CARDS_LAYOUT).createInstance();
+    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY);
+  } else {
+    var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
+    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', homePageLayout, isAnimated, DELAY);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/Components/Breadcrumbs.js":
+/*!******************************************!*\
+  !*** ./src/js/Components/Breadcrumbs.js ***!
+  \******************************************/
+/*! exports provided: Breadcrumbs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Breadcrumbs", function() { return Breadcrumbs; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var Breadcrumbs = /*#__PURE__*/function () {
+  function Breadcrumbs(data) {
+    _classCallCheck(this, Breadcrumbs);
+
+    this.data = data;
+    this.layout = '';
+  }
+
+  _createClass(Breadcrumbs, [{
+    key: "makeCleanWord",
+    value: function makeCleanWord(word) {
+      return word.match(/_/g) ? word.split('_').join(' ') : word;
+    }
+  }, {
+    key: "generateBreadcrumsWrapper",
+    value: function generateBreadcrumsWrapper() {
+      var div = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(div, 'div', 'header__breadcrumbs');
+      return div;
+    }
+  }, {
+    key: "generateLayout",
+    value: function generateLayout() {
+      var layout = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(layout, 'div', 'breadcrumbs__layout');
+      return layout;
+    }
+  }, {
+    key: "generateBreadcrums",
+    value: function generateBreadcrums(obj) {
+      var breadcrums = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(breadcrums, 'div', 'breadcrumbs__item');
+      breadcrums.dataset.breadcrumbs = obj.category;
+      var categoryWords = this.makeCleanWord(obj.category);
+      breadcrums.innerHTML = "<span class=\"breadcrumbs__logo\"\n                              style=\"background-image: url('".concat(obj.iconPath).concat(obj.category, "_color.svg');\"></span>\n                            <div class=\"breadcrumbs__title\">").concat(categoryWords, "</div>");
+      return breadcrums;
+    }
+  }, {
+    key: "buildBreadcrums",
+    value: function buildBreadcrums() {
+      var layout = this.generateLayout();
+      var wrapper = this.generateBreadcrumsWrapper();
+      wrapper.append(this.generateBreadcrums(this.data));
+      layout.append(wrapper);
+      console.log(wrapper);
+      this.layout = layout;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildBreadcrums();
+      return this.layout;
+    }
+  }]);
+
+  return Breadcrumbs;
+}();
 
 /***/ }),
 
@@ -10859,9 +10949,8 @@ function audioPlayer(pathToFile) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return changeContent; });
-function changeContent(containerSelector, newElement, isAnimated, delay) {
+function changeContent(containerSelector, newElement, isAnimated, delay, animationClass) {
   if (isAnimated) return;
-  console.log('I am in process');
 
   if (newElement === undefined || newElement === null || newElement.length < 1) {
     reportError('No new content!');
@@ -10870,34 +10959,39 @@ function changeContent(containerSelector, newElement, isAnimated, delay) {
 
   var container = document.querySelector(containerSelector);
   var elements = Array.from(container.children);
+  console.log(elements);
 
   if (!container || !elements) {
     reportError('No target element or content!');
   } else {
-    var fadedOut = fadeOut(elements, delay);
-    fadeIn(container, newElement, delay);
+    setTimeout(function () {
+      fadeOut(elements, delay, animationClass);
+    }, 0);
+    setTimeout(function () {
+      fadeIn(container, newElement, delay, animationClass);
+    }, delay);
   }
 
   return true;
 } ////////
 
-function fadeOut(elements, delay) {
-  if (disappearElements(elements)) {
+function fadeOut(elements, delay, animationClass) {
+  if (disappearElements(elements, animationClass)) {
     setTimeout(function () {
       deleteElements(elements);
-    }, delay);
+    }, 300);
   }
 
   ;
   return true;
 }
 
-function fadeIn(container, newElement, delay) {
-  var added = addElements(container, newElement);
+function fadeIn(container, newElement, delay, animationClass) {
+  var added = addElements(container, newElement, animationClass);
 
   if (added) {
     setTimeout(function () {
-      appearElements(newElement);
+      appearElements(newElement, animationClass);
     }, delay);
   }
 } ////////
@@ -10907,9 +11001,9 @@ function reportError(text) {
   console.error(text);
 }
 
-function disappearElements(elements) {
+function disappearElements(elements, animationClass) {
   elements.forEach(function (elem) {
-    elem.classList.add('disappear');
+    elem.classList.add(animationClass);
   });
   return true;
 }
@@ -10921,15 +11015,15 @@ function deleteElements(elements) {
   return true;
 }
 
-function addElements(container, newElement) {
-  newElement.classList.add('disappear'); // debugger;
+function addElements(container, newElement, animationClass) {
+  newElement.classList.add(animationClass); // debugger;
 
   container.append(newElement);
   return true;
 }
 
-function appearElements(newElement) {
-  newElement.classList.remove('disappear');
+function appearElements(newElement, animationClass) {
+  newElement.classList.remove(animationClass);
 }
 
 /***/ }),
