@@ -1,21 +1,56 @@
 import data from '../cards-data';
 import speak from './js/voiceSpeak';
+import audioPlayer from './js/audioPlayer';
+import randomizeCardsOrder from './js/randomizeCardsOrder';
+import generateContent from './js/generateContent';
+import changeContent from "./js/changeContent";
+
+// import Components
+import { Nav } from "./js/Components/Nav";
+import { CardsLayout } from "./js/Components/CardsLayout";
+import { CategoryLayout } from "./js/Components/CategoryLayout";
+
+// handlers
+import categoryClick from "./js/eventHadlers/categoryClick";
+
+// constants and variables
+const CATEGORIES_LAYOUT = ['layout-inline-flex'];
+const CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
+const DELAY = 500;
+let isAnimated = false;
+let mode = 'play_mode';
 
 window.onload = function () {
-  const CONTENT_CONTAINER = document.querySelector('#content-container');
-  const SWITCHER = document.querySelector('#toggleMode');
-  let cardsSwitchMode = document.querySelectorAll('.card__inner');
-  console.log('Hello, my checker)');
+  const CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
+  const HEADER_NAV = document.querySelector('#main-nav');
 
-  CONTENT_CONTAINER.addEventListener('click', (e)=> {
 
-    if (e.target.classList.contains('card__rotate-icon')) {
-      rotateCard(e.target)
-    } else {
-      sayText(e.target)
-    }
-  })
+  // make nav
+  const nav = new Nav(data);
+  HEADER_NAV.append(nav.createInstance());
+  HEADER_NAV.addEventListener('click', categoryClick);
+
+  // make categories home page
+  let homePageLayout = new CategoryLayout(data, mode, CATEGORIES_LAYOUT).createInstance();
+
+  CONTENT_CONTAINER.append(homePageLayout);
+
+  /////////// Listeners
+  // CONTENT_CONTAINER.addEventListener('click', (e) => {
+  //   if (e.target.classList.contains('card__rotate-icon')) {
+  //     rotateCard(e.target)
+  //   } else {
+  //     sayText(e.target)
+  //   }
+  // });
 }
+
+document.addEventListener('click', () => {
+  let animals = getCategoryFromData(data, 'animals');
+  let cards = new CardsLayout(animals, mode, CARDS_LAYOUT).createInstance();
+  changeContent('#content-container .wrapper', cards, isAnimated, DELAY);
+  animationInProcess();
+}, { once: true });
 
 
 function rotateCard(target) {
@@ -33,17 +68,17 @@ function sayText(target) {
   speak(word);
 }
 
-function randomizeCardsOrder(arr) {
-  let indexArray = [];
-  for (let i = 0; i < arr.length; i++) {
-    indexArray.push(i);
-  }
-  let j, temp;
-  for (let i = indexArray.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    temp = indexArray[j];
-    indexArray[j] = indexArray[i];
-    indexArray[i] = temp;
-  }
-  return indexArray;
+
+function getCategoryFromData(data, category) {
+  return data.find(el => el.category === category);
+}
+
+function animationInProcess() {
+  console.log('start---', new Date().getMilliseconds());
+
+  isAnimated = true;
+  setTimeout(() => {
+    isAnimated = false;
+    console.log('end---', new Date().getMilliseconds());
+  }, DELAY);
 }

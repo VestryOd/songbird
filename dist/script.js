@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
     word: "painting",
     translation: "рисование"
   }, {
-    word: "rope jumping",
+    word: "rope_jumping",
     translation: "прыгать на скакалке"
   }, {
     word: "sleeping",
@@ -118,10 +118,10 @@ __webpack_require__.r(__webpack_exports__);
     word: "studying",
     translation: "обучение"
   }, {
-    word: "teeth cleaning",
+    word: "teeth_cleaning",
     translation: "чистка зубов"
   }, {
-    word: "waking up",
+    word: "waking_up",
     translation: "пробуждение"
   }, {
     word: "walking",
@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
     word: "nightstand",
     translation: "тумбочка"
   }, {
-    word: "office chair",
+    word: "office_chair",
     translation: "офисный стул"
   }, {
     word: "sofa",
@@ -396,10 +396,10 @@ __webpack_require__.r(__webpack_exports__);
     word: "kite",
     translation: "воздушный змей"
   }, {
-    word: "rocking horse",
+    word: "rocking_horse",
     translation: "лошадка-качалка"
   }, {
-    word: "spin wheel",
+    word: "spin_wheel",
     translation: "ветрянное колесо"
   }, {
     word: "tricycle",
@@ -419,7 +419,7 @@ __webpack_require__.r(__webpack_exports__);
     word: "evacuator",
     translation: "эвакуатор"
   }, {
-    word: "fire truck",
+    word: "fire_truck",
     translation: "пожарная машина"
   }, {
     word: "minibus",
@@ -431,7 +431,7 @@ __webpack_require__.r(__webpack_exports__);
     word: "trolleybus",
     translation: "тролейбус"
   }, {
-    word: "truck crane",
+    word: "truck_crane",
     translation: "автокран"
   }, {
     word: "truck",
@@ -10197,22 +10197,60 @@ module.exports.formatError = function(err) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards-data */ "./cards-data.js");
 /* harmony import */ var _js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _js_audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/audioPlayer */ "./src/js/audioPlayer.js");
+/* harmony import */ var _js_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
+/* harmony import */ var _js_generateContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/generateContent */ "./src/js/generateContent.js");
+/* harmony import */ var _js_changeContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/changeContent */ "./src/js/changeContent.js");
+/* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
+/* harmony import */ var _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Components/CardsLayout */ "./src/js/Components/CardsLayout.js");
+/* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
+/* harmony import */ var _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/eventHadlers/categoryClick */ "./src/js/eventHadlers/categoryClick.js");
 
 
+
+
+
+ // import Components
+
+
+
+ // handlers
+
+ // constants and variables
+
+var CATEGORIES_LAYOUT = ['layout-inline-flex'];
+var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
+var DELAY = 500;
+var isAnimated = false;
+var mode = 'play_mode';
 
 window.onload = function () {
-  var CONTENT_CONTAINER = document.querySelector('#content-container');
-  var SWITCHER = document.querySelector('#toggleMode');
-  var cardsSwitchMode = document.querySelectorAll('.card__inner');
-  console.log('Hello, my checker)');
-  CONTENT_CONTAINER.addEventListener('click', function (e) {
-    if (e.target.classList.contains('card__rotate-icon')) {
-      rotateCard(e.target);
-    } else {
-      sayText(e.target);
-    }
-  });
+  var CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
+  var HEADER_NAV = document.querySelector('#main-nav'); // make nav
+
+  var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  HEADER_NAV.append(nav.createInstance());
+  HEADER_NAV.addEventListener('click', _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_9__["default"]); // make categories home page
+
+  var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
+  CONTENT_CONTAINER.append(homePageLayout); /////////// Listeners
+  // CONTENT_CONTAINER.addEventListener('click', (e) => {
+  //   if (e.target.classList.contains('card__rotate-icon')) {
+  //     rotateCard(e.target)
+  //   } else {
+  //     sayText(e.target)
+  //   }
+  // });
 };
+
+document.addEventListener('click', function () {
+  var animals = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'animals');
+  var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](animals, mode, CARDS_LAYOUT).createInstance();
+  Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY);
+  animationInProcess();
+}, {
+  once: true
+});
 
 function rotateCard(target) {
   var side = target.closest('.card__inner');
@@ -10230,6 +10268,748 @@ function sayText(target) {
   Object(_js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__["default"])(word);
 }
 
+function getCategoryFromData(data, category) {
+  return data.find(function (el) {
+    return el.category === category;
+  });
+}
+
+function animationInProcess() {
+  console.log('start---', new Date().getMilliseconds());
+  isAnimated = true;
+  setTimeout(function () {
+    isAnimated = false;
+    console.log('end---', new Date().getMilliseconds());
+  }, DELAY);
+}
+
+/***/ }),
+
+/***/ "./src/js/Components/Card.js":
+/*!***********************************!*\
+  !*** ./src/js/Components/Card.js ***!
+  \***********************************/
+/*! exports provided: Card */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Card", function() { return Card; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var Card = /*#__PURE__*/function () {
+  function Card(card, mode, imgPath, category) {
+    _classCallCheck(this, Card);
+
+    this.category = category;
+    this.imgPath = imgPath;
+    this.cardData = card;
+    this.mode = mode;
+    this.card = '';
+  }
+
+  _createClass(Card, [{
+    key: "makeCleanWord",
+    value: function makeCleanWord(word) {
+      return word.match(/_/g) ? word.split('_').join(' ') : word;
+    }
+  }, {
+    key: "generateCard",
+    value: function generateCard(word, mode) {
+      var cleanWord = this.makeCleanWord(word);
+      var card = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(this.card, 'div', 'card');
+      card.classList.add(mode);
+      card.setAttribute('data-action', cleanWord);
+      return card;
+    }
+  }, {
+    key: "generateCardInner",
+    value: function generateCardInner() {
+      var inner = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(inner, 'div', 'card__inner');
+      return inner;
+    }
+  }, {
+    key: "generateFront",
+    value: function generateFront(category, word, imgPath) {
+      var cleanWord = this.makeCleanWord(word);
+      var front = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(front, 'div', 'card__front');
+      front.setAttribute('style', "background-image: url(".concat(imgPath).concat(category, "/").concat(word, ".png);"));
+      front.innerHTML = "<span class=\"card__icon card__sound-icon hidden\"></span>\n                      <span class=\"card__icon card__rotate-icon\"></span>\n                      <div class=\"card__title\">".concat(cleanWord, "</div>");
+      return front;
+    }
+  }, {
+    key: "generateBack",
+    value: function generateBack(category, word, translation, imgPath) {
+      var back = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(back, 'div', 'card__back');
+      back.setAttribute('style', "background-image: url(".concat(imgPath).concat(category, "/").concat(word, ".png);"));
+      back.innerHTML = "<span class=\"card__icon card__rotate-icon\"></span>\n                      <div class=\"card__title\">".concat(translation, "</div>");
+      return back;
+    }
+  }, {
+    key: "generateGuessed",
+    value: function generateGuessed() {
+      // let classes = ['card__guessed', 'hidden'];
+      var guessed = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(guessed, 'div', 'card__guessed', 'hidden');
+      var icon = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(guessed, 'span', 'guessed__icon');
+      guessed.append(icon);
+      return guessed;
+    }
+  }, {
+    key: "buildCard",
+    value: function buildCard() {
+      var data = this.cardData;
+      var card = this.generateCard(data.word, this.mode);
+      var inner = this.generateCardInner();
+      var guessed = this.generateGuessed();
+      inner.append(this.generateFront(this.category, data.word, this.imgPath));
+      inner.append(this.generateBack(this.category, data.word, data.translation, this.imgPath));
+      inner.append(guessed);
+      card.append(inner);
+      this.card = card;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildCard();
+      return this.card;
+    }
+  }]);
+
+  return Card;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/CardsLayout.js":
+/*!******************************************!*\
+  !*** ./src/js/Components/CardsLayout.js ***!
+  \******************************************/
+/*! exports provided: CardsLayout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CardsLayout", function() { return CardsLayout; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Card */ "./src/js/Components/Card.js");
+/* harmony import */ var _Rate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Rate */ "./src/js/Components/Rate.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var CardsLayout = /*#__PURE__*/function () {
+  function CardsLayout(obj, mode, classes) {
+    _classCallCheck(this, CardsLayout);
+
+    this.obj = obj;
+    this.mode = mode;
+    this.classes = classes;
+    this.ratesLayout = '';
+    this.cardsLayout = '';
+    this.layout = '';
+  }
+
+  _createClass(CardsLayout, [{
+    key: "generateWrapper",
+    value: function generateWrapper() {
+      var classes = ['cards-category__layout'];
+      var cardsCategoryLayout = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [cardsCategoryLayout, 'div'].concat(classes));
+      return cardsCategoryLayout;
+    }
+  }, {
+    key: "generateCardsLayout",
+    value: function generateCardsLayout(classes) {
+      var layout = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [layout, 'div'].concat(_toConsumableArray(classes)));
+      return layout;
+    }
+  }, {
+    key: "generateRatesLayout",
+    value: function generateRatesLayout(obj, mode) {
+      this.rate = new _Rate__WEBPACK_IMPORTED_MODULE_2__["Rate"](obj, mode).createInstance();
+      return this.rate;
+    }
+  }, {
+    key: "addCardsToLayout",
+    value: function addCardsToLayout(layout, obj, classConstructor, mode) {
+      var cards = obj.cards;
+      var imgPath = obj.imgPath,
+          category = obj.category;
+      cards.forEach(function (elem) {
+        layout.append(new classConstructor(elem, mode, imgPath, category).createInstance());
+      });
+    }
+  }, {
+    key: "buildLayout",
+    value: function buildLayout() {
+      var wrapper = this.generateWrapper();
+      this.ratesLayout = this.generateRatesLayout(this.obj, this.mode);
+      wrapper.append(this.ratesLayout);
+      this.cardsLayout = this.generateCardsLayout(this.classes);
+      this.addCardsToLayout(this.cardsLayout, this.obj, _Card__WEBPACK_IMPORTED_MODULE_1__["Card"], this.mode);
+      wrapper.append(this.cardsLayout);
+      this.layout = wrapper;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildLayout();
+      return this.layout;
+    }
+  }]);
+
+  return CardsLayout;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/Category.js":
+/*!***************************************!*\
+  !*** ./src/js/Components/Category.js ***!
+  \***************************************/
+/*! exports provided: Category */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Category", function() { return Category; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var Category = /*#__PURE__*/function () {
+  function Category(data, mode) {
+    _classCallCheck(this, Category);
+
+    this.data = data;
+    this.mode = mode;
+    this.category = '';
+  }
+
+  _createClass(Category, [{
+    key: "makeCleanWord",
+    value: function makeCleanWord(word) {
+      return word.match(/_/g) ? word.split('_').join(' ') : word;
+    }
+  }, {
+    key: "generateCategoryWrapper",
+    value: function generateCategoryWrapper() {
+      var wrapper = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'category__wrapper');
+      return wrapper;
+    }
+  }, {
+    key: "generateCategory",
+    value: function generateCategory(obj, mode) {
+      var category = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(category, 'div', 'category', "category__".concat(mode));
+      category.dataset.category = obj.category;
+      var categoryTitle = this.makeCleanWord(obj.category);
+      category.innerHTML = "<span class=\"category__logo category__logo_color\"\n                            style=\"background-image: url('".concat(obj.iconPath).concat(obj.category, "_color.svg');\"></span>\n                          <span class=\"category__logo category__logo_grey\"\n                            style=\"background-image: url('").concat(obj.iconPath).concat(obj.category, "_grey.svg');\"></span>\n                          <div class=\"category__title\">").concat(categoryTitle, "</div>");
+      return category;
+    }
+  }, {
+    key: "buildCategory",
+    value: function buildCategory() {
+      var wrapper = this.generateCategoryWrapper();
+      wrapper.append(this.generateCategory(this.data, this.mode));
+      this.category = wrapper;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildCategory();
+      return this.category;
+    }
+  }]);
+
+  return Category;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/CategoryLayout.js":
+/*!*********************************************!*\
+  !*** ./src/js/Components/CategoryLayout.js ***!
+  \*********************************************/
+/*! exports provided: CategoryLayout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoryLayout", function() { return CategoryLayout; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+/* harmony import */ var _Category__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Category */ "./src/js/Components/Category.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var CategoryLayout = /*#__PURE__*/function () {
+  function CategoryLayout(obj, mode, classes) {
+    _classCallCheck(this, CategoryLayout);
+
+    this.obj = obj;
+    this.mode = mode;
+    this.classes = classes;
+    this.layout = '';
+  }
+
+  _createClass(CategoryLayout, [{
+    key: "generateLayout",
+    value: function generateLayout(classes) {
+      var layout = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [layout, 'div'].concat(_toConsumableArray(classes)));
+      return layout;
+    }
+  }, {
+    key: "addCategoriesToLayout",
+    value: function addCategoriesToLayout(layout, arr, classConstructor, mode) {
+      arr.forEach(function (elem) {
+        layout.append(new classConstructor(elem, mode).createInstance());
+      });
+    }
+  }, {
+    key: "buildLayout",
+    value: function buildLayout() {
+      this.layout = this.generateLayout(this.classes);
+      this.addCategoriesToLayout(this.layout, this.obj, _Category__WEBPACK_IMPORTED_MODULE_1__["Category"], this.mode);
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildLayout();
+      return this.layout;
+    }
+  }]);
+
+  return CategoryLayout;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/Nav.js":
+/*!**********************************!*\
+  !*** ./src/js/Components/Nav.js ***!
+  \**********************************/
+/*! exports provided: Nav */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Nav", function() { return Nav; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var Nav = /*#__PURE__*/function () {
+  function Nav(data) {
+    _classCallCheck(this, Nav);
+
+    this.data = data;
+    this.nav = '';
+  }
+
+  _createClass(Nav, [{
+    key: "generateNav",
+    value: function generateNav(data) {
+      var nav = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(nav, 'ul', 'nav');
+      nav.append(this.generateHomeItem());
+      nav = this.generateItems(nav, data);
+      nav.append(this.generateStatsItem());
+      return nav;
+    }
+  }, {
+    key: "generateHomeItem",
+    value: function generateHomeItem() {
+      var li = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(li, 'li', 'nav__link');
+      li.dataset.section = 'category';
+      li.innerHTML = "<span class=\"nav_icon\" style=\"background-image: url('/assets/img/icons/home.svg');\"></span>\n                    <span class=\"nav_content\">homepage</span>";
+      return li;
+    }
+  }, {
+    key: "generateStatsItem",
+    value: function generateStatsItem() {
+      var li = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(li, 'li', 'nav__link');
+      li.dataset.section = 'statistics';
+      li.innerHTML = "<span class=\"nav_icon\" style=\"background-image: url('/assets/img/icons/stats.svg');\"></span>\n                    <span class=\"nav_content\">statistics</span>";
+      return li;
+    }
+  }, {
+    key: "generateItems",
+    value: function generateItems(nav, data) {
+      var _this = this;
+
+      data.forEach(function (el) {
+        nav.append(_this.createLiElem(el));
+      });
+      return nav;
+    }
+  }, {
+    key: "createLiElem",
+    value: function createLiElem(obj) {
+      var li = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(li, 'li', 'nav__link');
+      li.dataset.section = obj.category;
+      li.innerHTML = "<span class=\"nav_icon\" style=\"background-image: url('".concat(obj.iconPath).concat(obj.category, "_contour.svg');\"></span>\n                    <span class=\"nav_content\">").concat(obj.category, "</span>");
+      return li;
+    }
+  }, {
+    key: "autoCloseNav",
+    value: function autoCloseNav() {
+      var switcher = document.querySelector('#toggleNav');
+      switcher.checked = false;
+    }
+  }, {
+    key: "mountNav",
+    value: function mountNav() {
+      var _this2 = this;
+
+      this.nav.addEventListener('click', function (event) {
+        _this2.autoCloseNav();
+      });
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.nav = this.generateNav(this.data);
+      this.mountNav();
+      return this.nav;
+    }
+  }]);
+
+  return Nav;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/Rate.js":
+/*!***********************************!*\
+  !*** ./src/js/Components/Rate.js ***!
+  \***********************************/
+/*! exports provided: Rate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rate", function() { return Rate; });
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var Rate = /*#__PURE__*/function () {
+  function Rate(obj, mode) {
+    _classCallCheck(this, Rate);
+
+    this.mode = mode;
+    this.obj = obj;
+    this.rate = '';
+  }
+
+  _createClass(Rate, [{
+    key: "generateLayout",
+    value: function generateLayout() {
+      var layout = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(layout, 'div', 'rate');
+      if (this.mode !== 'play_mode') layout.classList.add('hidden');
+      return layout;
+    }
+  }, {
+    key: "generateRateRank",
+    value: function generateRateRank() {
+      var rank = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(rank, 'form', 'rate__rank');
+      rank.setAttribute('id', 'playmode');
+      return rank;
+    }
+  }, {
+    key: "generateRateScore",
+    value: function generateRateScore(obj) {
+      var score = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(score, 'div', 'rate__score');
+      var cardsCount = obj.cards.length;
+      score.append(this.generateRatePoint('success'));
+      score.append(this.generateRatePoint('error'));
+      score.append(this.generateRatePoint('total', cardsCount));
+      return score;
+    }
+  }, {
+    key: "generateRatePoint",
+    value: function generateRatePoint(pointRole) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var point = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(point, 'div', 'rate__point');
+      point.innerHTML = "<label class=\"rate__label rate-status_".concat(pointRole, "\" for=\"playmode-").concat(pointRole, "\"></label>\n                      <input class=\"rate__indicator\" type=\"text\" name=\"").concat(pointRole, "\" id=\"playmode-").concat(pointRole, "\" disabled value=\"").concat(value, "\">");
+      return point;
+    }
+  }, {
+    key: "generateButtonWrapper",
+    value: function generateButtonWrapper() {
+      var wrapper = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'playmode-button__wrapper');
+      return wrapper;
+    }
+  }, {
+    key: "generatePlayButton",
+    value: function generatePlayButton() {
+      var button = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(button, 'button', 'playmode-button');
+      button.innerHTML = "<span class=\"playmode-button__play\"></span>\n                        <span class=\"playmode-button__repeat hidden\"></span>";
+      return button;
+    }
+  }, {
+    key: "buildButton",
+    value: function buildButton() {
+      var button = this.generateButtonWrapper();
+      button.append(this.generatePlayButton());
+      return button;
+    }
+  }, {
+    key: "buildRate",
+    value: function buildRate() {
+      var rate = this.generateLayout();
+      var rank = this.generateRateRank();
+      rank.append(this.generateRateScore(this.obj));
+      rank.append(this.buildButton());
+      rate.append(rank);
+      this.rate = rate;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.buildRate();
+      return this.rate;
+    }
+  }]);
+
+  return Rate;
+}();
+
+/***/ }),
+
+/***/ "./src/js/audioPlayer.js":
+/*!*******************************!*\
+  !*** ./src/js/audioPlayer.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return audioPlayer; });
+function audioPlayer(pathToFile) {
+  var audio = new Audio(pathToFile); // audio.style.display = "none";
+
+  audio.autoplay = true;
+
+  audio.onended = function () {
+    audio.remove();
+  }; // audio.play();
+
+}
+
+/***/ }),
+
+/***/ "./src/js/changeContent.js":
+/*!*********************************!*\
+  !*** ./src/js/changeContent.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return changeContent; });
+function changeContent(containerSelector, newElement, isAnimated, delay) {
+  if (isAnimated) return;
+  console.log('I am in process');
+
+  if (newElement === undefined || newElement === null || newElement.length < 1) {
+    reportError('No new content!');
+    return;
+  }
+
+  var container = document.querySelector(containerSelector);
+  var elements = Array.from(container.children);
+
+  if (!container || !elements) {
+    reportError('No target element or content!');
+  } else {
+    var fadedOut = fadeOut(elements, delay);
+    fadeIn(container, newElement, delay);
+  }
+
+  return true;
+} ////////
+
+function fadeOut(elements, delay) {
+  if (disappearElements(elements)) {
+    setTimeout(function () {
+      deleteElements(elements);
+    }, delay);
+  }
+
+  ;
+  return true;
+}
+
+function fadeIn(container, newElement, delay) {
+  var added = addElements(container, newElement);
+
+  if (added) {
+    setTimeout(function () {
+      appearElements(newElement);
+    }, delay);
+  }
+} ////////
+
+
+function reportError(text) {
+  console.error(text);
+}
+
+function disappearElements(elements) {
+  elements.forEach(function (elem) {
+    elem.classList.add('disappear');
+  });
+  return true;
+}
+
+function deleteElements(elements) {
+  elements.forEach(function (elem) {
+    elem.remove();
+  });
+  return true;
+}
+
+function addElements(container, newElement) {
+  newElement.classList.add('disappear'); // debugger;
+
+  container.append(newElement);
+  return true;
+}
+
+function appearElements(newElement) {
+  newElement.classList.remove('disappear');
+}
+
+/***/ }),
+
+/***/ "./src/js/createDomNode.js":
+/*!*********************************!*\
+  !*** ./src/js/createDomNode.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createDomNode; });
+function createDomNode(node, element) {
+  var _node$classList;
+
+  // console.log(...classes);
+  node = document.createElement(element);
+
+  for (var _len = arguments.length, classes = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    classes[_key - 2] = arguments[_key];
+  }
+
+  (_node$classList = node.classList).add.apply(_node$classList, classes);
+
+  return node;
+}
+;
+
+/***/ }),
+
+/***/ "./src/js/eventHadlers/categoryClick.js":
+/*!**********************************************!*\
+  !*** ./src/js/eventHadlers/categoryClick.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return categoryClick; });
+function categoryClick(e) {
+  console.log('e.target');
+}
+
+/***/ }),
+
+/***/ "./src/js/generateContent.js":
+/*!***********************************!*\
+  !*** ./src/js/generateContent.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return generateContent; });
+/* harmony import */ var _js_createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../js/createDomNode */ "./src/js/createDomNode.js");
+
+function generateContent(parentElement, wrapperClass, data, classConstructor) {
+  var wrapper = Object(_js_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', wrapperClass);
+  data.forEach(function (elem) {
+    wrapper.append(new classConstructor(elem).createInstance());
+  });
+  parentElement.append(wrapper);
+}
+
+/***/ }),
+
+/***/ "./src/js/randomizeCardsOrder.js":
+/*!***************************************!*\
+  !*** ./src/js/randomizeCardsOrder.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return randomizeCardsOrder; });
 function randomizeCardsOrder(arr) {
   var indexArray = [];
 

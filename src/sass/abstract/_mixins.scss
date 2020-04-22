@@ -9,12 +9,25 @@
 @mixin columns ($width) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     flex-grow: 1;
     >* {
         flex-basis: $width;
     }
 }
+
+@mixin custom-scroll($background-color) {
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $background-color;
+      border-radius: 10px;
+    }
+  }
 
 @mixin media-laptoplarge {
     @media (max-width: $content-width) { @content; }

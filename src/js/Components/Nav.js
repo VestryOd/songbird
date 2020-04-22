@@ -1,17 +1,33 @@
-import createDomNode from './createDomNode';
+import createDomNode from '../createDomNode';
 
-export default class Nivigation {
-  constructor(containerElement, data, callback) {
-    this.container = containerElement;
+export class Nav {
+  constructor(data) {
     this.data = data;
-    this.callback = callback;
     this.nav = '';
   }
 
   generateNav(data) {
     let nav = createDomNode(nav, 'ul', 'nav');
+    nav.append(this.generateHomeItem());
     nav = this.generateItems(nav, data);
+    nav.append(this.generateStatsItem());
     return nav;
+  }
+
+  generateHomeItem() {
+    let li = createDomNode(li, 'li', 'nav__link');
+    li.dataset.section = 'category';
+    li.innerHTML = `<span class="nav_icon" style="background-image: url('/assets/img/icons/home.svg');"></span>
+                    <span class="nav_content">homepage</span>`;
+    return li;
+  }
+
+  generateStatsItem() {
+    let li = createDomNode(li, 'li', 'nav__link');
+    li.dataset.section = 'statistics';
+    li.innerHTML = `<span class="nav_icon" style="background-image: url('/assets/img/icons/stats.svg');"></span>
+                    <span class="nav_content">statistics</span>`;
+    return li;
   }
 
   generateItems(nav, data) {
@@ -34,20 +50,15 @@ export default class Nivigation {
     switcher.checked = false;
   }
 
-  mountNav(containerElement) {
-    containerElement.append(this.nav);
+  mountNav() {
     this.nav.addEventListener('click', (event) => {
-      this.callback(event);
       this.autoCloseNav();
     })
   }
 
-  buildNav() {
+  createInstance() {
     this.nav = this.generateNav(this.data);
-    this.mountNav(this.containerElement);
-  }
-
-  createNavInstance() {
-    this.buildNav();
+    this.mountNav();
+    return this.nav;
   }
 }

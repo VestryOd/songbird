@@ -14,6 +14,7 @@
 @import "layouts/wrapper";
 @import "layouts/columns";
 @import "layouts/content";
+@import "layouts/inline";
 
 
 //Components
@@ -22,3 +23,5 @@
 @import "components/card";
 @import "components/playmode-btn";
 @import "components/rate";
+@import "components/category";
+@import "components/breadcrumbs";

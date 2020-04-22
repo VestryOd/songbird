@@ -1,6 +1,6 @@
 .rate {
   width: 100%;
-  padding: 0 15px;
+  padding: 0 10px;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
@@ -17,34 +17,46 @@
 }
 
 .rate__score {
+  padding: 0 10px;
   display: flex;
-  margin-right: 45px;
+  margin-right: 30px;
+  align-items: center;
   & div {
+    display: inline-flex;
     height: 100%;
   }
 }
 
 .rate__point {
-  width: 33px;
-  // height: 33px;
-  border: 2px solid transparent;
-  border-radius: 50%;
+  // width: 50px;
   margin: 0 2px;
+}
+
+.rate__label {
+  width: 33px;
   @extend %transition;
-  & div {
-    @extend %background-image;
-  }
+  @extend %background-image;
+}
+.rate-status_total {
+  background-image: url("/assets/img/icons/image.svg");
 }
 
-.rate-status__empty {
-  background-image: url("/assets/img/icons/star-empty.svg");
+.rate-status_success {
+  background-image: url("/assets/img/icons/thumb-up.svg");
 }
 
-.rate-status__success {
-  background-image: url("/assets/img/icons/star-success.svg");
+.rate-status_error {
+  background-image: url("/assets/img/icons/thumb-down.svg");
 }
 
-.rate-status__error {
-  background-image: url("/assets/img/icons/star-error.svg");
+.rate__indicator {
+  outline: none;
+  background: none;
+  border: none;
+  max-width: 30px;
+  font-size: 2rem;
+  font-weight: 300;
+  color: $color-light;
+  text-align: center;
+  @extend %text_shadow;
 }
-

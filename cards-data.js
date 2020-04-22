@@ -7,11 +7,11 @@ export default [
       { word: "breakfast", translation: "завтрак" },
       { word: "exercises", translation: "упражнения" },
       { word: "painting", translation: "рисование" },
-      { word: "rope jumping", translation: "прыгать на скакалке" },
+      { word: "rope_jumping", translation: "прыгать на скакалке" },
       { word: "sleeping", translation: "сон" },
       { word: "studying", translation: "обучение" },
-      { word: "teeth cleaning", translation: "чистка зубов" },
-      { word: "waking up", translation: "пробуждение" },
+      { word: "teeth_cleaning", translation: "чистка зубов" },
+      { word: "waking_up", translation: "пробуждение" },
       { word: "walking", translation: "прогулка" },
     ]
   },
@@ -101,7 +101,7 @@ export default [
       { word: "table", translation: "стол" },
       { word: "commode", translation: "комод" },
       { word: "nightstand", translation: "тумбочка" },
-      { word: "office chair", translation: "офисный стул" },
+      { word: "office_chair", translation: "офисный стул" },
       { word: "sofa", translation: "диван" },
       { word: "stool", translation: "стул" },
       { word: "wardrobe", translation: "гардероб" }
@@ -140,8 +140,8 @@ export default [
       { word: "doll", translation: "кукла" },
       { word: "drum", translation: "барабан" },
       { word: "kite", translation: "воздушный змей" },
-      { word: "rocking horse", translation: "лошадка-качалка" },
-      { word: "spin wheel", translation: "ветрянное колесо" },
+      { word: "rocking_horse", translation: "лошадка-качалка" },
+      { word: "spin_wheel", translation: "ветрянное колесо" },
       { word: "tricycle", translation: "трехколесный велосипед" }
     ]
   },
@@ -153,11 +153,11 @@ export default [
       { word: "bus", translation: "автобус" },
       { word: "car", translation: "машина" },
       { word: "evacuator", translation: "эвакуатор" },
-      { word: "fire truck", translation: "пожарная машина" },
+      { word: "fire_truck", translation: "пожарная машина" },
       { word: "minibus", translation: "микроавтобус" },
       { word: "tipper", translation: "самосвал" },
       { word: "trolleybus", translation: "тролейбус" },
-      { word: "truck crane", translation: "автокран" },
+      { word: "truck_crane", translation: "автокран" },
       { word: "truck", translation: "грузовик" }
     ]
   },

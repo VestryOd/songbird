@@ -1,0 +1,31 @@
+.breadcrumbs__item {
+  margin-left: 10px;
+  display: inline-flex;
+  position: relative;
+  padding: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.breadcrumbs__logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 37px;
+  height: 37px;
+  @extend %background-image;
+}
+
+.breadcrumbs__title {
+  font-size: 30px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: $color-secondary-emphasis;
+  padding-left: 35px;
+  @extend %transition;
+  @extend %text_shadow;
+}
+
+.breadcrumbs__item:hover .breadcrumbs__title {
+  color: $color-secondary-emphasis-hover;
+}

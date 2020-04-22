@@ -11,7 +11,7 @@
   border-radius: 10px;
   transition: all 0.5s;
   transform-style: preserve-3d;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.4);
+  @extend %box-shadow-thin;
 }
 
 .translate {
@@ -19,7 +19,7 @@
 }
 
 .card:hover .card__inner {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  @extend %box-shadow-bold;
 }
 
 .card__title {
@@ -39,7 +39,9 @@
   font-weight: 300;
   letter-spacing: 1px;
   color: $color-light;
+  opacity: 1;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  @extend %transition;
 }
 
 .card__front, .card__back {
@@ -87,13 +89,37 @@
     background-position: center -15px;
   }
   & .card__sound-icon {
-    opacity: 0;
+    opacity: 1;
+    @extend %transition;
   }
 }
 
 .play_mode {
   & .card__rotate-icon {
     visibility: hidden;
+  }
+  .card__title {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.card__guessed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-background-guessed-card;
+  z-index: 50;
+  & .guessed__icon {
+    width: 75px;
+    height: 75px;
+    @extend %background-image;
+    background-image: url("/assets/img/icons/ok-circle.svg");
   }
 }
 
