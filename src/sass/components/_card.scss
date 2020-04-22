@@ -52,6 +52,7 @@
   background-color: $color-light;
   @extend %background-image;
   backface-visibility: hidden;
+  @extend %transition;
 }
 
 .card__back {
@@ -82,6 +83,7 @@
 .card__sound-icon {
   left: 15px;
   background-image: url("/assets/img/icons/volume-loud.svg");
+  cursor: none;
 }
 
 .train_mode {
@@ -89,7 +91,7 @@
     background-position: center -15px;
   }
   & .card__sound-icon {
-    opacity: 1;
+    // opacity: 1;
     @extend %transition;
   }
 }
@@ -102,6 +104,10 @@
     transform: translateY(100%);
     opacity: 0;
   }
+}
+
+.sound-icon_hidden {
+  opacity: 0;
 }
 
 .card__guessed {

@@ -18,7 +18,7 @@ export class Category {
 
   generateCategory(obj, mode) {
     let category = createDomNode(category, 'div', 'category', `category__${mode}`);
-    category.dataset.category = obj.category;
+    category.dataset.section = obj.category;
     let categoryTitle = this.makeCleanWord(obj.category);
     category.innerHTML = `<span class="category__logo category__logo_color"
                             style="background-image: url('${obj.iconPath}${obj.category}_color.svg');"></span>

@@ -9,7 +9,7 @@ export class Rate {
 
   generateLayout() {
     let layout = createDomNode(layout, 'div', 'rate');
-    if (this.mode !== 'play_mode') layout.classList.add('hidden');
+    if (this.mode !== 'play_mode') layout.classList.add('invisible', 'hidden');
     return layout;
   }
 

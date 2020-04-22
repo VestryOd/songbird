@@ -30,7 +30,7 @@ export class Card {
     let cleanWord = this.makeCleanWord(word);
     let front = createDomNode(front, 'div', 'card__front');
     front.setAttribute('style', `background-image: url(${imgPath}${category}/${word}.png);`);
-    front.innerHTML = `<span class="card__icon card__sound-icon hidden"></span>
+    front.innerHTML = `<span class="card__icon card__sound-icon sound-icon_hidden"></span>
                       <span class="card__icon card__rotate-icon"></span>
                       <div class="card__title">${cleanWord}</div>`;
     return front;

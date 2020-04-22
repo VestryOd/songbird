@@ -10196,107 +10196,43 @@ module.exports.formatError = function(err) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards-data */ "./cards-data.js");
-/* harmony import */ var _js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/voiceSpeak */ "./src/js/voiceSpeak.js");
-/* harmony import */ var _js_audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/audioPlayer */ "./src/js/audioPlayer.js");
-/* harmony import */ var _js_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
-/* harmony import */ var _js_generateContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/generateContent */ "./src/js/generateContent.js");
-/* harmony import */ var _js_changeContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/changeContent */ "./src/js/changeContent.js");
-/* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
-/* harmony import */ var _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Components/CardsLayout */ "./src/js/Components/CardsLayout.js");
-/* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
-/* harmony import */ var _js_Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Components/Breadcrumbs */ "./src/js/Components/Breadcrumbs.js");
-/* harmony import */ var _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/eventHadlers/categoryClick */ "./src/js/eventHadlers/categoryClick.js");
-
-
-
+/* harmony import */ var _js_audioPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/audioPlayer */ "./src/js/audioPlayer.js");
+/* harmony import */ var _js_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
+/* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
+/* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
+/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
+/* harmony import */ var _js_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
 
 
  // import Components
 
 
-
-
  // handlers
+
+
 
  // constants and variables
 
 var CATEGORIES_LAYOUT = ['layout-inline-flex'];
-var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
-var DELAY = 500;
-var isAnimated = false;
-var mode = 'play_mode';
+var mode = 'train_mode';
 
 window.onload = function () {
   var CONTENT_CONTAINER = document.querySelector('#content-container .wrapper');
   var HEADER_NAV = document.querySelector('#main-nav');
-  var BREADCRUMDS_CONTAINER = document.querySelector('.breadcrumbs__wrapper'); // make nav
+  var SWITCHER = this.document.querySelector('#toggleMode'); // make nav
 
-  var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_6__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_3__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_eventHadlers_categoryClick__WEBPACK_IMPORTED_MODULE_10__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]); // make categories home page
 
-  var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
-  CONTENT_CONTAINER.append(homePageLayout); /////////// Listeners
-  // CONTENT_CONTAINER.addEventListener('click', (e) => {
-  //   if (e.target.classList.contains('card__rotate-icon')) {
-  //     rotateCard(e.target)
-  //   } else {
-  //     sayText(e.target)
-  //   }
-  // });
-
-  document.addEventListener('click', function () {
-    var animals = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'animals');
-    var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](animals, mode, CARDS_LAYOUT).createInstance();
-    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY, 'disappear'); //Breadcrumbs BREADCRUMDS_WRAPPER
-
-    var breadcrumbs = new _js_Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_9__["Breadcrumbs"](animals).createInstance();
-    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, DELAY, 'invisible');
-    animationInProcess();
-  }); //, { once: true }
-};
-
-function rotateCard(target) {
-  var side = target.closest('.card__inner');
-  side.classList.toggle('translate');
-
-  side.onmouseleave = function () {
-    side.classList.remove('translate');
-    side.onmouseleave = null;
-  };
-}
-
-function sayText(target) {
-  var word = target.closest('.card').dataset.action;
-  console.log(word);
-  Object(_js_voiceSpeak__WEBPACK_IMPORTED_MODULE_1__["default"])(word);
-}
-
-function getCategoryFromData(data, category) {
-  return data.find(function (el) {
-    return el.category === category;
+  var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_4__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
+  CONTENT_CONTAINER.append(homePageLayout);
+  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  SWITCHER.addEventListener('click', function () {
+    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__["default"])();
   });
-}
-
-function animationInProcess() {
-  console.log('start---', new Date().getMilliseconds());
-  isAnimated = true;
-  setTimeout(function () {
-    isAnimated = false;
-    console.log('end---', new Date().getMilliseconds());
-  }, DELAY);
-}
-
-function handleRouts(route) {
-  if (!route === 'category') {
-    var categoryObject = getCategoryFromData(_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], route);
-    var cards = new _js_Components_CardsLayout__WEBPACK_IMPORTED_MODULE_7__["CardsLayout"](categoryObject, mode, CARDS_LAYOUT).createInstance();
-    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', cards, isAnimated, DELAY);
-  } else {
-    var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_8__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], mode, CATEGORIES_LAYOUT).createInstance();
-    Object(_js_changeContent__WEBPACK_IMPORTED_MODULE_5__["default"])('#content-container .wrapper', homePageLayout, isAnimated, DELAY);
-  }
-}
+};
 
 /***/ }),
 
@@ -10430,7 +10366,7 @@ var Card = /*#__PURE__*/function () {
       var cleanWord = this.makeCleanWord(word);
       var front = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(front, 'div', 'card__front');
       front.setAttribute('style', "background-image: url(".concat(imgPath).concat(category, "/").concat(word, ".png);"));
-      front.innerHTML = "<span class=\"card__icon card__sound-icon hidden\"></span>\n                      <span class=\"card__icon card__rotate-icon\"></span>\n                      <div class=\"card__title\">".concat(cleanWord, "</div>");
+      front.innerHTML = "<span class=\"card__icon card__sound-icon sound-icon_hidden\"></span>\n                      <span class=\"card__icon card__rotate-icon\"></span>\n                      <div class=\"card__title\">".concat(cleanWord, "</div>");
       return front;
     }
   }, {
@@ -10617,7 +10553,7 @@ var Category = /*#__PURE__*/function () {
     key: "generateCategory",
     value: function generateCategory(obj, mode) {
       var category = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(category, 'div', 'category', "category__".concat(mode));
-      category.dataset.category = obj.category;
+      category.dataset.section = obj.category;
       var categoryTitle = this.makeCleanWord(obj.category);
       category.innerHTML = "<span class=\"category__logo category__logo_color\"\n                            style=\"background-image: url('".concat(obj.iconPath).concat(obj.category, "_color.svg');\"></span>\n                          <span class=\"category__logo category__logo_grey\"\n                            style=\"background-image: url('").concat(obj.iconPath).concat(obj.category, "_grey.svg');\"></span>\n                          <div class=\"category__title\">").concat(categoryTitle, "</div>");
       return category;
@@ -10845,7 +10781,7 @@ var Rate = /*#__PURE__*/function () {
     key: "generateLayout",
     value: function generateLayout() {
       var layout = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(layout, 'div', 'rate');
-      if (this.mode !== 'play_mode') layout.classList.add('hidden');
+      if (this.mode !== 'play_mode') layout.classList.add('invisible', 'hidden');
       return layout;
     }
   }, {
@@ -10950,7 +10886,11 @@ function audioPlayer(pathToFile) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return changeContent; });
 function changeContent(containerSelector, newElement, isAnimated, delay, animationClass) {
-  if (isAnimated) return;
+  if (isAnimated) {
+    console.log('animated');
+  }
+
+  ;
 
   if (newElement === undefined || newElement === null || newElement.length < 1) {
     reportError('No new content!');
@@ -10959,71 +10899,71 @@ function changeContent(containerSelector, newElement, isAnimated, delay, animati
 
   var container = document.querySelector(containerSelector);
   var elements = Array.from(container.children);
-  console.log(elements);
 
   if (!container || !elements) {
     reportError('No target element or content!');
   } else {
     setTimeout(function () {
       fadeOut(elements, delay, animationClass);
-    }, 0);
+    }, 0); // fadeOut(elements, delay, animationClass);
+
     setTimeout(function () {
       fadeIn(container, newElement, delay, animationClass);
-    }, delay);
+    }, delay); // fadeIn(container, newElement, delay, animationClass);
   }
 
-  return true;
-} ////////
+  return true; ////////
 
-function fadeOut(elements, delay, animationClass) {
-  if (disappearElements(elements, animationClass)) {
-    setTimeout(function () {
-      deleteElements(elements);
-    }, 300);
+  function fadeOut(elements, delay, animationClass) {
+    if (disappearElements(elements, animationClass)) {
+      setTimeout(function () {
+        deleteElements(elements);
+      }, delay);
+    }
+
+    ;
+    return true;
   }
 
-  ;
-  return true;
-}
+  function fadeIn(container, newElement, delay, animationClass) {
+    var added = addElements(container, newElement, animationClass);
 
-function fadeIn(container, newElement, delay, animationClass) {
-  var added = addElements(container, newElement, animationClass);
+    if (added) {
+      setTimeout(function () {
+        appearElements(newElement, animationClass);
+      }, delay);
+    }
+  } ////////
 
-  if (added) {
-    setTimeout(function () {
-      appearElements(newElement, animationClass);
-    }, delay);
+
+  function reportError(text) {
+    console.error(text);
   }
-} ////////
 
+  function disappearElements(elements, animationClass) {
+    elements.forEach(function (elem) {
+      elem.classList.add(animationClass);
+    });
+    return true;
+  }
 
-function reportError(text) {
-  console.error(text);
-}
+  function deleteElements(elements) {
+    elements.forEach(function (elem) {
+      elem.remove();
+    });
+    return true;
+  }
 
-function disappearElements(elements, animationClass) {
-  elements.forEach(function (elem) {
-    elem.classList.add(animationClass);
-  });
-  return true;
-}
+  function addElements(container, newElement, animationClass) {
+    newElement.classList.add(animationClass); // debugger;
 
-function deleteElements(elements) {
-  elements.forEach(function (elem) {
-    elem.remove();
-  });
-  return true;
-}
+    container.append(newElement);
+    return true;
+  }
 
-function addElements(container, newElement, animationClass) {
-  newElement.classList.add(animationClass); // debugger;
-
-  container.append(newElement);
-  return true;
-}
-
-function appearElements(newElement, animationClass) {
-  newElement.classList.remove(animationClass);
+  function appearElements(newElement, animationClass) {
+    newElement.classList.remove(animationClass);
+  }
 }
 
 /***/ }),
@@ -11056,40 +10996,169 @@ function createDomNode(node, element) {
 
 /***/ }),
 
-/***/ "./src/js/eventHadlers/categoryClick.js":
-/*!**********************************************!*\
-  !*** ./src/js/eventHadlers/categoryClick.js ***!
-  \**********************************************/
+/***/ "./src/js/hadlers/cardClick.js":
+/*!*************************************!*\
+  !*** ./src/js/hadlers/cardClick.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardClick; });
+/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+
+function cardClick(e) {
+  console.log(e.target);
+
+  if (e.target.classList.contains('card__rotate-icon')) {
+    rotateCard(e.target);
+  } else {
+    sayText(e.target);
+  }
+
+  function rotateCard(target) {
+    var side = target.closest('.card__inner');
+    console.log(side);
+    side.classList.toggle('translate');
+
+    side.onmouseleave = function () {
+      side.classList.remove('translate');
+      side.onmouseleave = null;
+    };
+  }
+
+  function sayText(target) {
+    var word = target.closest('.card').dataset.action;
+    Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_0__["default"])(word);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/hadlers/categoryClick.js":
+/*!*****************************************!*\
+  !*** ./src/js/hadlers/categoryClick.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return categoryClick; });
+/* harmony import */ var _handleRouts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handleRouts */ "./src/js/hadlers/handleRouts.js");
+
 function categoryClick(e) {
-  console.log('e.target');
+  var targetContainer = e.target.closest('.nav__link') || e.target.closest('.category ');
+  var route = targetContainer.dataset.section;
+  Object(_handleRouts__WEBPACK_IMPORTED_MODULE_0__["default"])(route);
 }
 
 /***/ }),
 
-/***/ "./src/js/generateContent.js":
-/*!***********************************!*\
-  !*** ./src/js/generateContent.js ***!
-  \***********************************/
+/***/ "./src/js/hadlers/handleModeSwitch.js":
+/*!********************************************!*\
+  !*** ./src/js/hadlers/handleModeSwitch.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return generateContent; });
-/* harmony import */ var _js_createDomNode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../js/createDomNode */ "./src/js/createDomNode.js");
-
-function generateContent(parentElement, wrapperClass, data, classConstructor) {
-  var wrapper = Object(_js_createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', wrapperClass);
-  data.forEach(function (elem) {
-    wrapper.append(new classConstructor(elem).createInstance());
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return handleModeSwitch; });
+function handleModeSwitch() {
+  console.log('handleswitch');
+  var rate = document.querySelector('.rate');
+  rate.classList.toggle('invisible');
+  rate.classList.toggle('hidden');
+  var cards = document.querySelectorAll('.card');
+  cards.forEach(function (el) {
+    el.classList.toggle('play_mode');
+    el.classList.toggle('train_mode');
   });
-  parentElement.append(wrapper);
+}
+
+/***/ }),
+
+/***/ "./src/js/hadlers/handleRouts.js":
+/*!***************************************!*\
+  !*** ./src/js/hadlers/handleRouts.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return handleRouts; });
+/* harmony import */ var _Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
+/* harmony import */ var _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/CardsLayout */ "./src/js/Components/CardsLayout.js");
+/* harmony import */ var _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Breadcrumbs */ "./src/js/Components/Breadcrumbs.js");
+/* harmony import */ var _changeContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../changeContent */ "./src/js/changeContent.js");
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+/* harmony import */ var _hadlers_cardClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hadlers/cardClick */ "./src/js/hadlers/cardClick.js");
+/* harmony import */ var _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+
+
+
+
+
+
+
+
+function handleRouts(route) {
+  console.log(route);
+  var CATEGORIES_LAYOUT = ['layout-inline-flex'];
+  var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
+  var DELAY = 500;
+  var isAnimated = false;
+  var mode = getModeValue();
+  console.log(mode);
+
+  if (route !== 'category' && route !== 'statistics') {
+    handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_7__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
+  } else {
+    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_7__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
+  }
+
+  function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
+    var categoryObject = getCategoryFromData(data, route);
+    var cards = new _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__["CardsLayout"](categoryObject, mode, classes).createInstance();
+    cards.addEventListener('click', _hadlers_cardClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
+    var breadcrumbs = new _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["Breadcrumbs"](categoryObject).createInstance();
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+    animationInProcess();
+  }
+
+  function handleCategoriesPage(data, mode, isAnimated, classes, delay) {
+    var homePageLayout = new _Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_0__["CategoryLayout"](data, mode, classes).createInstance();
+    homePageLayout.addEventListener('click', _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_6__["default"]);
+    var breadcrumbs = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_4__["default"])(breadcrumbs, 'div', 'breadcrumbs__layout');
+    breadcrumbs.innerHTML = "<div></div";
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+    animationInProcess();
+  }
+
+  function getCategoryFromData(data, category) {
+    return data.find(function (el) {
+      return el.category === category;
+    });
+  }
+
+  function animationInProcess() {
+    console.log('start---', new Date().getMilliseconds());
+    isAnimated = true;
+    setTimeout(function () {
+      isAnimated = false;
+      console.log('end---', new Date().getMilliseconds());
+    }, DELAY);
+  }
+
+  function getModeValue() {
+    return document.querySelector('#toggleMode').checked !== true ? 'train_mode' : 'play_mode';
+  }
 }
 
 /***/ }),

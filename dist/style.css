@@ -417,7 +417,7 @@ ul {
   box-sizing: border-box;
 }
 
-.header__breadcrumbs, .category__logo_color, .category, .rate__label, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__title, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
+.header__breadcrumbs, .category__logo_color, .category, .rate__label, .rate, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__front, .card__back, .card__title, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
 .breadcrumbs__layout {
   transition: all 0.5s ease-out;
 }
@@ -946,20 +946,21 @@ h5 {
 .card__sound-icon {
   left: 15px;
   background-image: url("/assets/img/icons/volume-loud.svg");
+  cursor: none;
 }
 
 .train_mode div > div {
   background-position: center -15px;
 }
-.train_mode .card__sound-icon {
-  opacity: 1;
-}
-
 .play_mode .card__rotate-icon {
   visibility: hidden;
 }
 .play_mode .card__title {
   transform: translateY(100%);
+  opacity: 0;
+}
+
+.sound-icon_hidden {
   opacity: 0;
 }
 
