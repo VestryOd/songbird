@@ -9,7 +9,7 @@ export class GameResults {
   }
 
   generateOverlay() {
-    let classes = ['results'];
+    let classes = ['results', 'hide_results'];
     let overlay = createDomNode(overlay, 'div', ...classes);
     return overlay;
   }
@@ -20,8 +20,8 @@ export class GameResults {
     return infoWrapper;
   }
 
-  generatetitle() {
-    let classes = ['info__wrapper'];
+  generateTitle() {
+    let classes = ['info__title'];
     let title = createDomNode(title, 'div', ...classes);
     let text = this.type === 'success' ? 'Congratulations, you won' : 'You had errors, try again';
     title.innerHTML = text;
@@ -35,7 +35,7 @@ export class GameResults {
     return description;
   }
   generateImage() {
-    let classes = ['info__description'];
+    let classes = ['info__image'];
     let image = createDomNode(image, 'div', ...classes);
     image.style = `background-image: url(/assets/img/playmode/${this.type === 'success' ? 'win' : 'fail'}.png);`;
     return image;
@@ -44,15 +44,23 @@ export class GameResults {
   buildLayout() {
     let overlay = this.generateOverlay();
     let wrapper = this.generateWrapper();
-    wrapper.append(this.generatetitle());
+    wrapper.append(this.generateTitle());
     wrapper.append(this.generateDescription());
     wrapper.append(this.generateImage());
     overlay.append(wrapper);
-    this.overlay = overlay;
+    this.layout = overlay;
   }
 
   createInstance() {
     this.buildLayout();
     return this.layout;
+  }
+
+  showInstance() {
+    this.layout.classList.remove('hide_results');
+  }
+
+  hideInstance() {
+    this.layout.classList.add('hide_results');
   }
 }

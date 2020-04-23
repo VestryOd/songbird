@@ -30,11 +30,9 @@ window.onload = function () {
    handleModeSwitch();
  });
 
+
   // init localstorage
   localStorage.setItem('englishMode', 'train_mode');
-  localStorage.setItem('englishWord', '');
-  localStorage.setItem('englishWordsArray', '');
-  localStorage.setItem('englishWordsOrder', '');
-  // localStorage.setItem('englishWordsIndex', '');
-  console.log(localStorage.englishMode);
+  localStorage.setItem('isPlaying', false);
+  localStorage.setItem('englishStats', '');
 }

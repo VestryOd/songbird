@@ -35,7 +35,7 @@ export class Breadcrumbs {
     let wrapper = this.generateBreadcrumsWrapper();
     wrapper.append(this.generateBreadcrums(this.data));
     layout.append(wrapper);
-    console.log(wrapper);
+    // console.log(wrapper);
     this.layout = layout;
   }
 

@@ -10227,11 +10227,8 @@ window.onload = function () {
   }); // init localstorage
 
   localStorage.setItem('englishMode', 'train_mode');
-  localStorage.setItem('englishWord', '');
-  localStorage.setItem('englishWordsArray', '');
-  localStorage.setItem('englishWordsOrder', ''); // localStorage.setItem('englishWordsIndex', '');
-
-  console.log(localStorage.englishMode);
+  localStorage.setItem('isPlaying', false);
+  localStorage.setItem('englishStats', '');
 };
 
 /***/ }),
@@ -10294,8 +10291,8 @@ var Breadcrumbs = /*#__PURE__*/function () {
       var layout = this.generateLayout();
       var wrapper = this.generateBreadcrumsWrapper();
       wrapper.append(this.generateBreadcrums(this.data));
-      layout.append(wrapper);
-      console.log(wrapper);
+      layout.append(wrapper); // console.log(wrapper);
+
       this.layout = layout;
     }
   }, {
@@ -10652,6 +10649,215 @@ var CategoryLayout = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/Components/Game.js":
+/*!***********************************!*\
+  !*** ./src/js/Components/Game.js ***!
+  \***********************************/
+/*! exports provided: Game */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Game", function() { return Game; });
+/* harmony import */ var _GameResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameResults */ "./src/js/Components/GameResults.js");
+/* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
+/* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
+/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+var Game = /*#__PURE__*/function () {
+  function Game() {
+    _classCallCheck(this, Game);
+
+    this.words = '';
+    this.order = '';
+    this.currenIndex = 0;
+    this.elemSuccess = '';
+    this.elemError = '';
+    this.elemTotal = '';
+    this.elemPlayButton = '';
+    this.elemRepeatButton = '';
+    this.elemsGuessedCards = [];
+    this.isSpeaking = false;
+    this.currentWord = '';
+  }
+
+  _createClass(Game, [{
+    key: "createInstance",
+    value: function createInstance() {
+      this.words = this.prepareCards();
+      this.order = this.initOrder();
+      this.initElements();
+      this.changeIcons();
+      this.newGameStep();
+    }
+  }, {
+    key: "initOrder",
+    value: function initOrder() {
+      return Object(_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__["default"])(this.words);
+    }
+  }, {
+    key: "initElements",
+    value: function initElements() {
+      this.elemSuccess = document.querySelector('#playmode-success');
+      this.elemError = document.querySelector('#playmode-error');
+      this.elemTotal = document.querySelector('#playmode-total');
+      this.elemPlayButton = document.querySelector('.playmode-button__play');
+      this.elemRepeatButton = document.querySelector('.playmode-button__repeat');
+    }
+  }, {
+    key: "prepareCards",
+    value: function prepareCards() {
+      var cards = Array.from(document.querySelectorAll('.card'));
+      return cards.map(function (el) {
+        return el.dataset.action;
+      });
+    }
+  }, {
+    key: "sayWord",
+    value: function sayWord(word) {
+      var _this = this;
+
+      console.log("word is: ".concat(word));
+      this.isSpeaking = true;
+      setTimeout(function () {
+        Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_3__["default"])(word);
+      }, 300);
+      setTimeout(function () {
+        _this.isSpeaking = false;
+      }, 300);
+      return word;
+    }
+  }, {
+    key: "repeatWord",
+    value: function repeatWord() {
+      this.sayWord(this.currentWord);
+    }
+  }, {
+    key: "newGameStep",
+    value: function newGameStep() {
+      var wordOrder = this.order[this.currenIndex];
+      this.currentWord = this.sayWord(this.words[wordOrder]); // localStorage.setItem('englishWord', this.currentWord);
+    }
+  }, {
+    key: "markRightAnswer",
+    value: function markRightAnswer(target) {
+      var guessedCard = target.querySelector('.card__guessed');
+      this.elemsGuessedCards.push(guessedCard);
+      guessedCard.classList.remove('hidden');
+    }
+  }, {
+    key: "handleGuess",
+    value: function handleGuess(target) {
+      var targetWord = target.dataset.action;
+
+      if (this.currentWord === targetWord) {
+        this.rightGuess(target);
+      } else {
+        this.wrongGuess();
+      }
+    }
+  }, {
+    key: "rightGuess",
+    value: function rightGuess(target) {
+      var _this2 = this;
+
+      this.markRightAnswer(target);
+
+      if (this.currenIndex < this.words.length - 1) {
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/success.mp3');
+        this.currenIndex++;
+        this.changeValue('total');
+        this.changeValue('success');
+      } else {
+        this.endOfGame();
+        return;
+      }
+
+      setTimeout(function () {
+        _this2.newGameStep();
+      }, 500);
+    }
+  }, {
+    key: "wrongGuess",
+    value: function wrongGuess() {
+      this.changeValue('error');
+      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/error.mp3');
+    }
+  }, {
+    key: "endOfGame",
+    value: function endOfGame() {
+      var right = this.elemSuccess.value;
+      var wrong = this.elemError.value;
+      this.changeIcons();
+
+      if (+wrong === 0) {
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/win.mp3');
+        this.showrResults('success', right, wrong);
+      } else {
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/lose.mp3');
+        this.showrResults('errors', right, wrong);
+      }
+
+      this.isPlaying = false;
+    }
+  }, {
+    key: "showrResults",
+    value: function showrResults(type, success, errors) {
+      var results = new _GameResults__WEBPACK_IMPORTED_MODULE_0__["GameResults"](type, success, errors);
+      var resultsLayout = results.createInstance();
+      document.body.append(resultsLayout);
+      setTimeout(function () {
+        results.showInstance();
+      }, 0);
+      document.querySelector('#toggleMode').checked = false;
+      localStorage.isPlaying = JSON.stringify(false);
+      localStorage.setItem('englishMode', 'train_mode');
+      Object(_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__["default"])('category');
+      setTimeout(function () {
+        results.hideInstance();
+      }, 2000);
+    }
+  }, {
+    key: "changeValue",
+    value: function changeValue(type) {
+      var elemName = "elem".concat(type.charAt(0).toUpperCase() + type.slice(1));
+      console.log(elemName);
+      var previoysValue = +this[elemName].value;
+      this[elemName].value = type === 'total' ? previoysValue - 1 : previoysValue + 1;
+    }
+  }, {
+    key: "changeIcons",
+    value: function changeIcons() {
+      this.elemPlayButton.classList.toggle('invisible');
+      this.elemRepeatButton.classList.toggle('invisible');
+    }
+  }, {
+    key: "clearCards",
+    value: function clearCards() {
+      this.elemsGuessedCards.forEach(function (el) {
+        if (!el.classList.contains('hidden')) {
+          el.classList.add('hidden');
+        }
+      });
+    }
+  }]);
+
+  return Game;
+}();
+
+/***/ }),
+
 /***/ "./src/js/Components/GameResults.js":
 /*!******************************************!*\
   !*** ./src/js/Components/GameResults.js ***!
@@ -10683,7 +10889,7 @@ var GameResults = /*#__PURE__*/function () {
   _createClass(GameResults, [{
     key: "generateOverlay",
     value: function generateOverlay() {
-      var classes = ['results'];
+      var classes = ['results', 'hide_results'];
       var overlay = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [overlay, 'div'].concat(classes));
       return overlay;
     }
@@ -10695,9 +10901,9 @@ var GameResults = /*#__PURE__*/function () {
       return infoWrapper;
     }
   }, {
-    key: "generatetitle",
-    value: function generatetitle() {
-      var classes = ['info__wrapper'];
+    key: "generateTitle",
+    value: function generateTitle() {
+      var classes = ['info__title'];
       var title = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [title, 'div'].concat(classes));
       var text = this.type === 'success' ? 'Congratulations, you won' : 'You had errors, try again';
       title.innerHTML = text;
@@ -10714,7 +10920,7 @@ var GameResults = /*#__PURE__*/function () {
   }, {
     key: "generateImage",
     value: function generateImage() {
-      var classes = ['info__description'];
+      var classes = ['info__image'];
       var image = _createDomNode__WEBPACK_IMPORTED_MODULE_0__["default"].apply(void 0, [image, 'div'].concat(classes));
       image.style = "background-image: url(/assets/img/playmode/".concat(this.type === 'success' ? 'win' : 'fail', ".png);");
       return image;
@@ -10724,17 +10930,27 @@ var GameResults = /*#__PURE__*/function () {
     value: function buildLayout() {
       var overlay = this.generateOverlay();
       var wrapper = this.generateWrapper();
-      wrapper.append(this.generatetitle());
+      wrapper.append(this.generateTitle());
       wrapper.append(this.generateDescription());
       wrapper.append(this.generateImage());
       overlay.append(wrapper);
-      this.overlay = overlay;
+      this.layout = overlay;
     }
   }, {
     key: "createInstance",
     value: function createInstance() {
       this.buildLayout();
       return this.layout;
+    }
+  }, {
+    key: "showInstance",
+    value: function showInstance() {
+      this.layout.classList.remove('hide_results');
+    }
+  }, {
+    key: "hideInstance",
+    value: function hideInstance() {
+      this.layout.classList.add('hide_results');
     }
   }]);
 
@@ -11097,156 +11313,32 @@ function createDomNode(node, element) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
-/* harmony import */ var _Components_GameResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/GameResults */ "./src/js/Components/GameResults.js");
-/* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
-/* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
-/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _Components_Game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/Game */ "./src/js/Components/Game.js");
 
-
-
-
-var words, order, currenIndex, isPlaying, isSpeaking;
+var isSpeaking = false;
+var game = null;
 function cardTrainClick(e) {
-  if (e.target.classList.contains('playmode-button__play') || e.target.classList.contains('playmode-button__repeat')) {
-    if (isPlaying) {
-      clearCards();
-    } else {
-      changeIcons();
-    }
+  if (checkClass(e, 'playmode-button__play') || checkClass(e, 'playmode-button__repeat')) {
+    var isPlaying = JSON.parse(localStorage.isPlaying);
 
-    isPlaying = true;
-    initValues();
-    newGameStep();
-  } else if (e.target.classList.contains('card__front') || e.target.classList.contains('card')) {
+    if (!isPlaying) {
+      game = new _Components_Game__WEBPACK_IMPORTED_MODULE_0__["Game"]();
+      game.createInstance();
+      localStorage.isPlaying = JSON.stringify(true);
+      return;
+    } else {
+      game.repeatWord();
+      return;
+    }
+  }
+
+  if (checkClass(e, 'card__front') || checkClass(e, 'card')) {
     if (isSpeaking) return;
-    handleGuess(e.target.closest('.card'));
+    game.handleGuess(e.target.closest('.card'));
   }
 
-  console.log(e.target);
-
-  function newGameStep() {
-    console.log("words=".concat(words, ", order=").concat(order));
-    var currentWord = sayWord(words[order[currenIndex]]);
-    localStorage.setItem('englishWord', currentWord);
-  }
-
-  function prepareCards() {
-    var cards = Array.from(document.querySelectorAll('.card'));
-    var words = cards.map(function (el) {
-      return el.dataset.action;
-    });
-    return words;
-  }
-
-  function sayWord(word) {
-    Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_3__["default"])(word);
-    isSpeaking = true;
-    setTimeout(function () {
-      isSpeaking = false;
-    }, 300);
-    console.log(word);
-    return word;
-  }
-
-  function endOfGame() {
-    var ok = document.querySelector('#playmode-success').value;
-    var wrong = document.querySelector('#playmode-error').value;
-    changeIcons();
-
-    if (+document.querySelector('#playmode-error').value === 0) {
-      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/win.mp3');
-      showrResults('success', ok, wrong);
-    } else {
-      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/lose.mp3');
-      showrResults('errors', ok, wrong);
-    }
-
-    isPlaying = false;
-  }
-
-  function showrResults(type, success, errors) {
-    var results = new _Components_GameResults__WEBPACK_IMPORTED_MODULE_0__["GameResults"]().createInstance();
-    document.body.append(results);
-    setTimeout(function () {
-      results.remove();
-    }, 1000);
-  }
-
-  function guessedRight(target) {
-    if (currenIndex < words.length - 1) {
-      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/success.mp3');
-      currenIndex++;
-      resolveTotal();
-      resolveOk();
-      markRightAnswer(target);
-    } else {
-      endOfGame();
-    }
-
-    setTimeout(function () {
-      newGameStep();
-    }, 500);
-  }
-
-  function resolveOk() {
-    var elem = document.querySelector('#playmode-success');
-    var previousSuccess = +elem.value;
-    elem.value = previousSuccess + 1;
-  }
-
-  function resolveWrong() {
-    var elem = document.querySelector('#playmode-error');
-    var previousValue = +elem.value;
-    elem.value = previousValue + 1;
-  }
-
-  function resolveTotal() {
-    var elem = document.querySelector('#playmode-total');
-    var previousTotal = +elem.value;
-    elem.value = previousTotal - 1;
-  }
-
-  function notGuessed(errorElement) {
-    Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/error.mp3');
-    resolveWrong();
-  }
-
-  function handleGuess(target) {
-    var targetWord = target.dataset.action;
-    console.log(targetWord, localStorage.englishWord);
-
-    if (localStorage.englishWord === targetWord) {
-      console.log('right');
-      guessedRight(target);
-    } else {
-      console.log('wrong');
-      notGuessed();
-    }
-  }
-
-  function changeIcons() {
-    document.querySelector('.playmode-button__play').classList.toggle('invisible');
-    document.querySelector('.playmode-button__repeat').classList.toggle('invisible');
-  }
-
-  function markRightAnswer(target) {
-    var child = target.querySelector('.card__guessed');
-    child.classList.remove('hidden');
-  }
-
-  function initValues() {
-    words = prepareCards();
-    order = Object(_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__["default"])(words);
-    currenIndex = 0;
-    isSpeaking = false;
-  }
-
-  function clearCards() {
-    document.querySelectorAll('.card__guessed').forEach(function (el) {
-      if (!el.classList.contains('hidden')) {
-        el.classList.add('hidden');
-      }
-    });
+  function checkClass(e, className) {
+    return e.target.classList.contains(className);
   }
 }
 
@@ -11344,6 +11436,10 @@ function handleModeSwitch() {
     if (oldMode === 'train_mode') {
       newValue = 'play_mode';
     } else {
+      localStorage.isPlaying = JSON.stringify(false);
+      clearCards();
+      clearIndicators();
+      changeIcons();
       newValue = 'train_mode';
     }
 
@@ -11363,6 +11459,27 @@ function handleModeSwitch() {
       el.classList.toggle('play_mode');
       el.classList.toggle('train_mode');
     });
+  }
+
+  function clearCards() {
+    var cards = document.querySelectorAll('.card__guessed');
+    cards.forEach(function (el) {
+      if (!el.classList.contains('hidden')) {
+        el.classList.add('hidden');
+      }
+    });
+  }
+
+  function clearIndicators() {
+    var cards = document.querySelectorAll('.card');
+    document.querySelector('#playmode-success').value = 0;
+    document.querySelector('#playmode-error').value = 0;
+    document.querySelector('#playmode-total').value = cards.length;
+  }
+
+  function changeIcons() {
+    document.querySelector('.playmode-button__play').classList.toggle('invisible');
+    document.querySelector('.playmode-button__repeat').classList.toggle('invisible');
   }
 
   function changeHandlers() {
@@ -11415,8 +11532,7 @@ function handleRouts(route) {
   var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
   var DELAY = 500;
   var isAnimated = false;
-  var mode = getModeValue();
-  console.log(mode);
+  var mode = getModeValue(); // console.log(mode);
 
   if (route !== 'category' && route !== 'statistics') {
     handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
@@ -11427,8 +11543,8 @@ function handleRouts(route) {
   function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
     var categoryObject = getCategoryFromData(data, route);
     var cards = new _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__["CardsLayout"](categoryObject, mode, classes).createInstance();
-    var clickHandler = mode === 'train_mode' ? _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__["default"] : _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__["default"];
-    console.log(clickHandler);
+    var clickHandler = mode === 'train_mode' ? _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__["default"] : _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__["default"]; // console.log(clickHandler);
+
     cards.addEventListener('click', clickHandler);
     var breadcrumbs = new _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["Breadcrumbs"](categoryObject).createInstance();
     Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
