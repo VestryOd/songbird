@@ -10198,9 +10198,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards-data */ "./cards-data.js");
 /* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
 /* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
-/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
+/* harmony import */ var _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Components/Stats */ "./src/js/Components/Stats.js");
+/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
  // import Components
+
 
 
  // handlers
@@ -10217,18 +10219,21 @@ window.onload = function () {
 
   var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]); // make categories home page
 
   var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'train_mode', CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout);
-  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]);
   SWITCHER.addEventListener('click', function () {
-    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_4__["default"])();
+    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__["default"])();
   }); // init localstorage
 
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', false);
-  localStorage.setItem('englishStats', '');
+  localStorage.setItem('englishCategory', '');
+  var stats = new _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  stats.createInstance();
+  console.log(stats.getStats());
 };
 
 /***/ }),
@@ -10660,15 +10665,19 @@ var CategoryLayout = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Game", function() { return Game; });
 /* harmony import */ var _GameResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameResults */ "./src/js/Components/GameResults.js");
-/* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
-/* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
-/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
-/* harmony import */ var _hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
+/* harmony import */ var _Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stats */ "./src/js/Components/Stats.js");
+/* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
+/* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
+/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 
@@ -10690,6 +10699,7 @@ var Game = /*#__PURE__*/function () {
     this.elemsGuessedCards = [];
     this.isSpeaking = false;
     this.currentWord = '';
+    this.stats = '';
   }
 
   _createClass(Game, [{
@@ -10700,11 +10710,13 @@ var Game = /*#__PURE__*/function () {
       this.initElements();
       this.changeIcons();
       this.newGameStep();
+      this.stats = new _Stats__WEBPACK_IMPORTED_MODULE_1__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_6__["default"]);
+      this.stats.createInstance();
     }
   }, {
     key: "initOrder",
     value: function initOrder() {
-      return Object(_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_1__["default"])(this.words);
+      return Object(_randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_2__["default"])(this.words);
     }
   }, {
     key: "initElements",
@@ -10728,10 +10740,9 @@ var Game = /*#__PURE__*/function () {
     value: function sayWord(word) {
       var _this = this;
 
-      console.log("word is: ".concat(word));
       this.isSpeaking = true;
       setTimeout(function () {
-        Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_3__["default"])(word);
+        Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_4__["default"])(word);
       }, 300);
       setTimeout(function () {
         _this.isSpeaking = false;
@@ -10747,7 +10758,7 @@ var Game = /*#__PURE__*/function () {
     key: "newGameStep",
     value: function newGameStep() {
       var wordOrder = this.order[this.currenIndex];
-      this.currentWord = this.sayWord(this.words[wordOrder]); // localStorage.setItem('englishWord', this.currentWord);
+      this.currentWord = this.sayWord(this.words[wordOrder]);
     }
   }, {
     key: "markRightAnswer",
@@ -10757,13 +10768,21 @@ var Game = /*#__PURE__*/function () {
       guessedCard.classList.remove('hidden');
     }
   }, {
+    key: "sendStats",
+    value: function sendStats(word, type) {
+      var category = localStorage.getItem('englishCategory');
+      this.stats.updateStats(category, word, type);
+    }
+  }, {
     key: "handleGuess",
     value: function handleGuess(target) {
       var targetWord = target.dataset.action;
 
       if (this.currentWord === targetWord) {
+        this.sendStats(targetWord, 'right');
         this.rightGuess(target);
       } else {
+        this.sendStats(targetWord, 'wrong');
         this.wrongGuess();
       }
     }
@@ -10775,7 +10794,7 @@ var Game = /*#__PURE__*/function () {
       this.markRightAnswer(target);
 
       if (this.currenIndex < this.words.length - 1) {
-        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/success.mp3');
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_3__["default"])('assets/audio/success.mp3');
         this.currenIndex++;
         this.changeValue('total');
         this.changeValue('success');
@@ -10792,7 +10811,7 @@ var Game = /*#__PURE__*/function () {
     key: "wrongGuess",
     value: function wrongGuess() {
       this.changeValue('error');
-      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/error.mp3');
+      Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_3__["default"])('assets/audio/error.mp3');
     }
   }, {
     key: "endOfGame",
@@ -10802,10 +10821,10 @@ var Game = /*#__PURE__*/function () {
       this.changeIcons();
 
       if (+wrong === 0) {
-        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/win.mp3');
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_3__["default"])('assets/audio/win.mp3');
         this.showrResults('success', right, wrong);
       } else {
-        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_2__["default"])('assets/audio/lose.mp3');
+        Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_3__["default"])('assets/audio/lose.mp3');
         this.showrResults('errors', right, wrong);
       }
 
@@ -10823,7 +10842,7 @@ var Game = /*#__PURE__*/function () {
       document.querySelector('#toggleMode').checked = false;
       localStorage.isPlaying = JSON.stringify(false);
       localStorage.setItem('englishMode', 'train_mode');
-      Object(_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__["default"])('category');
+      Object(_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_5__["default"])('category');
       setTimeout(function () {
         results.hideInstance();
       }, 2000);
@@ -10832,7 +10851,6 @@ var Game = /*#__PURE__*/function () {
     key: "changeValue",
     value: function changeValue(type) {
       var elemName = "elem".concat(type.charAt(0).toUpperCase() + type.slice(1));
-      console.log(elemName);
       var previoysValue = +this[elemName].value;
       this[elemName].value = type === 'total' ? previoysValue - 1 : previoysValue + 1;
     }
@@ -11159,6 +11177,96 @@ var Rate = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/Components/Stats.js":
+/*!************************************!*\
+  !*** ./src/js/Components/Stats.js ***!
+  \************************************/
+/*! exports provided: Stats */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Stats", function() { return Stats; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Stats = /*#__PURE__*/function () {
+  function Stats(data) {
+    _classCallCheck(this, Stats);
+
+    this.data = data;
+    this.template = '';
+    this.stats = '';
+  }
+
+  _createClass(Stats, [{
+    key: "initTemplate",
+    value: function initTemplate(data) {
+      var _this = this;
+
+      var template = {};
+      data.forEach(function (obj) {
+        template[obj.category] = _this.getWordsObject(obj.cards);
+      });
+      localStorage.setItem('englishStatsTemplate', JSON.stringify(template));
+      return template;
+    }
+  }, {
+    key: "getWordsObject",
+    value: function getWordsObject(arr) {
+      var result = {};
+      arr.forEach(function (el) {
+        result[el.word] = {
+          translate: el.translation,
+          right: 0,
+          wrong: 0,
+          click: 0
+        };
+      });
+      return result;
+    }
+  }, {
+    key: "getStats",
+    value: function getStats() {
+      var result = JSON.parse(localStorage.getItem('englishStats'));
+      return result;
+    }
+  }, {
+    key: "updateStats",
+    value: function updateStats(category, word, eventType) {
+      var stats = this.stats;
+      var prev = +stats[category][word][eventType];
+      stats[category][word][eventType] = prev + 1;
+      var update = JSON.stringify(stats);
+      localStorage.setItem('englishStats', update);
+    }
+  }, {
+    key: "clearStats",
+    value: function clearStats() {
+      localStorage.setItem('englishStats', JSON.stringify(this.template));
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      this.template = this.initTemplate(this.data);
+
+      if (localStorage.englishStats === this.undefined) {
+        this.clearStats();
+        this.stats = this.template;
+      } else {
+        this.stats = this.getStats();
+      }
+    }
+  }]);
+
+  return Stats;
+}();
+
+/***/ }),
+
 /***/ "./src/js/audioPlayer.js":
 /*!*******************************!*\
   !*** ./src/js/audioPlayer.js ***!
@@ -11355,10 +11463,14 @@ function cardTrainClick(e) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
 /* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _Components_Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Stats */ "./src/js/Components/Stats.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
 
+
+
+var stats = new _Components_Stats__WEBPACK_IMPORTED_MODULE_1__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_2__["default"]);
+stats.createInstance();
 function cardTrainClick(e) {
-  console.log(e.target);
-
   if (e.target.classList.contains('card__rotate-icon')) {
     rotateCard(e.target);
   } else {
@@ -11367,7 +11479,6 @@ function cardTrainClick(e) {
 
   function rotateCard(target) {
     var side = target.closest('.card__inner');
-    console.log(side);
     side.classList.toggle('translate');
 
     side.onmouseleave = function () {
@@ -11379,6 +11490,12 @@ function cardTrainClick(e) {
   function sayText(target) {
     var word = target.closest('.card').dataset.action;
     Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_0__["default"])(word);
+    sendStats(word, 'click');
+  }
+
+  function sendStats(word, type) {
+    var category = localStorage.getItem('englishCategory');
+    stats.updateStats(category, word, type);
   }
 }
 
@@ -11536,6 +11653,7 @@ function handleRouts(route) {
 
   if (route !== 'category' && route !== 'statistics') {
     handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
+    localStorage.setItem('englishCategory', route);
   } else {
     handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
   }

@@ -1,8 +1,10 @@
 import { GameResults } from "./GameResults";
+import { Stats } from "./Stats";
 import randomize from "../randomizeCardsOrder";
 import player from "../audioPlayer";
 import speak from "../voiceSpeak";
 import handleRouts from "../hadlers/handleRouts";
+import data from "../../../cards-data";
 
 export class Game {
   constructor() {
@@ -17,6 +19,7 @@ export class Game {
     this.elemsGuessedCards = [];
     this.isSpeaking = false;
     this.currentWord = '';
+    this.stats = '';
   }
 
   createInstance() {
@@ -25,6 +28,8 @@ export class Game {
     this.initElements();
     this.changeIcons();
     this.newGameStep();
+    this.stats = new Stats(data);
+    this.stats.createInstance();
   }
 
   initOrder() {
@@ -45,7 +50,6 @@ export class Game {
   }
 
   sayWord(word) {
-    console.log(`word is: ${word}`);
     this.isSpeaking = true;
     setTimeout(() => {
       speak(word);
@@ -63,7 +67,6 @@ export class Game {
   newGameStep() {
     let wordOrder = this.order[this.currenIndex];
     this.currentWord = this.sayWord(this.words[wordOrder]);
-    // localStorage.setItem('englishWord', this.currentWord);
   }
 
   markRightAnswer(target) {
@@ -72,11 +75,18 @@ export class Game {
     guessedCard.classList.remove('hidden');
   }
 
+  sendStats(word, type) {
+    let category = localStorage.getItem('englishCategory');
+    this.stats.updateStats(category, word, type);
+  }
+
   handleGuess(target) {
     let targetWord = target.dataset.action;
     if (this.currentWord === targetWord) {
+      this.sendStats(targetWord, 'right');
       this.rightGuess(target);
     } else {
+      this.sendStats(targetWord, 'wrong');
       this.wrongGuess();
     }
   }
@@ -134,7 +144,6 @@ export class Game {
 
   changeValue(type) {
     let elemName = `elem${type.charAt(0).toUpperCase() + type.slice(1)}`;
-    console.log(elemName);
     let previoysValue = +this[elemName].value;
     this[elemName].value = type === 'total' ? previoysValue - 1 : previoysValue + 1;
   }

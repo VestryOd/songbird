@@ -3,6 +3,7 @@ import data from '../cards-data';
 // import Components
 import { Nav } from "./js/Components/Nav";
 import { CategoryLayout } from "./js/Components/CategoryLayout";
+import { Stats } from "./js/Components/Stats";
 
 // handlers
 import categoryClick from "./js/hadlers/categoryClick";
@@ -34,5 +35,9 @@ window.onload = function () {
   // init localstorage
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', false);
-  localStorage.setItem('englishStats', '');
+  localStorage.setItem('englishCategory', '');
+
+  let stats = new Stats(data);
+  stats.createInstance();
+  console.log(stats.getStats());
 }

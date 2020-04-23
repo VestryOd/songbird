@@ -20,6 +20,7 @@ export default function handleRouts(route) {
 
   if (route !== 'category' && route !== 'statistics') {
     handleCardsCategory(data, route, mode, isAnimated, CARDS_LAYOUT, DELAY);
+    localStorage.setItem('englishCategory', route);
   } else {
     handleCategoriesPage(data, route, mode, CATEGORIES_LAYOUT, DELAY);
   }
