@@ -41,6 +41,10 @@
     @media (max-width: $tablet-width) { @content; }
 }
 
+@mixin media-tablet-768 {
+    @media (max-width: $tablet-width-768) { @content; }
+}
+
 @mixin media-tabletsmall {
     @media (max-width: $tablet-medium-width) { @content; }
 }

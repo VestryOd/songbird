@@ -417,7 +417,7 @@ ul {
   box-sizing: border-box;
 }
 
-.results, .header__breadcrumbs, .category__logo_color, .category, .rate__label, .rate, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__front, .card__back, .card__title, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
+.results, .header__breadcrumbs, .category__logo_color, .category, .rate__label, .rate, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__front, .card__back, .card__title, .card__inner, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
 .breadcrumbs__layout {
   transition: all 0.5s ease-out;
 }
@@ -436,7 +436,7 @@ h1 {
   background-position: center;
 }
 
-.info__description > *, .info__title, .breadcrumbs__title, .category__title, .rate__indicator, .toggle__slider:after, .nav__link .nav_content {
+.info__description > *, .info__title, .breadcrumbs__title, .category__title, .rate__indicator, .card__title, .toggle__slider:after, .nav__link .nav_content {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -669,35 +669,13 @@ h5 {
   padding-top: 150px;
 }
 
-@media (max-width: 1200px) {
-  .content__wrapper > .card {
-    flex-basis: 29%;
-  }
-  .content__wrapper > .card .card__inner {
-    height: 26vw;
-    margin: 0 auto;
-  }
+.content__wrapper {
+  margin-bottom: 150px;
 }
 @media (max-width: 940px) {
   .content__wrapper {
     justify-content: center;
     flex-wrap: wrap;
-  }
-  .content__wrapper > .card {
-    flex-basis: 42%;
-  }
-  .content__wrapper > .card .card__inner {
-    height: 30vw;
-    margin: 0 auto;
-  }
-}
-@media (max-width: 660px) {
-  .content__wrapper > .card {
-    flex-basis: 100%;
-  }
-  .content__wrapper > .card .card__inner {
-    height: 250px;
-    margin: 0 auto;
   }
 }
 
@@ -872,17 +850,48 @@ h5 {
 }
 
 .card {
-  margin: 15px;
+  margin: 20px;
+  width: 300px;
+  height: 250px;
   perspective: 500px;
+}
+@media (max-width: 1200px) {
+  .card {
+    flex-basis: 23%;
+    width: 288px;
+    height: 240px;
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    flex-basis: 29%;
+    width: 240px;
+    height: 190px;
+    margin: 15px;
+  }
+}
+@media (max-width: 375px) {
+  .card {
+    width: 156px;
+    height: 130px;
+    flex-basis: 43%;
+    margin: 10px;
+  }
+}
+@media (max-width: 320px) {
+  .card {
+    flex-basis: 100%;
+    width: 300px;
+    height: 250px;
+  }
 }
 
 .card__inner {
+  margin: 0;
   position: relative;
-  max-width: 300px;
-  max-height: 250px;
-  height: 18vw;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
-  transition: all 0.5s;
   transform-style: preserve-3d;
 }
 
@@ -908,7 +917,18 @@ h5 {
   letter-spacing: 1px;
   color: #ffffff;
   opacity: 1;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 375px) {
+  .card__title {
+    height: 3rem;
+    line-height: 3rem;
+  }
+}
+@media (max-width: 320px) {
+  .card__title {
+    height: 4rem;
+    line-height: 4rem;
+  }
 }
 
 .card__front, .card__back {
@@ -933,10 +953,30 @@ h5 {
   border-radius: 50%;
   cursor: pointer;
 }
+@media (max-width: 375px) {
+  .card__icon {
+    top: 5px;
+  }
+}
+@media (max-width: 320px) {
+  .card__icon {
+    top: 10px;
+  }
+}
 
 .card__rotate-icon {
   right: 15px;
   background-image: url("/assets/img/icons/rotate.svg");
+}
+@media (max-width: 375px) {
+  .card__rotate-icon {
+    right: 6px;
+  }
+}
+@media (max-width: 320px) {
+  .card__rotate-icon {
+    right: 6px;
+  }
 }
 
 .card__rotate-icon:hover {
@@ -951,6 +991,16 @@ h5 {
 
 .train_mode div > div {
   background-position: center -15px;
+}
+@media (max-width: 375px) {
+  .train_mode div > div {
+    background-position: center -10px;
+  }
+}
+@media (max-width: 320px) {
+  .train_mode div > div {
+    background-position: center -15px;
+  }
 }
 .play_mode .card__rotate-icon {
   visibility: hidden;
