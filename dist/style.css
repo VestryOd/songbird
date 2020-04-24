@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==========================================================================
    Normalize.scss settings
    ========================================================================== */
@@ -417,8 +418,9 @@ ul {
   box-sizing: border-box;
 }
 
-.results, .header__breadcrumbs, .category__logo_color, .category, .rate__label, .rate, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__front, .card__back, .card__title, .card__inner, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
-.breadcrumbs__layout {
+.table__title > th, .clear__button, .results, .header__breadcrumbs, .category__logo_color, .category, .rate__label, .rate, .playmode-button, .train_mode .card__sound-icon, .card__icon, .card__front, .card__back, .card__title, .card__inner, .toggle__input:checked + .toggle__slider:after, .toggle__slider:after, .nav__link .nav_icon, .nav__link .nav_content, .layout-inline-flex, .layout-2-column, .layout-3-column, .layout-4-column, .cards-category__layout,
+.breadcrumbs__layout,
+.stats_layout {
   transition: all 0.5s ease-out;
 }
 
@@ -436,15 +438,15 @@ h1 {
   background-position: center;
 }
 
-.info__description > *, .info__title, .breadcrumbs__title, .category__title, .rate__indicator, .card__title, .toggle__slider:after, .nav__link .nav_content {
+.table__title, .table__caption, .clear__button, .info__description > *, .info__title, .breadcrumbs__title, .category__title, .rate__indicator, .card__title, .toggle__slider:after, .nav__link .nav_content {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.category, .card__inner {
+.clear__button, .category, .card__inner {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
 }
 
-.info__image, .category:hover,
+.clear__button:hover, .info__image, .category:hover,
 .category:active, .card:hover .card__inner {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -548,7 +550,8 @@ h5 {
 }
 
 .cards-category__layout,
-.breadcrumbs__layout {
+.breadcrumbs__layout,
+.stats_layout {
   opacity: 1;
 }
 
@@ -685,6 +688,12 @@ h5 {
   justify-content: center;
 }
 
+.stats_layout {
+  display: flex;
+  flex-direction: column;
+  margin: 100px auto;
+}
+
 .overlay {
   position: fixed;
   left: -100%;
@@ -715,14 +724,14 @@ h5 {
 
 .nav {
   margin: 0;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
 .nav__link {
-  padding: 1rem 0;
+  padding: 8px 0;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
@@ -1138,7 +1147,7 @@ h5 {
 }
 
 .category__wrapper {
-  margin: 40px;
+  margin: 30px;
 }
 @media (max-width: 375px) {
   .category__wrapper {
@@ -1292,6 +1301,83 @@ h5 {
 .hide_results {
   opacity: 0;
   transform: translateY(100%);
+}
+
+.clear__wrapper {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.clear__button {
+  padding: 15px 20px;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  word-spacing: 1px;
+  color: #ffffff;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  background-color: #BF4D0B;
+}
+.clear__button:hover {
+  border: 1px solid #ffffff;
+  background-color: #db5f17;
+}
+
+.table__wrapper {
+  margin: 10px 0;
+  padding: 0 20px;
+}
+
+.stats-table {
+  background-color: #ffffff;
+  border: #dddddd;
+  overflow: auto;
+}
+.stats-table > * {
+  font-size: 1.8rem;
+}
+
+.table__caption {
+  margin-bottom: 5px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.table__title {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+}
+.table__title > th {
+  padding: 5px;
+  background-color: #5F49F2;
+}
+.table__title > th:hover {
+  background-color: #2C51BF;
+}
+
+.arrow_up:after {
+  content: "↑";
+  padding-left: 5px;
+}
+
+.arrow_down:after {
+  content: "↓";
+  padding-left: 5px;
+}
+
+.table__row > * {
+  padding-left: 5px;
+  color: #353535;
+}
+.table__row:nth-child(odd) {
+  background-color: #e0e0e0;
 }
 
 /*# sourceMappingURL=style.css.map*/

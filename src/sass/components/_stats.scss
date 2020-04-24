@@ -1,0 +1,87 @@
+.clear__wrapper {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.clear__button {
+  padding: 15px 20px;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  word-spacing: 1px;
+  color: $color-light;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  @extend %text_shadow;
+  background-color: $color-clear-stats-btn;
+  @extend %box-shadow-thin;
+  @extend %transition;
+  &:hover {
+    border: 1px solid $color-light;
+    background-color: $color-clear-stats-hover;
+    @extend %box-shadow-bold;
+  }
+}
+
+.table__wrapper {
+  margin: 10px 0;
+  padding: 0 20px;
+}
+
+.stats-table {
+  background-color: $color-light;
+  border: $color-border;
+  overflow: auto;
+  & > * {
+    font-size: 1.8rem;
+  }
+}
+
+.table__caption {
+  margin-bottom: 5px;
+  text-align: right;
+  text-transform: uppercase;
+  color: $color-light;
+  @extend %text_shadow;
+}
+
+.table__title {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $color-light;
+  @extend %text_shadow;
+  cursor: pointer;
+  & > th {
+    padding: 5px;
+    @extend %transition;
+    background-color: $color-secondary-emphasis;
+    &:hover {
+      background-color: $color-additional;
+    }
+  }
+}
+
+.arrow_up:after {
+  content: "↑";
+  padding-left: 5px;
+}
+
+.arrow_down:after {
+  content: "↓";
+  padding-left: 5px;
+}
+
+
+.table__row {
+  & > * {
+    padding-left: 5px;
+    color: $color-table-font;
+    // text-align: right;
+  }
+  &:nth-child(odd) {
+    background-color: $color-table-odd-row;
+  }
+}

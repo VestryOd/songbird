@@ -28,14 +28,14 @@
 
 .nav {
   margin: 0;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
 .nav__link {
-  padding: 1rem 0;
+  padding: 8px 0;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;

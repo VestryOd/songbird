@@ -10199,9 +10199,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
 /* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
 /* harmony import */ var _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Components/Stats */ "./src/js/Components/Stats.js");
-/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
+/* harmony import */ var _js_Components_StatsLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Components/StatsLayout */ "./src/js/Components/StatsLayout.js");
+/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
  // import Components
+
 
 
 
@@ -10219,21 +10221,21 @@ window.onload = function () {
 
   var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]); // make categories home page
 
   var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'train_mode', CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout);
-  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
   SWITCHER.addEventListener('click', function () {
-    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__["default"])();
+    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__["default"])();
   }); // init localstorage
 
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', false);
   localStorage.setItem('englishCategory', '');
+  localStorage.setItem('englishSortDirection', JSON.stringify(true));
   var stats = new _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   stats.createInstance();
-  console.log(stats.getStats());
 };
 
 /***/ }),
@@ -11253,7 +11255,7 @@ var Stats = /*#__PURE__*/function () {
     value: function createInstance() {
       this.template = this.initTemplate(this.data);
 
-      if (localStorage.englishStats === this.undefined) {
+      if (localStorage.englishStats === undefined) {
         this.clearStats();
         this.stats = this.template;
       } else {
@@ -11263,6 +11265,248 @@ var Stats = /*#__PURE__*/function () {
   }]);
 
   return Stats;
+}();
+
+/***/ }),
+
+/***/ "./src/js/Components/StatsLayout.js":
+/*!******************************************!*\
+  !*** ./src/js/Components/StatsLayout.js ***!
+  \******************************************/
+/*! exports provided: StatsLayout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatsLayout", function() { return StatsLayout; });
+/* harmony import */ var _Stats__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Stats */ "./src/js/Components/Stats.js");
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var StatsLayout = /*#__PURE__*/function () {
+  function StatsLayout() {
+    _classCallCheck(this, StatsLayout);
+
+    this.stats = '';
+    this.statsInstance = '';
+    this.table = '';
+    this.title = '';
+    this.clearButton = '';
+    this.layout = '';
+  }
+
+  _createClass(StatsLayout, [{
+    key: "initStats",
+    value: function initStats() {
+      var stats = new _Stats__WEBPACK_IMPORTED_MODULE_0__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_2__["default"]);
+      stats.createInstance();
+      this.statsInstance = stats;
+      this.stats = stats.getStats();
+    }
+  }, {
+    key: "generateLayout",
+    value: function generateLayout() {
+      var layout = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(layout, 'div', 'stats_layout');
+      return layout;
+    }
+  }, {
+    key: "generateclearButton",
+    value: function generateclearButton() {
+      var wrapper = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(wrapper, 'div', 'clear__wrapper');
+      var button = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(button, 'button', 'clear__button');
+      button.innerHTML = 'reset';
+      this.clearButton = button;
+      wrapper.append(button);
+      return wrapper;
+    }
+  }, {
+    key: "generateTableWrapper",
+    value: function generateTableWrapper() {
+      var wrapper = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(wrapper, 'div', 'table__wrapper');
+      wrapper.append(this.generateTable());
+      return wrapper;
+    }
+  }, {
+    key: "generateTable",
+    value: function generateTable() {
+      var table = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(table, 'table', 'stats-table');
+      var caption = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(caption, 'caption', 'table__caption');
+      caption.innerHTML = "Statistics table";
+      table.append(caption);
+      table.append(this.generateTitle());
+      table.append.apply(table, _toConsumableArray(this.generateRows()));
+      return table;
+    }
+  }, {
+    key: "generateTitle",
+    value: function generateTitle() {
+      var tr = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(tr, 'tr', 'table__title');
+      tr.innerHTML = "<th class=\"table-category arrow_up\" data-sort=\"table-category\">category</th>\n                    <th class=\"table-word arrow_up\" data-sort=\"table-word\">word</th>\n                    <th class=\"table-translation arrow_up\" data-sort=\"table-translation\">translation</th>\n                    <th class=\"table-right arrow_up\" data-sort=\"table-right\">right</th>\n                    <th class=\"table-wrong arrow_up\" data-sort=\"table-wrong\">wrong</th>\n                    <th class=\"table-click arrow_up\" data-sort=\"table-click\">click</th>";
+      this.title = tr;
+      return tr;
+    }
+  }, {
+    key: "generateRows",
+    value: function generateRows() {
+      var rows = [];
+      var stats = this.stats;
+
+      for (var category in stats) {
+        var categoryName = category;
+        var current = stats[category];
+
+        for (var elem in current) {
+          var tr = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_1__["default"])(tr, 'tr', 'table__row');
+          tr = this.makeRow(tr, categoryName);
+          tr = this.makeRow(tr, elem);
+          tr = this.makeTds(tr, current[elem]);
+          rows.push(tr);
+        }
+      }
+
+      return rows;
+    }
+  }, {
+    key: "makeRow",
+    value: function makeRow(tr, category) {
+      var td = document.createElement('td');
+      td.innerHTML = category;
+      tr.append(td);
+      return tr;
+    }
+  }, {
+    key: "makeTds",
+    value: function makeTds(tr, elem) {
+      var trValue = tr.innerHTML;
+      tr.innerHTML = "".concat(trValue, "\n                    <td>").concat(elem.translate, "</td>\n                    <td>").concat(elem.right, "</td>\n                    <td>").concat(elem.wrong, "</td>\n                    <td>").concat(elem.click, "</td>");
+      return tr;
+    }
+  }, {
+    key: "buildStatsTable",
+    value: function buildStatsTable() {
+      this.initStats();
+      var layout = this.generateLayout();
+      this.clearButton = this.generateclearButton();
+      layout.append(this.clearButton);
+      this.table = this.generateTable();
+      layout.append(this.table);
+      return layout;
+    }
+  }, {
+    key: "createInstance",
+    value: function createInstance() {
+      var _this = this;
+
+      this.layout = this.buildStatsTable();
+      this.clearButton.addEventListener('click', function (e) {
+        _this.resetStats();
+      });
+      this.title.addEventListener('click', function (e) {
+        _this.handleSort(e);
+      });
+      return this.layout;
+    }
+  }, {
+    key: "sortColumn",
+    value: function sortColumn(index) {
+      var _this2 = this;
+
+      var table = document.querySelector('.stats-table');
+      var direction = JSON.parse(localStorage.getItem('englishSortDirection'));
+      var sortedRows = Array.from(table.rows).slice(1).sort(function (rowA, rowB) {
+        return _this2.compareTwoRows(rowA, rowB, index, direction);
+      });
+      table.append.apply(table, _toConsumableArray(sortedRows));
+      localStorage.setItem('englishSortDirection', JSON.stringify(!direction));
+    }
+  }, {
+    key: "compareTwoRows",
+    value: function compareTwoRows(rowA, rowB, index, direction) {
+      if (direction === true) {
+        return rowA.cells[index].innerHTML > rowB.cells[index].innerHTML ? 1 : -1;
+      } else {
+        return rowA.cells[index].innerHTML < rowB.cells[index].innerHTML ? 1 : -1;
+      }
+    }
+  }, {
+    key: "getColumnIndex",
+    value: function getColumnIndex(word) {
+      return document.querySelector(".".concat(word)).cellIndex;
+    }
+  }, {
+    key: "handleSort",
+    value: function handleSort(e) {
+      this.toggleArrows(e.target);
+      var word = e.target.dataset.sort;
+      var index = this.getColumnIndex(word);
+      this.sortColumn(index);
+    }
+  }, {
+    key: "toggleArrows",
+    value: function toggleArrows(target) {
+      target.classList.toggle('arrow_up');
+      target.classList.toggle('arrow_down');
+    }
+  }, {
+    key: "resetStats",
+    value: function resetStats() {
+      var indexes = [];
+      indexes.push(this.getColumnIndex('table-right'));
+      indexes.push(this.getColumnIndex('table-wrong'));
+      indexes.push(this.getColumnIndex('table-click'));
+      this.clearColumn(indexes);
+      this.statsInstance.clearStats();
+    }
+  }, {
+    key: "clearColumn",
+    value: function clearColumn(arrOfIndexes) {
+      var table = document.querySelector('.stats-table');
+
+      var _iterator = _createForOfIteratorHelper(arrOfIndexes),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var i = _step.value;
+          Array.from(table.rows).slice(1).forEach(function (row) {
+            row.cells[i].innerHTML = 0;
+          });
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }]);
+
+  return StatsLayout;
 }();
 
 /***/ }),
@@ -11629,12 +11873,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
 /* harmony import */ var _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/CardsLayout */ "./src/js/Components/CardsLayout.js");
 /* harmony import */ var _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Breadcrumbs */ "./src/js/Components/Breadcrumbs.js");
-/* harmony import */ var _changeContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../changeContent */ "./src/js/changeContent.js");
-/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
-/* harmony import */ var _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cardTrainClick */ "./src/js/hadlers/cardTrainClick.js");
-/* harmony import */ var _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cardPlayClick */ "./src/js/hadlers/cardPlayClick.js");
-/* harmony import */ var _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+/* harmony import */ var _Components_StatsLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/StatsLayout */ "./src/js/Components/StatsLayout.js");
+/* harmony import */ var _changeContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../changeContent */ "./src/js/changeContent.js");
+/* harmony import */ var _createDomNode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../createDomNode */ "./src/js/createDomNode.js");
+/* harmony import */ var _cardTrainClick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cardTrainClick */ "./src/js/hadlers/cardTrainClick.js");
+/* harmony import */ var _cardPlayClick__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cardPlayClick */ "./src/js/hadlers/cardPlayClick.js");
+/* harmony import */ var _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+
 
 
 
@@ -11652,31 +11898,42 @@ function handleRouts(route) {
   var mode = getModeValue(); // console.log(mode);
 
   if (route !== 'category' && route !== 'statistics') {
-    handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
+    handleCardsCategory(_cards_data__WEBPACK_IMPORTED_MODULE_9__["default"], route, mode, isAnimated, CARDS_LAYOUT, DELAY);
     localStorage.setItem('englishCategory', route);
+  } else if (route === 'statistics') {
+    handleStatisticsLayout(isAnimated, DELAY);
   } else {
-    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_8__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
+    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_9__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
   }
 
   function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
     var categoryObject = getCategoryFromData(data, route);
     var cards = new _Components_CardsLayout__WEBPACK_IMPORTED_MODULE_1__["CardsLayout"](categoryObject, mode, classes).createInstance();
-    var clickHandler = mode === 'train_mode' ? _cardTrainClick__WEBPACK_IMPORTED_MODULE_5__["default"] : _cardPlayClick__WEBPACK_IMPORTED_MODULE_6__["default"]; // console.log(clickHandler);
+    var clickHandler = mode === 'train_mode' ? _cardTrainClick__WEBPACK_IMPORTED_MODULE_6__["default"] : _cardPlayClick__WEBPACK_IMPORTED_MODULE_7__["default"]; // console.log(clickHandler);
 
     cards.addEventListener('click', clickHandler);
     var breadcrumbs = new _Components_Breadcrumbs__WEBPACK_IMPORTED_MODULE_2__["Breadcrumbs"](categoryObject).createInstance();
-    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
-    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('#content-container .wrapper', cards, isAnimated, delay, 'disappear');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
     animationInProcess();
   }
 
   function handleCategoriesPage(data, mode, isAnimated, classes, delay) {
     var homePageLayout = new _Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_0__["CategoryLayout"](data, mode, classes).createInstance();
-    homePageLayout.addEventListener('click', _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_7__["default"]);
-    var breadcrumbs = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_4__["default"])(breadcrumbs, 'div', 'breadcrumbs__layout');
+    homePageLayout.addEventListener('click', _hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_8__["default"]);
+    var breadcrumbs = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_5__["default"])(breadcrumbs, 'div', 'breadcrumbs__layout');
     breadcrumbs.innerHTML = "<div></div";
-    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
-    Object(_changeContent__WEBPACK_IMPORTED_MODULE_3__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+    animationInProcess();
+  }
+
+  function handleStatisticsLayout(isAnimated, delay) {
+    var statsLayout = new _Components_StatsLayout__WEBPACK_IMPORTED_MODULE_3__["StatsLayout"]().createInstance();
+    var breadcrumbs = Object(_createDomNode__WEBPACK_IMPORTED_MODULE_5__["default"])(breadcrumbs, 'div', 'breadcrumbs__layout');
+    breadcrumbs.innerHTML = "<div></div";
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('#content-container .wrapper', statsLayout, isAnimated, delay, 'disappear');
+    Object(_changeContent__WEBPACK_IMPORTED_MODULE_4__["default"])('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
     animationInProcess();
   }
 

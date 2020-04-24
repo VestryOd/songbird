@@ -2,6 +2,7 @@
 import { CategoryLayout } from "../Components/CategoryLayout";
 import { CardsLayout } from "../Components/CardsLayout";
 import { Breadcrumbs } from "../Components/Breadcrumbs";
+import { StatsLayout } from "../Components/StatsLayout";
 import changeContent from "../changeContent";
 import createDomNode from "../createDomNode";
 import cardTrainClick from "./cardTrainClick";
@@ -21,6 +22,8 @@ export default function handleRouts(route) {
   if (route !== 'category' && route !== 'statistics') {
     handleCardsCategory(data, route, mode, isAnimated, CARDS_LAYOUT, DELAY);
     localStorage.setItem('englishCategory', route);
+  } else if (route === 'statistics'){
+    handleStatisticsLayout(isAnimated, DELAY);
   } else {
     handleCategoriesPage(data, route, mode, CATEGORIES_LAYOUT, DELAY);
   }
@@ -48,6 +51,17 @@ export default function handleRouts(route) {
     let breadcrumbs = createDomNode(breadcrumbs, 'div', 'breadcrumbs__layout');
     breadcrumbs.innerHTML = `<div></div`;
     changeContent('#content-container .wrapper', homePageLayout, isAnimated, delay, 'disappear');
+    changeContent('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
+
+    animationInProcess();
+  }
+
+  function handleStatisticsLayout(isAnimated, delay) {
+    let statsLayout = new StatsLayout().createInstance();
+
+    let breadcrumbs = createDomNode(breadcrumbs, 'div', 'breadcrumbs__layout');
+    breadcrumbs.innerHTML = `<div></div`;
+    changeContent('#content-container .wrapper', statsLayout, isAnimated, delay, 'disappear');
     changeContent('.breadcrumbs__wrapper', breadcrumbs, isAnimated, delay, 'invisible');
 
     animationInProcess();

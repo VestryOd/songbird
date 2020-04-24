@@ -4,6 +4,7 @@ import data from '../cards-data';
 import { Nav } from "./js/Components/Nav";
 import { CategoryLayout } from "./js/Components/CategoryLayout";
 import { Stats } from "./js/Components/Stats";
+import { StatsLayout } from "./js/Components/StatsLayout";
 
 // handlers
 import categoryClick from "./js/hadlers/categoryClick";
@@ -27,17 +28,17 @@ window.onload = function () {
   CONTENT_CONTAINER.append(homePageLayout);
   homePageLayout.addEventListener('click', categoryClick);
 
- SWITCHER.addEventListener('click', () => {
-   handleModeSwitch();
- });
+  SWITCHER.addEventListener('click', () => {
+    handleModeSwitch();
+  });
 
 
   // init localstorage
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', false);
   localStorage.setItem('englishCategory', '');
+  localStorage.setItem('englishSortDirection', JSON.stringify(true));
 
   let stats = new Stats(data);
   stats.createInstance();
-  console.log(stats.getStats());
 }

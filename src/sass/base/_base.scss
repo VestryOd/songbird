@@ -48,7 +48,8 @@ h5 {
 }
 
 .cards-category__layout,
-.breadcrumbs__layout {
+.breadcrumbs__layout,
+.stats_layout {
   opacity: 1;
   @extend %transition;
 }

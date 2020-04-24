@@ -46,7 +46,7 @@ export class Stats {
 
   createInstance() {
     this.template = this.initTemplate(this.data);
-    if (localStorage.englishStats === this.undefined) {
+    if (localStorage.englishStats === undefined) {
       this.clearStats();
       this.stats = this.template;
     } else {
