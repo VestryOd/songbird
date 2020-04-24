@@ -1,7 +1,4 @@
 export default function changeContent(containerSelector, newElement, isAnimated, delay, animationClass) {
-  if (isAnimated) {
-    console.log('animated');
-  };
 
   if (newElement === undefined || newElement === null || newElement.length < 1) {
     reportError('No new content!');
@@ -16,16 +13,13 @@ export default function changeContent(containerSelector, newElement, isAnimated,
     setTimeout(() => {
       fadeOut(elements, delay, animationClass);
     }, 0);
-    // fadeOut(elements, delay, animationClass);
 
     setTimeout(() => {
       fadeIn(container, newElement, delay, animationClass)
     }, delay);
-    // fadeIn(container, newElement, delay, animationClass);
   }
   return true;
 
-  ////////
   function fadeOut(elements, delay, animationClass) {
     if (disappearElements(elements, animationClass)) {
       setTimeout(() => {
@@ -44,8 +38,6 @@ export default function changeContent(containerSelector, newElement, isAnimated,
     }
   }
 
-
-  ////////
   function reportError(text) {
     console.error(text);
   }
@@ -66,7 +58,6 @@ export default function changeContent(containerSelector, newElement, isAnimated,
 
   function addElements(container, newElement, animationClass) {
     newElement.classList.add(animationClass);
-    // debugger;
     container.append(newElement);
     return true;
   }

@@ -45,7 +45,6 @@ export class Card {
   }
 
   generateGuessed() {
-    // let classes = ['card__guessed', 'hidden'];
     let guessed = createDomNode(guessed, 'div', 'card__guessed', 'hidden');
     let icon = createDomNode(guessed, 'span', 'guessed__icon');
     guessed.append(icon);

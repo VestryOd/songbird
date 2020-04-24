@@ -32,13 +32,13 @@ window.onload = function () {
     handleModeSwitch();
   });
 
-
   // init localstorage
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', false);
   localStorage.setItem('englishCategory', '');
   localStorage.setItem('englishSortDirection', JSON.stringify(true));
 
+  // init statistics
   let stats = new Stats(data);
   stats.createInstance();
 }

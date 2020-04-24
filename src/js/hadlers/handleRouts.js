@@ -17,7 +17,6 @@ export default function handleRouts(route) {
   const DELAY = 500;
   let isAnimated = false;
   let mode = getModeValue();
-  // console.log(mode);
 
   if (route !== 'category' && route !== 'statistics') {
     handleCardsCategory(data, route, mode, isAnimated, CARDS_LAYOUT, DELAY);
@@ -33,7 +32,6 @@ export default function handleRouts(route) {
     let categoryObject = getCategoryFromData(data, route);
     let cards = new CardsLayout(categoryObject, mode, classes).createInstance();
     let clickHandler = mode === 'train_mode' ? cardTrainClick : cardPlayClick;
-    // console.log(clickHandler);
     cards.addEventListener('click', clickHandler);
 
     let breadcrumbs = new Breadcrumbs(categoryObject).createInstance();
@@ -72,17 +70,13 @@ export default function handleRouts(route) {
   }
 
   function animationInProcess() {
-    // console.log('start---', new Date().getMilliseconds());
-
     isAnimated = true;
     setTimeout(() => {
       isAnimated = false;
-      // console.log('end---', new Date().getMilliseconds());
     }, DELAY);
   }
 
   function getModeValue() {
     return document.querySelector('#toggleMode').checked !== true ? 'train_mode' : 'play_mode';
   }
-
 }
