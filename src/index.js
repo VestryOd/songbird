@@ -34,7 +34,7 @@ window.onload = function () {
 
   // init localstorage
   localStorage.setItem('englishMode', 'train_mode');
-  localStorage.setItem('isPlaying', false);
+  localStorage.setItem('isPlaying', JSON.stringify(false));
   localStorage.setItem('englishCategory', '');
   localStorage.setItem('englishSortDirection', JSON.stringify(true));
 
