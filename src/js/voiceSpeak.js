@@ -21,7 +21,7 @@ export default function speak(wordToSay, pitch = 1, rate = 1) {
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
     synth.cancel();
-    setTimeout(speak, 100);
+    setTimeout(speak, 300);
   } else {
     const utterThis = new SpeechSynthesisUtterance(wordToSay);
     utterThis.onerror = function (event) {

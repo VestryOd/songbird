@@ -1,13 +1,16 @@
 import { GameResults } from "./GameResults";
 import { Stats } from "./Stats";
+// import { SpeechVoice } from "./SpeechVoice";
 import randomize from "../randomizeCardsOrder";
 import player from "../audioPlayer";
-import speak from "../voiceSpeak";
+// import speak from "../voiceSpeak";
 import handleRouts from "../hadlers/handleRouts";
 import data from "../../../cards-data";
 
+let voice;
+
 export class Game {
-  constructor() {
+  constructor(voice) {
     this.words = '';
     this.order = '';
     this.currenIndex = 0;
@@ -17,9 +20,9 @@ export class Game {
     this.elemPlayButton = '';
     this.elemRepeatButton = '';
     this.elemsGuessedCards = [];
-    this.isSpeaking = false;
     this.currentWord = '';
     this.stats = '';
+    this.voice = voice;
   }
 
   createInstance() {
@@ -30,6 +33,9 @@ export class Game {
     this.newGameStep();
     this.stats = new Stats(data);
     this.stats.createInstance();
+
+    this.voice.sayWord.bind(this);
+    this.voice.speakPause.bind(this);
   }
 
   initOrder() {
@@ -50,13 +56,7 @@ export class Game {
   }
 
   sayWord(word) {
-    this.isSpeaking = true;
-    setTimeout(() => {
-      speak(word);
-    }, 300);
-    setTimeout(() => {
-      this.isSpeaking = false;
-    }, 300);
+    this.voice.sayWord(word);
     return word;
   }
 
@@ -81,14 +81,27 @@ export class Game {
   }
 
   handleGuess(target) {
+    if (this.voice.synth.speaking) {
+      this.voice.speakPause();
+    }
+    this.checkAnswer(target);
+  }
+
+  checkAnswer(target) {
+    let done, type;
     let targetWord = target.dataset.action;
     if (this.currentWord === targetWord) {
-      this.sendStats(targetWord, 'right');
-      this.rightGuess(target);
+      setTimeout(() => {
+        done = this.rightGuess(target);
+        type = 'right';
+      }, 0);
     } else {
-      this.sendStats(targetWord, 'wrong');
-      this.wrongGuess();
+      setTimeout(() => {
+        done = this.wrongGuess();
+        type = 'wrong';
+      }, 0);
     }
+    if (done) this.sendStats(targetWord, type);
   }
 
   rightGuess(target) {
@@ -105,11 +118,13 @@ export class Game {
     setTimeout(() => {
       this.newGameStep();
     }, 500);
+    return true;
   }
 
   wrongGuess() {
     this.changeValue('error');
     player('assets/audio/error.mp3');
+    return true;
   }
 
   endOfGame() {

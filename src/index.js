@@ -4,7 +4,6 @@ import data from '../cards-data';
 import { Nav } from "./js/Components/Nav";
 import { CategoryLayout } from "./js/Components/CategoryLayout";
 import { Stats } from "./js/Components/Stats";
-import { StatsLayout } from "./js/Components/StatsLayout";
 
 // handlers
 import categoryClick from "./js/hadlers/categoryClick";
@@ -37,8 +36,10 @@ window.onload = function () {
   localStorage.setItem('isPlaying', JSON.stringify(false));
   localStorage.setItem('englishCategory', '');
   localStorage.setItem('englishSortDirection', JSON.stringify(true));
+  localStorage.setItem('englishGame', '');
 
   // init statistics
   let stats = new Stats(data);
   stats.createInstance();
 }
+

@@ -38,26 +38,32 @@ export default function handleModeSwitch() {
 
 
     let cards = document.querySelectorAll('.card');
-    cards.forEach(el => {
-      el.classList.toggle('play_mode');
-      el.classList.toggle('train_mode');
-    });
+    if (cards.length !== 0) {
+      cards.forEach(el => {
+        el.classList.toggle('play_mode');
+        el.classList.toggle('train_mode');
+      });
+    }
   }
 
   function clearCards() {
     let cards = document.querySelectorAll('.card__guessed');
-    cards.forEach(el => {
-      if (!el.classList.contains('hidden')) {
-        el.classList.add('hidden');
-      }
-    })
+    if (cards.length !== 0) {
+      cards.forEach(el => {
+        if (!el.classList.contains('hidden')) {
+          el.classList.add('hidden');
+        }
+      })
+    }
   }
 
   function clearIndicators() {
     let cards = document.querySelectorAll('.card');
-    document.querySelector('#playmode-success').value = 0;
-    document.querySelector('#playmode-error').value = 0;
-    document.querySelector('#playmode-total').value = cards.length;
+    if (cards.length !== 0) {
+      document.querySelector('#playmode-success').value = 0;
+      document.querySelector('#playmode-error').value = 0;
+      document.querySelector('#playmode-total').value = cards.length;
+    }
   }
 
   function changeIcons() {

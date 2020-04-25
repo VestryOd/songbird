@@ -11,7 +11,7 @@ import categoryClick from "../hadlers/categoryClick";
 import data from "../../../cards-data";
 
 export default function handleRouts(route) {
-
+  localStorage.setItem('isPlaying', false);
   const CATEGORIES_LAYOUT = ['layout-inline-flex'];
   const CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
   const DELAY = 500;
@@ -24,7 +24,7 @@ export default function handleRouts(route) {
   } else if (route === 'statistics'){
     handleStatisticsLayout(isAnimated, DELAY);
   } else {
-    handleCategoriesPage(data, route, mode, CATEGORIES_LAYOUT, DELAY);
+    handleCategoriesPage(data, mode, isAnimated, CATEGORIES_LAYOUT, DELAY);
   }
 
 

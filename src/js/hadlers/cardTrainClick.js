@@ -1,9 +1,16 @@
-import speak from "../voiceSpeak";
+// import speak from "../voiceSpeak";
+import { SpeechVoice } from "../Components/SpeechVoice";
 import { Stats } from "../Components/Stats";
 import data from "../../../cards-data";
 
 let stats = new Stats(data);
 stats.createInstance();
+
+let voice = new SpeechVoice();
+
+window.onbeforeunload = function () {
+  voice.synth.cancel();
+};
 
 export default function cardTrainClick(e) {
   if (e.target.classList.contains('card__rotate-icon')) {
@@ -23,7 +30,10 @@ export default function cardTrainClick(e) {
 
   function sayText(target) {
     let word = target.closest('.card').dataset.action;
-    speak(word);
+    if (voice.synth.speaking) {
+      voice.speakPause();
+    }
+    voice.sayWord(word);
     sendStats(word, 'click')
   }
 

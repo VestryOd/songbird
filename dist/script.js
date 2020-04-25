@@ -10199,11 +10199,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Components/Nav */ "./src/js/Components/Nav.js");
 /* harmony import */ var _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Components/CategoryLayout */ "./src/js/Components/CategoryLayout.js");
 /* harmony import */ var _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Components/Stats */ "./src/js/Components/Stats.js");
-/* harmony import */ var _js_Components_StatsLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Components/StatsLayout */ "./src/js/Components/StatsLayout.js");
-/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
-/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
+/* harmony import */ var _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/hadlers/categoryClick */ "./src/js/hadlers/categoryClick.js");
+/* harmony import */ var _js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/hadlers/handleModeSwitch */ "./src/js/hadlers/handleModeSwitch.js");
  // import Components
-
 
 
 
@@ -10221,19 +10219,20 @@ window.onload = function () {
 
   var nav = new _js_Components_Nav__WEBPACK_IMPORTED_MODULE_1__["Nav"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   HEADER_NAV.append(nav.createInstance());
-  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]); // make categories home page
+  HEADER_NAV.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]); // make categories home page
 
   var homePageLayout = new _js_Components_CategoryLayout__WEBPACK_IMPORTED_MODULE_2__["CategoryLayout"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"], 'train_mode', CATEGORIES_LAYOUT).createInstance();
   CONTENT_CONTAINER.append(homePageLayout);
-  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  homePageLayout.addEventListener('click', _js_hadlers_categoryClick__WEBPACK_IMPORTED_MODULE_4__["default"]);
   SWITCHER.addEventListener('click', function () {
-    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_6__["default"])();
+    Object(_js_hadlers_handleModeSwitch__WEBPACK_IMPORTED_MODULE_5__["default"])();
   }); // init localstorage
 
   localStorage.setItem('englishMode', 'train_mode');
   localStorage.setItem('isPlaying', JSON.stringify(false));
   localStorage.setItem('englishCategory', '');
-  localStorage.setItem('englishSortDirection', JSON.stringify(true)); // init statistics
+  localStorage.setItem('englishSortDirection', JSON.stringify(true));
+  localStorage.setItem('englishGame', ''); // init statistics
 
   var stats = new _js_Components_Stats__WEBPACK_IMPORTED_MODULE_3__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_0__["default"]);
   stats.createInstance();
@@ -10669,9 +10668,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stats */ "./src/js/Components/Stats.js");
 /* harmony import */ var _randomizeCardsOrder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../randomizeCardsOrder */ "./src/js/randomizeCardsOrder.js");
 /* harmony import */ var _audioPlayer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../audioPlayer */ "./src/js/audioPlayer.js");
-/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
-/* harmony import */ var _hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
-/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+/* harmony import */ var _hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hadlers/handleRouts */ "./src/js/hadlers/handleRouts.js");
+/* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -10679,14 +10677,16 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+ // import { SpeechVoice } from "./SpeechVoice";
+
+
+ // import speak from "../voiceSpeak";
 
 
 
-
-
-
+var voice;
 var Game = /*#__PURE__*/function () {
-  function Game() {
+  function Game(voice) {
     _classCallCheck(this, Game);
 
     this.words = '';
@@ -10698,9 +10698,9 @@ var Game = /*#__PURE__*/function () {
     this.elemPlayButton = '';
     this.elemRepeatButton = '';
     this.elemsGuessedCards = [];
-    this.isSpeaking = false;
     this.currentWord = '';
     this.stats = '';
+    this.voice = voice;
   }
 
   _createClass(Game, [{
@@ -10711,8 +10711,10 @@ var Game = /*#__PURE__*/function () {
       this.initElements();
       this.changeIcons();
       this.newGameStep();
-      this.stats = new _Stats__WEBPACK_IMPORTED_MODULE_1__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_6__["default"]);
+      this.stats = new _Stats__WEBPACK_IMPORTED_MODULE_1__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_5__["default"]);
       this.stats.createInstance();
+      this.voice.sayWord.bind(this);
+      this.voice.speakPause.bind(this);
     }
   }, {
     key: "initOrder",
@@ -10739,15 +10741,7 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "sayWord",
     value: function sayWord(word) {
-      var _this = this;
-
-      this.isSpeaking = true;
-      setTimeout(function () {
-        Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_4__["default"])(word);
-      }, 300);
-      setTimeout(function () {
-        _this.isSpeaking = false;
-      }, 300);
+      this.voice.sayWord(word);
       return word;
     }
   }, {
@@ -10777,15 +10771,33 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "handleGuess",
     value: function handleGuess(target) {
+      if (this.voice.synth.speaking) {
+        this.voice.speakPause();
+      }
+
+      this.checkAnswer(target);
+    }
+  }, {
+    key: "checkAnswer",
+    value: function checkAnswer(target) {
+      var _this = this;
+
+      var done, type;
       var targetWord = target.dataset.action;
 
       if (this.currentWord === targetWord) {
-        this.sendStats(targetWord, 'right');
-        this.rightGuess(target);
+        setTimeout(function () {
+          done = _this.rightGuess(target);
+          type = 'right';
+        }, 0);
       } else {
-        this.sendStats(targetWord, 'wrong');
-        this.wrongGuess();
+        setTimeout(function () {
+          done = _this.wrongGuess();
+          type = 'wrong';
+        }, 0);
       }
+
+      if (done) this.sendStats(targetWord, type);
     }
   }, {
     key: "rightGuess",
@@ -10807,12 +10819,14 @@ var Game = /*#__PURE__*/function () {
       setTimeout(function () {
         _this2.newGameStep();
       }, 500);
+      return true;
     }
   }, {
     key: "wrongGuess",
     value: function wrongGuess() {
       this.changeValue('error');
       Object(_audioPlayer__WEBPACK_IMPORTED_MODULE_3__["default"])('assets/audio/error.mp3');
+      return true;
     }
   }, {
     key: "endOfGame",
@@ -10843,7 +10857,7 @@ var Game = /*#__PURE__*/function () {
       document.querySelector('#toggleMode').checked = false;
       localStorage.isPlaying = JSON.stringify(false);
       localStorage.setItem('englishMode', 'train_mode');
-      Object(_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_5__["default"])('category');
+      Object(_hadlers_handleRouts__WEBPACK_IMPORTED_MODULE_4__["default"])('category');
       setTimeout(function () {
         results.hideInstance();
       }, 2000);
@@ -11178,6 +11192,94 @@ var Rate = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/Components/SpeechVoice.js":
+/*!******************************************!*\
+  !*** ./src/js/Components/SpeechVoice.js ***!
+  \******************************************/
+/*! exports provided: SpeechVoice */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpeechVoice", function() { return SpeechVoice; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var SpeechVoice = /*#__PURE__*/function () {
+  function SpeechVoice(word) {
+    var pitch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+    var rate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+    _classCallCheck(this, SpeechVoice);
+
+    this.synth = window.speechSynthesis;
+    this.voices = [];
+    this.ENG_GB = "en-GB";
+    this.ENG_US = "en-US";
+    this.word = word;
+    this.pitch = pitch;
+    this.rate = rate;
+    this.utterThis = '';
+  }
+
+  _createClass(SpeechVoice, [{
+    key: "populateVoiceList",
+    value: function populateVoiceList() {
+      this.voices = window.speechSynthesis.getVoices();
+    }
+  }, {
+    key: "prepareSpeech",
+    value: function prepareSpeech(word) {
+      this.synth.cancel();
+      this.utterThis = new SpeechSynthesisUtterance(word);
+      var voices = this.voices;
+
+      for (var i = 0; i < voices.length; i++) {
+        if (voices[i].lang === this.ENG_GB || voices[i].name === this.ENG_US) {
+          this.utterThis.voice = voices[i];
+        }
+      }
+    }
+  }, {
+    key: "speak",
+    value: function speak() {
+      this.utterThis.pitch = this.pitch;
+      this.utterThis.rate = this.rate;
+      this.synth.speak(this.utterThis);
+
+      this.utterThis.onend = function () {
+        return true;
+      };
+    }
+  }, {
+    key: "speakPause",
+    value: function speakPause() {
+      this.synth.pause();
+      this.synth.cancel();
+    }
+  }, {
+    key: "sayWord",
+    value: function sayWord(word) {
+      this.populateVoiceList();
+
+      if (this.synth.onvoiceschanged !== undefined) {
+        this.synth.onvoiceschanged = this.populateVoiceList;
+      }
+
+      this.prepareSpeech(word);
+      var finish = this.speak();
+      return finish;
+    }
+  }]);
+
+  return SpeechVoice;
+}();
+
+/***/ }),
+
 /***/ "./src/js/Components/Stats.js":
 /*!************************************!*\
   !*** ./src/js/Components/Stats.js ***!
@@ -11238,11 +11340,13 @@ var Stats = /*#__PURE__*/function () {
   }, {
     key: "updateStats",
     value: function updateStats(category, word, eventType) {
+      if (!category || !word || !eventType) return false;
       var stats = this.stats;
       var prev = +stats[category][word][eventType];
       stats[category][word][eventType] = prev + 1;
       var update = JSON.stringify(stats);
       localStorage.setItem('englishStats', update);
+      return true;
     }
   }, {
     key: "clearStats",
@@ -11653,15 +11757,22 @@ function createDomNode(node, element) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
 /* harmony import */ var _Components_Game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/Game */ "./src/js/Components/Game.js");
+/* harmony import */ var _Components_SpeechVoice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/SpeechVoice */ "./src/js/Components/SpeechVoice.js");
 
-var isSpeaking = false;
+
 var game = null;
+var voice = new _Components_SpeechVoice__WEBPACK_IMPORTED_MODULE_1__["SpeechVoice"]();
+
+window.onbeforeunload = function () {
+  voice.synth.cancel();
+};
+
 function cardTrainClick(e) {
   if (checkClass(e, 'playmode-button__play') || checkClass(e, 'playmode-button__repeat')) {
     var isPlaying = JSON.parse(localStorage.isPlaying);
 
     if (!isPlaying) {
-      game = new _Components_Game__WEBPACK_IMPORTED_MODULE_0__["Game"]();
+      game = new _Components_Game__WEBPACK_IMPORTED_MODULE_0__["Game"](voice);
       game.createInstance();
       localStorage.isPlaying = JSON.stringify(true);
       return;
@@ -11672,7 +11783,6 @@ function cardTrainClick(e) {
   }
 
   if (checkClass(e, 'card__front') || checkClass(e, 'card')) {
-    if (isSpeaking) return;
     game.handleGuess(e.target.closest('.card'));
   }
 
@@ -11693,14 +11803,21 @@ function cardTrainClick(e) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cardTrainClick; });
-/* harmony import */ var _voiceSpeak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../voiceSpeak */ "./src/js/voiceSpeak.js");
+/* harmony import */ var _Components_SpeechVoice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Components/SpeechVoice */ "./src/js/Components/SpeechVoice.js");
 /* harmony import */ var _Components_Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Stats */ "./src/js/Components/Stats.js");
 /* harmony import */ var _cards_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../cards-data */ "./cards-data.js");
+// import speak from "../voiceSpeak";
 
 
 
 var stats = new _Components_Stats__WEBPACK_IMPORTED_MODULE_1__["Stats"](_cards_data__WEBPACK_IMPORTED_MODULE_2__["default"]);
 stats.createInstance();
+var voice = new _Components_SpeechVoice__WEBPACK_IMPORTED_MODULE_0__["SpeechVoice"]();
+
+window.onbeforeunload = function () {
+  voice.synth.cancel();
+};
+
 function cardTrainClick(e) {
   if (e.target.classList.contains('card__rotate-icon')) {
     rotateCard(e.target);
@@ -11720,7 +11837,12 @@ function cardTrainClick(e) {
 
   function sayText(target) {
     var word = target.closest('.card').dataset.action;
-    Object(_voiceSpeak__WEBPACK_IMPORTED_MODULE_0__["default"])(word);
+
+    if (voice.synth.speaking) {
+      voice.speakPause();
+    }
+
+    voice.sayWord(word);
     sendStats(word, 'click');
   }
 
@@ -11745,6 +11867,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _handleRouts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handleRouts */ "./src/js/hadlers/handleRouts.js");
 
 function categoryClick(e) {
+  if (!(e.target.closest('.nav__link') || e.target.closest('.category '))) {
+    return false;
+  }
+
   var targetContainer = e.target.closest('.nav__link') || e.target.closest('.category ');
   var route = targetContainer.dataset.section;
   Object(_handleRouts__WEBPACK_IMPORTED_MODULE_0__["default"])(route);
@@ -11803,26 +11929,35 @@ function handleModeSwitch() {
     }
 
     var cards = document.querySelectorAll('.card');
-    cards.forEach(function (el) {
-      el.classList.toggle('play_mode');
-      el.classList.toggle('train_mode');
-    });
+
+    if (cards.length !== 0) {
+      cards.forEach(function (el) {
+        el.classList.toggle('play_mode');
+        el.classList.toggle('train_mode');
+      });
+    }
   }
 
   function clearCards() {
     var cards = document.querySelectorAll('.card__guessed');
-    cards.forEach(function (el) {
-      if (!el.classList.contains('hidden')) {
-        el.classList.add('hidden');
-      }
-    });
+
+    if (cards.length !== 0) {
+      cards.forEach(function (el) {
+        if (!el.classList.contains('hidden')) {
+          el.classList.add('hidden');
+        }
+      });
+    }
   }
 
   function clearIndicators() {
     var cards = document.querySelectorAll('.card');
-    document.querySelector('#playmode-success').value = 0;
-    document.querySelector('#playmode-error').value = 0;
-    document.querySelector('#playmode-total').value = cards.length;
+
+    if (cards.length !== 0) {
+      document.querySelector('#playmode-success').value = 0;
+      document.querySelector('#playmode-error').value = 0;
+      document.querySelector('#playmode-total').value = cards.length;
+    }
   }
 
   function changeIcons() {
@@ -11878,6 +12013,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function handleRouts(route) {
+  localStorage.setItem('isPlaying', false);
   var CATEGORIES_LAYOUT = ['layout-inline-flex'];
   var CARDS_LAYOUT = ['layout-4-column', 'content__wrapper'];
   var DELAY = 500;
@@ -11890,7 +12026,7 @@ function handleRouts(route) {
   } else if (route === 'statistics') {
     handleStatisticsLayout(isAnimated, DELAY);
   } else {
-    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_9__["default"], route, mode, CATEGORIES_LAYOUT, DELAY);
+    handleCategoriesPage(_cards_data__WEBPACK_IMPORTED_MODULE_9__["default"], mode, isAnimated, CATEGORIES_LAYOUT, DELAY);
   }
 
   function handleCardsCategory(data, route, mode, isAnimated, classes, delay) {
@@ -11970,71 +12106,6 @@ function randomizeCardsOrder(arr) {
   }
 
   return indexArray;
-}
-
-/***/ }),
-
-/***/ "./src/js/voiceSpeak.js":
-/*!******************************!*\
-  !*** ./src/js/voiceSpeak.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return speak; });
-// Speech synthesis
-var synth = window.speechSynthesis;
-var voices = [];
-var ENG_GB = "en-GB";
-var ENG_US = "en-US";
-
-window.onbeforeunload = function () {
-  synth.cancel();
-};
-
-function populateVoiceList() {
-  voices = synth.getVoices();
-}
-
-populateVoiceList();
-
-if (speechSynthesis.onvoiceschanged !== undefined) {
-  speechSynthesis.onvoiceschanged = populateVoiceList;
-}
-
-function speak(wordToSay) {
-  var pitch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var rate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-
-  if (synth.speaking) {
-    console.error('speechSynthesis.speaking');
-    synth.cancel();
-    setTimeout(speak, 100);
-  } else {
-    var utterThis = new SpeechSynthesisUtterance(wordToSay);
-
-    utterThis.onerror = function (event) {
-      console.error('SpeechSynthesisUtterance.onerror');
-    };
-
-    for (var i = 0; i < voices.length; i++) {
-      if (voices[i].lang === ENG_GB || voices[i].name === ENG_US) {
-        utterThis.voice = voices[i];
-      }
-    }
-
-    utterThis.onpause = function (event) {
-      var _char = event.utterance.text.charAt(event.charIndex);
-
-      console.log('Speech paused at character ' + event.charIndex + ' of "' + event.utterance.text + '", which is "' + _char + '".');
-    };
-
-    utterThis.pitch = pitch;
-    utterThis.rate = rate;
-    synth.speak(utterThis);
-  }
 }
 
 /***/ }),
