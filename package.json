@@ -1,7 +1,7 @@
 {
-  "name": "english-for-kids",
+  "name": "movie-search",
   "version": "1.0.0",
-  "description": "english-for-kids by Kaspriv Maksym",
+  "description": "movie-search by Kaspriv Maksym",
   "main": "index.js",
   "scripts": {
     "prod": "webpack --mode production",
