@@ -6,11 +6,9 @@ body {
     @extend %font-prim;
     @include font($size: 1.6rem, $height: 2.6rem, $weight: normal);
     background-color: $color-background;
-    @include custom-scroll($color-secondary-emphasis);
 }
 
 h1 {
-    @extend %font-add;
     @include font($height: 5.4rem, $size: 4.4rem);
     @include media-mobile {
         @include font($height: 4.2rem, $size: 3.2rem);

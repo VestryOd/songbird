@@ -1,0 +1,17 @@
+.header__wrapper {
+  width: 100%;
+  padding: 20px 0;
+  @extend %background-image;
+  background-size: cover;
+  background-image: url("/assets/img/header/header_bg.png");
+}
+
+.header {
+  text-align: center;
+}
+
+.header__title {
+  margin: 0;
+  color: $color-header-title;
+  @extend %text_shadow;
+}

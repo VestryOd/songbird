@@ -33,8 +33,7 @@ module.exports = (env, options) => {
         filename: 'style.css'
       }),
       new CopyPlugin([
-        { from: './src/img', to: 'assets/img' },
-        { from: './src/audio', to: 'assets/audio' }
+        { from: './src/img', to: 'assets/img' }
       ]),
       ...(isProduction ? [new CleanWebpackPlugin()] : [])
     ],
