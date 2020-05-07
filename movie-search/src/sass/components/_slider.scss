@@ -1,0 +1,50 @@
+.slide__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image__wrapper {
+  height: 400px;
+  @extend %background-image;
+}
+
+.slide__title {
+  text-align: center;
+  font-weight: 600;
+  padding: 10px 0;
+  & a {
+    @extend %transition;
+    color: $color-slide-title;
+    text-decoration: none;
+    &:hover {
+      color:$color-slide-title-hover;
+    }
+  }
+}
+
+.slide__info {
+  height: 40px;
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > *{
+    font-weight: 600;
+    padding: 0 5px;
+    color: $color-slide-title;
+  }
+}
+
+.slide__rating {
+  display: flex;
+  &:before {
+    content: "";
+    display: block;
+    padding: 0 2px;
+    width: 22px;
+    height: 22px;
+    @extend %background-image;
+    background-image: url("/assets/img/icons/star.svg");
+  }
+}

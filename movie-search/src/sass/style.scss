@@ -12,8 +12,14 @@
 @import "layouts/wrapper";
 @import "layouts/header";
 @import "layouts/content";
+@import "layouts/slider";
+@import "layouts/swiper";
 @import "layouts/footer";
 
 // Components
 @import "components/search";
+@import "components/info-panel";
+// @import "components/swiper";
 @import "components/slider";
+@import "components/footer";
+

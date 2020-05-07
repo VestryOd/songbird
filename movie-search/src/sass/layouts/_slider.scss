@@ -1,0 +1,13 @@
+.slider__wrapper {
+  max-width: 1300px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 50px auto 0 auto;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @include media-mobilesmall {
+    display: none;
+  }
+}

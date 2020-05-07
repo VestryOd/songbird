@@ -1,0 +1,14 @@
+.info-panel__wrapper {
+  margin: 50px auto;
+}
+
+.info-panel {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: $color-info-message;
+}
+
+.error {
+  color: $color-error-message;
+}

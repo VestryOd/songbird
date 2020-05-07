@@ -13,9 +13,111 @@
     <div class="wrapper">
       <div class="header">
         <h1 class="header__title">MovieSearch</h1>
-
       </div>
     </div>
   </div>
+  <section class="search__wrapper">
+    <div class="wrapper">
+      <div class="search">
+        <form id="search" class="search__form">
+          <div class="search__info">
+            <div class="search-input__wrapper">
+              <label for="movie-name" class="icon icon__search"></label>
+              <input class="search__input" type="search" name="movie-name" id="movie-name" placeholder="Search movie...">
+            </div>
+            <div class="search__options">
+              <div class="search__loader"></div>
+              <button class="search__clear icon icon__clear" type="button"></button>
+            </div>
+            <div class="virtual-keyboard__wrapper">
+              <button class="virtual-keyboard icon icon__keyboard"></button>
+            </div>
+          </div>
+          <button type="submit" class="search__send">search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="info-panel__wrapper">
+    <div class="wrapper">
+      <h3 class="info-panel">Results of "Dream" search</h3>
+    </div>
+  </section>
+  <section class="slider__wrapper">
+    <div class="swiper-container" id="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slide_wrapper">
+            <div class="slide__title">
+              <a class="slide__image" href="https://www.imdb.com/title/tt0180093/videogallery/?ref_=tt_pv_vi_sm">Dream House</a>
+            </div>
+            <div class="image__wrapper"
+              style="background-image: url('https://m.media-amazon.com/images/M/MV5BMTM5MzUxMDc5Ml5BMl5BanBnXkFtZTcwMTMwMjIwNg@@._V1_SX300.jpg');">
+            </div>
+            <div class="slide__info">
+              <span class="slide__year">2011</span>
+              <span class="slide__rating">6.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide_wrapper">
+            <div class="slide__title">
+              <a href="https://www.imdb.com/title/tt0180093/videogallery/?ref_=tt_pv_vi_sm">Goal! The Dream Begins</a>
+            </div>
+            <div class="image__wrapper"
+              style="background-image: url('https://m.media-amazon.com/images/M/MV5BMjAxNDk2Njk1OV5BMl5BanBnXkFtZTcwOTE5MzIzMQ@@._V1_SX300.jpg');">
+            </div>
+            <div class="slide__info">
+              <span class="slide__year">2001</span>
+              <span class="slide__rating">6.9</span>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide_wrapper">
+            <div class="slide__title">
+              <a href="https://www.imdb.com/title/tt0180093/videogallery/?ref_=tt_pv_vi_sm">Cassandra's Dream</a>
+            </div>
+            <div class="image__wrapper"
+              style="background-image: url('https://m.media-amazon.com/images/M/MV5BMTI1NDg1NTY2N15BMl5BanBnXkFtZTcwNDY2MTU1MQ@@._V1_SX300.jpg');">
+            </div>
+            <div class="slide__info">
+              <span class="slide__year">2015</span>
+              <span class="slide__rating">8.9</span>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide_wrapper">
+            <div class="slide__title">
+              <a href="https://www.imdb.com/title/tt0180093/videogallery/?ref_=tt_pv_vi_sm">Goal II: Living the Dream</a>
+            </div>
+            <div class="image__wrapper"
+              style="background-image: url('https://m.media-amazon.com/images/M/MV5BMTIxNzI5NjAxNl5BMl5BanBnXkFtZTcwNzI2NTQ0MQ@@._V1_SX300.jpg');">
+            </div>
+            <div class="slide__info">
+              <span class="slide__year">204</span>
+              <span class="slide__rating">7.7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="js-prev" class="swiper-button-prev"></div>
+      <div id="js-next" class="swiper-button-next"></div>
+    </div>
+  </section>
+  <footer class="footer__wrapper">
+    <div class="wrapper">
+      <div class="footer">
+        <div class="course-info">RS School 2020q1</div>
+        <div class="github-link">
+          <a class="github-link" href="https://github.com/VestryOd">
+            <span class="icon github__icon"></span>VestryOd
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

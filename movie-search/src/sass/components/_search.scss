@@ -1,0 +1,108 @@
+.search__wrapper {
+  width: 100%;
+  margin: 50px auto;
+}
+
+.search__form {
+  display: flex;
+  width: 100%;
+  height: 40px;
+}
+
+.search__info {
+  width: 100%;
+  padding: 4px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid $color-search-border;
+  @extend %transition;
+  @extend %box-shadow-thin;
+}
+
+.search-input__wrapper {
+  display: flex;
+  flex-grow: 10;
+}
+
+.search__input {
+  width: 100%;
+  outline: transparent;
+  border: transparent;
+}
+
+.active {
+  border: 2px solid $color-search-border-hover;
+}
+
+.icon {
+  display: block;
+  width: 35px;
+  height: 35px;
+  @extend %background-image;
+}
+
+.icon__search {
+  background-image: url("/assets/img/icons/search.svg");
+}
+
+.search__options {
+  width: 80px;
+  display: flex;
+}
+
+.search__loader {
+  width: 40px;
+}
+
+.icon__clear {
+  background-image: url("/assets/img/icons/close.svg");
+}
+
+.search__clear,
+.virtual-keyboard {
+  border: none;
+  background-color: transparent;
+  outline: transparent;
+  opacity: 0.7;
+  @extend %transition;
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.virtual-keyboard__wrapper {
+  margin: 0 5px;
+}
+.virtual-keyboard {
+  width: 50px;
+}
+
+.icon__keyboard {
+  background-image: url("/assets/img/icons/keyboard.svg");
+}
+
+.search__send {
+  width: 100px;
+  padding: 0 5px;
+  outline: transparent;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: $color-light;
+  font-weight: 300;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  @extend %text_shadow;
+  text-transform: uppercase;
+  background-color: $color-search-button;
+  @extend %transition;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-search-button-hover;
+    border-color: $color-light;
+    @extend %box-shadow-thin;
+  }
+}
