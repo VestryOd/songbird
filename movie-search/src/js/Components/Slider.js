@@ -1,19 +1,19 @@
 import Swiper from 'swiper';
-import 'swiper.min.css';
 import { Slide } from "./Slide";
 import createDomNode from "../services/createDomNode";
 import options from "../services/sliderOptions";
 
 export class Slider {
-  constructor(data) {
+  constructor() {
     this.slides = [];
-    this.data = data;
+    this.data = null;
     this.amount = null;
-    this.noPoster = '/assets/img/slider/no-poster.png';
     this.noRating = '-.-';
     this.swiperElement = null;
+    this.container = null;
     this.instance = null;
     this.swiper = null;
+    this.basis = null;
   }
 
   generateSlides() {
@@ -37,21 +37,31 @@ export class Slider {
 
   generateSliderBasis() {
     const section = createDomNode(section, 'section', 'slider__wrapper');
-    const swiper = createDomNode(swiper, 'div', 'swiper-container');
-    const wrapper = createDomNode(wrapper, 'div', 'swiper-wrapper');
-    wrapper.setAttribute('id', 'swiper');
-    this.swiperElement = wrapper;
-    swiper.append(wrapper);
-    section.append(swiper);
+    const wrapper = createDomNode(wrapper, 'div', 'wrapper');
+    const swiperContainer = createDomNode(swiperContainer, 'div', 'swiper-container');
+    wrapper.append(swiperContainer);
+    const wrapperSwiper = createDomNode(wrapperSwiper, 'div', 'swiper-wrapper');
+    swiperContainer.setAttribute('id', 'swiper');
+    this.container = swiperContainer;
+    this.swiperElement = wrapperSwiper;
+    swiperContainer.append(wrapperSwiper);
+    section.append(wrapper);
     return section;
   }
 
-  render() {
+  prepare() {
     const basis = this.generateSliderBasis();
+    this.basis = basis;
+    return basis;
+  }
+
+  render(data) {
+    this.data  = data;
     this.generateSlides();
     this.insertSlides();
-    basis.insertAdjacentHTML('beforeend', this.generateNavigation());
-    this.swiper = new Swiper(this.swiperElement, options);
+    this.container.insertAdjacentHTML('beforeend', this.generateNavigation());
+    this.swiper = new Swiper(this.container, options);
+    console.log(options);
     this.swiper.init();
   }
 }

@@ -44,5 +44,25 @@ export const getFullMovie = async (page, name) => {
 
 export async function getTranslate(text) {
   const url = translateUrl(text);
-  return await fetch(url);
+  try {
+    return fetch(url)
+      .then(res => {
+        if (!res.ok) {
+          throw Error(`Connection problem, status: ${res.status}, text: ${res.statusText}`);
+        }
+        return res.json()
+      })
+      .then(data => {
+        if (data.code > 299) {
+          throw Error(data.message);
+        }
+        return data;
+      })
+      .catch(error => {
+        throw new Error(`Connection problem. Reason: ${error.message}`);
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+
 }

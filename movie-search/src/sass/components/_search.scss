@@ -1,6 +1,7 @@
 .search__wrapper {
   width: 100%;
-  margin: 50px auto;
+  margin-top: 35px;
+  margin-bottom: 20px;
 }
 
 .search__form {
@@ -17,6 +18,7 @@
   align-items: center;
   border-radius: 10px;
   border: 1px solid $color-search-border;
+  background-color: $color-light;
   @extend %transition;
   @extend %box-shadow-thin;
 }

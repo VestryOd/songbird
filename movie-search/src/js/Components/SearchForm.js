@@ -7,6 +7,8 @@ export class SearchForm {
     this.clear = null;
     this.keyboard = null;
     this.form = null;
+    this.changeStatus.bind(this);
+    this.clearStatus.bind(this);
   }
 
   generateSearchInput() {
@@ -85,14 +87,17 @@ export class SearchForm {
     const search = this.generateSearch();
     wrapper.append(search);
     layout.append(wrapper);
-    // const result = [
-    //   search,
-    //   this.status = null,
-    //   this.clear = null,
-    //   this.keyboard = null,
-    //   this.form = null
-    //   ];
-    // return [...result];
     return layout;
+  }
+
+  clearStatus() {
+    const icons = this.status.querySelectorAll('.icon');
+    icons.forEach(el => el.classList.remove('shown'));
+  }
+
+  changeStatus(value) {
+    this.clearStatus();
+    const current = this.status.querySelector(`.icon__${value}`);
+    current.classList.add('shown');
   }
 }

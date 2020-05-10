@@ -1,5 +1,5 @@
 const options = {
-  slidesPerView: 4,
+  slidesPerView: 3,
   spaceBetween: 40,
   slidesPerGroup: 1,
   loop: false,
@@ -9,8 +9,8 @@ const options = {
     prevEl: '#js-prev',
   },
   breakpoints: {
-    1300: {
-      slidesPerView: 4
+    1197: {
+      slidesPerView: 3
     },
     1020: {
       slidesPerView: 3

@@ -4,38 +4,44 @@ import * as OPTIONS from "../constants";
 export class Slide {
   constructor(data) {
     this.data = data;
+    this.noPoster = '/assets/img/slider/no-poster.png';
     this.card = null;
-    this.rating = null;
   }
 
-  getRating(imdbID) {
-    const url = `${OPTIONS.OMDB_URL}?i=${imdbID}&apikey=${OMDB_API_KEY}`;
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        this.rating = data.imdbRating;
-      })
-      .catch(err =>{
-        this.rating = '-.-';
-      });
+  generateTitle(data) {
+    const title = createDomNode(title, 'div', 'slide__title');
+    title.innerHTML = `<a href="${OPTIONS.IMBD_URL}${data.imdbID}/videogallery/?ref_=tt_pv_vi_sm">${data.Title}</a>`;
+    return title;
+  }
+
+  generateImage(data) {
+    const wrapper = createDomNode(wrapper, 'div', 'image__wrapper');
+    const img = new Image();
+    img.src = data.Poster;
+    img.alt = data.Title;
+    img.onerror = () => {
+      img.src = this.noPoster;
+    }
+    wrapper.append(img);
+    return wrapper;
+  }
+
+  generateInfo(data) {
+    const wrapper = createDomNode(wrapper, 'div', 'slide__info');
+    wrapper.innerHTML = `<span class="slide__year">${data.Year}</span>
+                        <span class="slide__rating">${data.imdbRating}</span>`;
+      return wrapper;
   }
 
   generateCard() {
-    const {data} = this;
-    this.getRating(data.imdbID);
     const swiperSlide = createDomNode(swiperSlide, 'div', 'swiper-slide');
-    const content = `<div class="slide__title">
-                      <a href="${OPTIONS.IMBD_URL}${data.imdbID}/videogallery/?ref_=tt_pv_vi_sm">${data.Title}</a>
-                    </div>
-                    <div class="image__wrapper"
-                      style="background-image: url('${data.Poster}');">
-                    </div>
-                    <div class="slide__info">
-                      <span class="slide__year">${data.Year}</span>
-                      <span class="slide__rating">${this.rating}</span>
-                    </div>
-                  </div>`;
-    swiperSlide.insertAdjacentHTML('afterbegin', content);
+    const inner__wrapper = createDomNode(inner__wrapper, 'div', 'inner__wrapper');
+    swiperSlide.append(inner__wrapper);
+    inner__wrapper.append(
+      this.generateTitle(this.data),
+      this.generateImage(this.data),
+      this.generateInfo(this.data)
+    );
     this.card = swiperSlide;
   }
 

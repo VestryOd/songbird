@@ -5,7 +5,9 @@ html {
 body {
     @extend %font-prim;
     @include font($size: 1.6rem, $height: 2.6rem, $weight: normal);
-    background-color: $color-background;
+    @extend %background-image;
+    background-image: url('/assets/img/main/cinema.jpg');
+    background-size: 200% 150%;
 }
 
 h1 {
