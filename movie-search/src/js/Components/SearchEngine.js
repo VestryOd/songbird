@@ -1,28 +1,64 @@
-import createDomNode from "../services/createDomNode";
 import checkString from "../services/checkString";
 import { getFullMovie, getTranslate } from "../services/getData";
 
 export class SearchEngine {
-  constructor(searchForm, infoPanel, slider) {
-    this.defaultText = 'Dream';
+  constructor(query, searchForm, infoPanel, slider) {
     this.movies = null;
     this.amount = null;
-    this.ratings = null;
-    this.keyboard = null;
-    this.form = null;
-    this.clear = null;
     this.movies = null;
+    this.pageCounter = 1;
+    this.query = query;
     this.searchForm = searchForm;
     this.infoPanel = infoPanel;
     this.slider = slider;
+    this.slidesBeforeLoad = 4;
+    this.isFirstLoad = true;
+    this.isFirstRequestProcessing = false;
+    this.isFetching - false;
+  }
+
+  firstLoad() {
+    this.isFirstLoad = true;
+    this.isFirstRequestProcessing = true;
+    this.pageCounter = 1;
+    this.render();
   }
 
   handleErrors(error) {
-    console.log(error.status, 'Someething went wrong');
+    this.isFetching = false;
+    this.isFirstRequestProcessing = false;
+    this.infoPanel.errorInfo(error);
+    this.searchForm.changeStatus('no');
+  }
+
+  addSliderEventListener() {
+    this.slider.swiper.on('sliderMove', () => {
+      this.checkNextPagesToLoad();
+    });
+    this.slider.swiper.update();
+  }
+
+  checkNextPagesToLoad() {
+    console.log('nextPage is working');
+    const swiper = this.slider.swiper;
+    if ((swiper.progress > 1 - (1 / swiper.slides.length) * this.slidesBeforeLoad) && !this.isFetching) {
+      console.log('inside nextPage');
+      this.pageCounter++;
+      this.isFirstLoad = false;
+      this.searchForm.changeStatus('loading');
+      this.render();
+    }
   }
 
   handleSuccess(res, text) {
-    this.infoPanel.successInfo(`${res.totalResults} results were found of "${text}"`);
+    this.isFetching = false;
+    this.amount = res.totalResults;
+    if (this.isFirstRequestProcessing && this.isFirstLoad) {
+      this.slider.clearSlider();
+    }
+    this.slider.render(res);
+    this.isFirstRequestProcessing = false;
+    this.infoPanel.successInfo(`${res.totalResults} results of "${text}"`);
     this.searchForm.changeStatus('ok');
   }
 
@@ -38,36 +74,31 @@ export class SearchEngine {
             if (data.Error) {
               throw new Error(data.Error);
             }
-            this.infoPanel.successInfo(data.text[0]);
-            //
+            this.query = data.text[0];
+            this.firstLoad();
           })
           .catch(error => {
-            this.infoPanel.errorInfo(error);
+            this.handleErrors(error);
           });
       } else {
-        this.infoPanel.successInfo(checked);
+        this.query = checked;
+        this.firstLoad();
       }
     } catch (error) {
-      this.infoPanel.errorInfo(error);
+      this.handleErrors(error);
     }
   }
 
-  render(text) {
-    const query = text || this.defaultText;
-    if (!localStorage.movies) {
-      try {
-        getFullMovie(1, query).then(res => {
-          localStorage.setItem('movies', JSON.stringify(res));
-          console.log("data", res)
-          this.handleSuccess(res, text);
-        });
-      } catch (error) {
-        this.handleErrors(error);
-      }
-    } else {
-      this.movies = JSON.parse(localStorage.getItem('movies'));
-      console.log("data", this.movies);
-      this.slider.render(this.movies.Search);
+  render() {
+    this.isFetching = true;
+    const query = this.query;
+    try {
+      getFullMovie(this.pageCounter, query).then(res => {
+        console.log("data", new Date().getTime(), res)
+        this.handleSuccess(res, query);
+      });
+    } catch (error) {
+      this.handleErrors(error);
     }
 
   }

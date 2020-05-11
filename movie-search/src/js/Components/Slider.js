@@ -8,26 +8,19 @@ export class Slider {
     this.slides = [];
     this.data = null;
     this.amount = null;
-    this.noRating = '-.-';
     this.swiperElement = null;
     this.container = null;
     this.instance = null;
     this.swiper = null;
     this.basis = null;
+    this.firstInstance = true;
   }
 
   generateSlides() {
-    const { data } = this;
+    const data = this.data.Search;
     data.forEach(el => {
-      this.slides.push(new Slide(el));
+      this.slides.push(new Slide(el).render());
     });
-  }
-
-  insertSlides() {
-    const { slides } = this;
-    slides.forEach(el => {
-      this.swiperElement.append(el.render());
-    })
   }
 
   generateNavigation() {
@@ -55,13 +48,22 @@ export class Slider {
     return basis;
   }
 
+  initSwiper() {
+    this.container.insertAdjacentHTML('beforeend', this.generateNavigation());
+    this.swiper = new Swiper(this.container, options);
+    // this.swiper.init();
+  }
+
   render(data) {
     this.data  = data;
     this.generateSlides();
-    this.insertSlides();
-    this.container.insertAdjacentHTML('beforeend', this.generateNavigation());
-    this.swiper = new Swiper(this.container, options);
-    console.log(options);
-    this.swiper.init();
+    this.swiper.appendSlide(this.slides);
+    this.swiper.update();
+  }
+
+  clearSlider() {
+    this.swiper.removeAllSlides();
+    this.swiper.update();
+    this.amount = null;
   }
 }

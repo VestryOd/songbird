@@ -1,5 +1,5 @@
 const options = {
-  slidesPerView: 3,
+  // slidesPerView: 3,
   spaceBetween: 40,
   slidesPerGroup: 1,
   loop: false,
@@ -22,7 +22,7 @@ const options = {
       slidesPerView: 1
     }
   },
-
+  updateOnWindowResize: true,
   a11y: true,
   keyboardControl: true,
   grabCursor: true,
