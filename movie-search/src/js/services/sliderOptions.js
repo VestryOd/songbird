@@ -23,6 +23,7 @@ const options = {
     }
   },
   updateOnWindowResize: true,
+  // autoHeight: true,
   a11y: true,
   keyboardControl: true,
   grabCursor: true,

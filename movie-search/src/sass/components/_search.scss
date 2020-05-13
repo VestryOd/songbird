@@ -109,6 +109,9 @@
 
 .virtual-keyboard__wrapper {
   margin: 0 5px;
+  @media (max-width: 999px) {
+    display: none;
+  }
 }
 .virtual-keyboard {
   width: 50px;
@@ -137,5 +140,9 @@
   &:focus,
   &:active {
     background-color: $color-search-button-hover;
+  }
+  @include media-mobile {
+    width: 70px;
+    font-size: 1.2rem;
   }
 }

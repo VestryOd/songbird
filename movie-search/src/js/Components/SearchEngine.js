@@ -31,15 +31,18 @@ export class SearchEngine {
     this.searchForm.changeStatus('no');
   }
 
-  addSliderEventListener() {
+  addSliderEventListeners() {
     this.slider.swiper.on('sliderMove', () => {
+      this.checkNextPagesToLoad();
+    });
+    this.slider.next.addEventListener('click', () => {
       this.checkNextPagesToLoad();
     });
     this.slider.swiper.update();
   }
 
   checkNextPagesToLoad() {
-    console.log('nextPage is working');
+    console.log('nextPage is working', this.slider.swiper);
     const swiper = this.slider.swiper;
     if ((swiper.progress > 1 - (1 / swiper.slides.length) * this.slidesBeforeLoad) && !this.isFetching) {
       console.log('inside nextPage');

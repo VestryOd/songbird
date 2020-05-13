@@ -1,4 +1,5 @@
 import { moviesUrl, ratingUrl, translateUrl } from './URLs';
+import reportError from "./reportError";
 
 const getMovie = async (page, name) => {
   const url = moviesUrl(page, name);
@@ -12,9 +13,23 @@ const getImdbID = async imdbID => {
   return res;
 };
 
+const checkStatus = code => {
+  switch (code) {
+    case '401':
+      return reportError(`Status 401: limit is reached`);
+    case '404':
+      return reportError(`Status 404: no matches found`);
+    default:
+      return {};
+  }
+}
+
 export const getFullMovie = async (page, name) => {
   return getMovie(page, name)
-    .then(res => res.json())
+    .then(res => {
+      checkStatus(res.status);
+      return res.json();
+    })
     .then(data => {
       const promises = [];
       if (data.Error) {
@@ -24,7 +39,10 @@ export const getFullMovie = async (page, name) => {
       dataSearch.forEach((elem, i) => {
         promises.push(
           getImdbID(elem.imdbID)
-            .then(res => res.json())
+            .then(res => {
+              checkStatus(res.status);
+              return res.json();
+            })
             .then(movie => {
               dataSearch[i].imdbRating = movie.imdbRating;
               dataSearch[i].Genre = movie.Genre;

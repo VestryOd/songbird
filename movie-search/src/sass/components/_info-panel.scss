@@ -18,6 +18,11 @@
   font-weight: 600;
   text-align: center;
   color: $color-info-message;
+  @include media-mobilesmall {
+    padding: 5px 10px;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
 }
 
 .error {

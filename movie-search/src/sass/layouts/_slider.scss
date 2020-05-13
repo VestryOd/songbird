@@ -1,7 +1,10 @@
 .slider__wrapper {
   width: 100%;
-  margin: 35px auto 0 auto;
+  margin: 35px auto;
   position: relative;
+  @include media-mobile {
+    margin: 25px auto;
+  }
 }
 
 .swiper-button-prev {
@@ -15,7 +18,7 @@
 .swiper-button-prev,
 .swiper-button-next {
   outline: transparent;
-  @include media-mobilesmall {
+  @include media-mobile {
     display: none;
   }
 }

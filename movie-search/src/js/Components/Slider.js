@@ -13,7 +13,10 @@ export class Slider {
     this.instance = null;
     this.swiper = null;
     this.basis = null;
+    this.prev = null;
+    this.next = null;
     this.firstInstance = true;
+
   }
 
   generateSlides() {
@@ -24,8 +27,13 @@ export class Slider {
   }
 
   generateNavigation() {
-    return `<div id="js-prev" class="swiper-button-prev"></div>
-            <div id="js-next" class="swiper-button-next"></div>`;
+    const prev = createDomNode(prev, 'div', 'swiper-button-prev');
+    prev.setAttribute('id', 'js-prev');
+    this.prev = prev;
+    const next = createDomNode(next, 'div', 'swiper-button-next');
+    next.setAttribute('id', 'js-next');
+    this.next = next;
+    return [prev, next];
   }
 
   generateSliderBasis() {
@@ -49,7 +57,7 @@ export class Slider {
   }
 
   initSwiper() {
-    this.container.insertAdjacentHTML('beforeend', this.generateNavigation());
+    this.container.append(...this.generateNavigation());
     this.swiper = new Swiper(this.container, options);
     // this.swiper.init();
   }
