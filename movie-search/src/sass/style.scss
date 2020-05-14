@@ -11,7 +11,6 @@
 // Layouts
 @import "layouts/wrapper";
 @import "layouts/header";
-@import "layouts/content";
 @import "layouts/swiper";
 @import "layouts/slider";
 @import "layouts/footer";
@@ -19,8 +18,8 @@
 // Components
 @import "components/search";
 @import "components/info-panel";
-// @import "components/swiper";
 @import "components/slider";
 @import "components/footer";
-@import "components/loader";
+@import "components/keyboard";
+@import "components/button";
 

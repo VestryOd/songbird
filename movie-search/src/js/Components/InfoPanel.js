@@ -25,9 +25,6 @@ export class InfoPanel {
   }
 
   errorInfo(query) {
-    console.log(query);
-    console.log(query instanceof Error);
-
     this.panel.classList.add('error');
     if (query instanceof Error) {
       this.panel.textContent = query.message;

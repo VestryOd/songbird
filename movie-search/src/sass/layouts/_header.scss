@@ -5,6 +5,7 @@
   background-size: cover;
   background-image: url("/assets/img/header/header_bg.png");
   border-bottom: 5px solid $color-header-border-bottom;
+  z-index: 110;
 }
 
 .header {

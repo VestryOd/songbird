@@ -1,5 +1,4 @@
 import { invalidInput } from "./messages";
-import { getTranslate } from "../services/getData";
 
 const checkString = text => {
   let query = text;

@@ -12,21 +12,16 @@ export class SearchEngine {
     this.infoPanel = infoPanel;
     this.slider = slider;
     this.slidesBeforeLoad = 4;
-    this.isFirstLoad = true;
-    this.isFirstRequestProcessing = false;
     this.isFetching - false;
   }
 
   firstLoad() {
-    this.isFirstLoad = true;
-    this.isFirstRequestProcessing = true;
     this.pageCounter = 1;
     this.render();
   }
 
   handleErrors(error) {
     this.isFetching = false;
-    this.isFirstRequestProcessing = false;
     this.infoPanel.errorInfo(error);
     this.searchForm.changeStatus('no');
   }
@@ -42,12 +37,9 @@ export class SearchEngine {
   }
 
   checkNextPagesToLoad() {
-    console.log('nextPage is working', this.slider.swiper);
     const swiper = this.slider.swiper;
     if ((swiper.progress > 1 - (1 / swiper.slides.length) * this.slidesBeforeLoad) && !this.isFetching) {
-      console.log('inside nextPage');
       this.pageCounter++;
-      this.isFirstLoad = false;
       this.searchForm.changeStatus('loading');
       this.render();
     }
@@ -56,10 +48,11 @@ export class SearchEngine {
   handleSuccess(res, text) {
     this.isFetching = false;
     this.amount = res.totalResults;
-    if (this.isFirstRequestProcessing && this.isFirstLoad) {
-      this.slider.clearSlider();
+    if (this.pageCounter === 1) {
+      this.slider.updateSlider(res);
+    } else {
+      this.slider.render(res);
     }
-    this.slider.render(res);
     this.isFirstRequestProcessing = false;
     this.infoPanel.successInfo(`${res.totalResults} results of "${text}"`);
     this.searchForm.changeStatus('ok');
@@ -97,7 +90,6 @@ export class SearchEngine {
     const query = this.query;
     try {
       getFullMovie(this.pageCounter, query).then(res => {
-        console.log("data", new Date().getTime(), res)
         this.handleSuccess(res, query);
       });
     } catch (error) {

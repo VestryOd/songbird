@@ -5,6 +5,7 @@
   & * {
     color: $color-light;
     line-height: 4.5rem;
+    @extend %text_shadow;
   }
 }
 

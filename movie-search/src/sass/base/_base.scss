@@ -12,7 +12,6 @@ body {
   flex-direction: column;
   @extend %font-prim;
   @include font($size: 1.6rem, $height: 2.6rem, $weight: normal);
-  // background-size: 200% 150%;
 }
 
 .main {

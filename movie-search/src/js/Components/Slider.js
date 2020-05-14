@@ -1,6 +1,7 @@
 import Swiper from 'swiper';
 import { Slide } from "./Slide";
 import createDomNode from "../services/createDomNode";
+import changeVisibility from "../services/changeVisibility";
 import options from "../services/sliderOptions";
 
 export class Slider {
@@ -15,8 +16,17 @@ export class Slider {
     this.basis = null;
     this.prev = null;
     this.next = null;
-    this.firstInstance = true;
+    this.loader = null;
+    this.delay = 1000;
+    this.updateSlider.bind(this);
+  }
 
+  generateLoader() {
+    const loaderWrapper = createDomNode(loaderWrapper, 'div', 'loader__container','invisible');
+    const loader = createDomNode(loaderWrapper, 'div', 'loader');
+    loaderWrapper.append(loader);
+    this.loader = loaderWrapper;
+    return loaderWrapper;
   }
 
   generateSlides() {
@@ -40,7 +50,8 @@ export class Slider {
     const section = createDomNode(section, 'section', 'slider__wrapper');
     const wrapper = createDomNode(wrapper, 'div', 'wrapper');
     const swiperContainer = createDomNode(swiperContainer, 'div', 'swiper-container');
-    wrapper.append(swiperContainer);
+    const loader = this.generateLoader();
+    wrapper.append(loader, swiperContainer);
     const wrapperSwiper = createDomNode(wrapperSwiper, 'div', 'swiper-wrapper');
     swiperContainer.setAttribute('id', 'swiper');
     this.container = swiperContainer;
@@ -59,19 +70,31 @@ export class Slider {
   initSwiper() {
     this.container.append(...this.generateNavigation());
     this.swiper = new Swiper(this.container, options);
-    // this.swiper.init();
   }
 
   render(data) {
-    this.data  = data;
+    this.data = data;
     this.generateSlides();
     this.swiper.appendSlide(this.slides);
-    this.swiper.update();
+    this.swiper.init();
   }
 
-  clearSlider() {
-    this.swiper.removeAllSlides();
-    this.swiper.update();
+  updateSlider(data) {
+    this.loaderShow();
     this.amount = null;
+    this.slides = [];
+    this.swiper.removeAllSlides();
+    this.render(data);
+    setTimeout(() => {
+      this.loaderHide();
+    }, this.delay);
+  }
+
+  loaderShow() {
+    changeVisibility(this.container, this.loader);
+  }
+
+  async loaderHide() {
+    changeVisibility(this.loader, this.container);
   }
 }

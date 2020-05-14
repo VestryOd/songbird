@@ -36,8 +36,6 @@ window.onload = () => {
   searchEngine.addSliderEventListeners();
   searchEngine.render();
 
-  // alert('Привет дорогой друг (подруга)☺ Просьба начать проверку не раньше 12-13.05, т.к. при последнем деплое возникли проблемы с провайдером - обещали за день два починить). Просьба войти в положение. Для свизи ник в дискорде vestry_od, телега vestry_od. Заранее благодарю за понимание)');
-
   console.log(searchEngine);
 
   searchForm.form.addEventListener('submit', (e) => {
@@ -45,4 +43,20 @@ window.onload = () => {
     searchEngine.searchRequest(e.target);
   });
 
+  searchForm.keyboardButton.addEventListener('click', () => {
+    searchForm.keyboardLayout.classList.toggle('keyboard-show');
+  })
+
+  searchForm.keyboardLayout.addEventListener('click', () => {
+    console.log(searchForm.input);
+    searchForm.input.dispatchEvent(new Event('input'));
+  })
+
+  document.querySelector('.keyboard__key[data-code="Enter"]').addEventListener('click', () => {
+    searchEngine.searchRequest(searchForm.form);
+  });
+
+  searchForm.input.addEventListener('input', ()=> {
+    searchForm.input.focus();
+  });
 }

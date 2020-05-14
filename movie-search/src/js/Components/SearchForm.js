@@ -1,12 +1,18 @@
 import createDomNode from "../services/createDomNode";
 import addDomNodeAttributes from "../services/addDomNodeAttributes";
+import data from "./VirtualKeyboard/data";
+import exceptions from "./VirtualKeyboard/exceptions";
+import { VirtualKeyboard } from "./VirtualKeyboard/Components/VirtualKeyboard";
 
 export class SearchForm {
   constructor() {
     this.status = null;
     this.clear = null;
-    this.keyboard = null;
+    this.keyboardButton = null;
     this.form = null;
+    this.input = null;
+    this.keyboardLayout = null;
+    this.keyboardInstance = null;
     this.changeStatus.bind(this);
     this.clearStatus.bind(this);
   }
@@ -22,6 +28,7 @@ export class SearchForm {
       id: "movie-name",
       placeholder: "Search movie..."
     });
+    this.input = input;
     inputWrapper.append(label, input);
     return inputWrapper;
   }
@@ -44,9 +51,18 @@ export class SearchForm {
     const wrapper = createDomNode(wrapper, 'div', 'virtual-keyboard__wrapper');
     let button = createDomNode(button, 'button', 'virtual-keyboard', 'icon', 'icon__keyboard');
     button = addDomNodeAttributes(button, { type: 'button' });
-    this.keyboard = button;
+    this.keyboardButton = button;
     wrapper.append(button);
     return wrapper;
+  }
+
+  generateKeyboardLayout() {
+    const layout = createDomNode(layout, 'div', 'keyboard-container');
+    this.keyboardInstance = new VirtualKeyboard(data, exceptions, this.input);
+    this.keyboardInstance.init();
+    layout.append(this.keyboardInstance.render());
+    this.keyboardLayout = layout;
+    return layout;
   }
 
   generateInfo() {
@@ -77,7 +93,9 @@ export class SearchForm {
 
   generateSearch() {
     const search = createDomNode(search, 'div', 'search');
-    search.append(this.generateForm());
+    const form = this.generateForm();
+    const keyboard = this.generateKeyboardLayout();
+    search.append(form, keyboard);
     return search;
   }
 
