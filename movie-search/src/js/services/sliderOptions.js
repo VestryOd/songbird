@@ -14,7 +14,7 @@ const options = {
     1020: {
       slidesPerView: 3
     },
-    768: {
+    600: {
       slidesPerView: 2
     },
     414: {
