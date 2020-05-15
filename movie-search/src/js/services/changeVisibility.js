@@ -1,12 +1,30 @@
-async function changeVisibility(elemToHide, elemToShow) {
+function changeVisibility(elemToShow, elemToHide) {
 
-  setTimeout(() => {
-    toggleOpacity(elemToHide);
-    toggleOpacity(elemToShow);
-  }, 0);
+  function hideElem(elem) {
+    elem.classList.add("hidden");
+    return true;
+  }
+  function visibleElem(elem) {
+    elem.classList.remove("hidden");
+    return true;
+  }
+  function fadeIn(elem) {
+    elem.classList.add("show");
+    return true;
+  }
+  function fadeOut(elem) {
+    elem.classList.remove("show");
+    return true;
+  }
 
-  function toggleOpacity(elem) {
-    elem.classList.toggle('invisible');
+  if (fadeOut(elemToHide)) {
+    setTimeout(() => {
+      if (visibleElem(elemToShow)) {
+        fadeIn(elemToShow);
+        hideElem(elemToHide);
+      }
+      fadeIn(elemToShow);
+    }, 500);
   }
 }
 

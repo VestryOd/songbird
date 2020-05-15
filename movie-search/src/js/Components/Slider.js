@@ -22,7 +22,7 @@ export class Slider {
   }
 
   generateLoader() {
-    const loaderWrapper = createDomNode(loaderWrapper, 'div', 'loader__container','invisible');
+    const loaderWrapper = createDomNode(loaderWrapper, 'div', 'loader__container');
     const loader = createDomNode(loaderWrapper, 'div', 'loader');
     loaderWrapper.append(loader);
     this.loader = loaderWrapper;
@@ -91,10 +91,10 @@ export class Slider {
   }
 
   loaderShow() {
-    changeVisibility(this.container, this.loader);
+    changeVisibility(this.loader, this.container);
   }
 
-  async loaderHide() {
-    changeVisibility(this.loader, this.container);
+  loaderHide() {
+    changeVisibility(this.container, this.loader);
   }
 }
