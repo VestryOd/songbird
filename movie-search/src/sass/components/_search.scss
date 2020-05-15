@@ -169,6 +169,7 @@
   overflow: hidden;
   box-shadow: 4px 10px 13px #000;
   transition: all 0.5s linear;
+  z-index: 99;
   @media (max-width: 1023px) {
     display: none;
   }
@@ -177,6 +178,5 @@
 .keyboard-show {
   top: 65px;
   background-color: $color-light;
-  z-index: 99;
   border-radius: 10px;
 }

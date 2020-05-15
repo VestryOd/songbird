@@ -25,6 +25,7 @@ export class SearchForm {
     input = addDomNodeAttributes(input, {
       name: "movie-name",
       type: "search",
+      autocomplete: "off",
       id: "movie-name",
       placeholder: "Search movie..."
     });

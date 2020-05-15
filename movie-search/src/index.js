@@ -56,6 +56,18 @@ window.onload = () => {
     searchEngine.searchRequest(searchForm.form);
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') {
+      searchForm.keyboardLayout.classList.remove('keyboard-show');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.keyboard') && !e.target.classList.contains('icon__keyboard')) {
+      searchForm.keyboardLayout.classList.remove('keyboard-show');
+    }
+  })
+
   searchForm.input.addEventListener('input', ()=> {
     searchForm.input.focus();
   });

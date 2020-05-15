@@ -50,6 +50,7 @@ export class SearchEngine {
     this.amount = res.totalResults;
     if (this.pageCounter === 1) {
       this.slider.updateSlider(res);
+      this.searchForm.keyboardLayout.classList.remove('keyboard-show');
     } else {
       this.slider.render(res);
     }
