@@ -53,10 +53,15 @@ export const getFullMovie = async (page, name) => {
                 dataSearch[i].Actors = movie.Actors.split(', ');
               }
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+              throw new Error(err);
+            })
         );
       });
       return Promise.allSettled(promises).then(() => data);
+    })
+    .catch(err => {
+      throw new Error(err.message);
     });
 };
 

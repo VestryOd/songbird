@@ -22,7 +22,12 @@ export class SearchEngine {
 
   handleErrors(error) {
     this.isFetching = false;
-    this.infoPanel.errorInfo(error);
+    if (error.message === 'Movie not found!') {
+      const falseQuery = this.searchForm.input.value;
+      this.infoPanel.errorInfo(falseQuery);
+    } else {
+      this.infoPanel.errorInfo(error);
+    }
     this.searchForm.changeStatus('no');
   }
 
@@ -92,7 +97,8 @@ export class SearchEngine {
     try {
       getFullMovie(this.pageCounter, query).then(res => {
         this.handleSuccess(res, query);
-      });
+      })
+        .catch(error => this.handleErrors(error));
     } catch (error) {
       this.handleErrors(error);
     }

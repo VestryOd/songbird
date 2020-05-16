@@ -27,7 +27,8 @@ export class SearchForm {
       type: "search",
       autocomplete: "off",
       id: "movie-name",
-      placeholder: "Search movie..."
+      placeholder: "Search movie...",
+      autofocus: true
     });
     this.input = input;
     inputWrapper.append(label, input);

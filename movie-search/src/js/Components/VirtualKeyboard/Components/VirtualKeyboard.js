@@ -106,6 +106,24 @@ export class VirtualKeyboard {
     let positionFromLeft = null;
 
     switch (value) {
+      case 'ControlLeft':
+        this.output.value = `${left}${right}`;
+        break;
+      case 'ControlRight':
+        this.output.value = `${left}${right}`;
+        break;
+      case 'AltLeft':
+        this.output.value = `${left}${right}`;
+        break;
+      case 'AltRight':
+        this.output.value = `${left}${right}`;
+        break;
+      case 'ShiftLeft':
+        this.output.value = `${left}${right}`;
+        break;
+      case 'ShiftRight':
+        this.output.value = `${left}${right}`;
+        break;
       case 'Tab':
         this.output.value = `${left}\t${right}`;
         cursorPos += 1;
@@ -206,12 +224,12 @@ export class VirtualKeyboard {
         this.capslocked = !this.capslocked;
         this.capslockPressed(this.capslocked);
         break;
-      case 'ShiftLeft':
-        this.shiftPressed(true)
-        break;
-      case 'ShiftRight':
-        this.shiftPressed(true)
-        break;
+      // case 'ShiftLeft':
+      //   this.shiftPressed(true)
+      //   break;
+      // case 'ShiftRight':
+      //   this.shiftPressed(true)
+      //   break;
       default:
         this.changeValue(special);
         break;

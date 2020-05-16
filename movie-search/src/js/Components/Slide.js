@@ -17,7 +17,7 @@ export class Slide {
 
   generateTitle(data) {
     const title = createDomNode(title, 'div', 'slide__title');
-    title.innerHTML = `<a href="${OPTIONS.IMBD_URL}${data.imdbID}/videogallery/?ref_=tt_pv_vi_sm" target="_blank">${data.Title}</a>`;
+    title.innerHTML = `<a href="${OPTIONS.IMBD_URL}title/${data.imdbID}/videogallery/?ref_=tt_pv_vi_sm" target="_blank">${data.Title}</a>`;
     return title;
   }
 

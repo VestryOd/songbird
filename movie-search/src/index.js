@@ -48,8 +48,11 @@ window.onload = () => {
   })
 
   searchForm.keyboardLayout.addEventListener('click', () => {
-    console.log(searchForm.input);
     searchForm.input.dispatchEvent(new Event('input'));
+  });
+
+  searchForm.clear.addEventListener('click', () => {
+    searchForm.clearStatus();
   })
 
   document.querySelector('.keyboard__key[data-code="Enter"]').addEventListener('click', () => {
@@ -63,7 +66,9 @@ window.onload = () => {
   });
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.keyboard') && !e.target.classList.contains('icon__keyboard')) {
+    if (!e.target.closest('.keyboard') &&
+      !e.target.classList.contains('icon__keyboard') &&
+      !e.target.classList.contains('icon__clear')) {
       searchForm.keyboardLayout.classList.remove('keyboard-show');
     }
   })

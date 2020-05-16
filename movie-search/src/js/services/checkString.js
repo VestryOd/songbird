@@ -3,7 +3,7 @@ import { invalidInput } from "./messages";
 const checkString = text => {
   let query = text;
   if (
-    query.length <= 1 ||
+    query.length < 1 ||
     query === "" ||
     query.match(/[a-zA-Zа-яА-Я]/) === null
   ) {
