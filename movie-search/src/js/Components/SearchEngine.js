@@ -23,8 +23,7 @@ export class SearchEngine {
   handleErrors(error) {
     this.isFetching = false;
     if (error.message === 'Movie not found!') {
-      const falseQuery = this.searchForm.input.value;
-      this.infoPanel.errorInfo(falseQuery);
+      this.infoPanel.errorInfo(this.query);
     } else {
       this.infoPanel.errorInfo(error);
     }

@@ -21,6 +21,8 @@ const options = {
       slidesPerView: 1
     }
   },
+  preloadImages: true,
+  updateOnImagesReady: true,
   updateOnWindowResize: true,
   a11y: true,
   keyboardControl: true,
