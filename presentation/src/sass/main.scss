@@ -1,0 +1,18 @@
+@import '../../node_modules/reveal.js/css/reveal.css';
+@import '../../node_modules/reveal.js/css/theme/moon.css';
+
+.title {
+  color: #fff;
+  top: 150px;
+  position: relative;
+}
+
+.reveal:not(.has-vertical-slides) .controls .navigate-left {
+  right: 6.4em;
+  bottom: 3.2em;
+}
+
+.reveal:not(.has-vertical-slides) .controls .navigate-right {
+  right: 0;
+  bottom: 3.2em;
+}

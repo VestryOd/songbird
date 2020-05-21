@@ -1,0 +1,8 @@
+node_modules
+dist
+.idea/
+*.log
+*.lock
+.DS_Store
+.publish
+Thumbs.db
