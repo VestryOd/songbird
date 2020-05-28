@@ -1,0 +1,75 @@
+.reveal pre {
+  -moz-tab-size: 4; /* Firefox */
+  -o-tab-size: 4; /* Opera 10.6-12.1 */
+  tab-size: 4;
+}
+
+.content-area {
+  padding: 20px 0;
+  font-family: 'Roboto', 'Open Sans', Helvetica, sans-serif;
+  background-color:rgba(0, 0, 0, 0.322);
+  border-radius: 15px;
+  box-shadow:  10px 10px 18px -3px rgba(0, 0, 0, 0.75);
+}
+
+.content-area h2,
+.content-area h3,
+.content-area li {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1.5em;
+}
+
+.content-area li {
+  font-family: monospace;
+}
+
+.reveal .slide-title {
+  color: #272822;
+  letter-spacing: 0.5px;
+}
+
+.reveal .shadowed-img {
+  border-radius: 10px;
+  box-shadow:  10px 10px 18px -3px rgba(0, 0, 0, 0.75);
+}
+
+.reveal .margin-vert {
+  margin: 20px 0;
+}
+
+.reveal .slide-img {
+  box-shadow:  10px 10px 18px -3px rgba(0, 0, 0, 0.75);
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.reveal pre {
+  box-shadow:  10px 10px 18px -3px rgba(0, 0, 0, 0.75);
+}
+
+.reveal .shadowed-title {
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.reveal .colored-title {
+  color: #b16527;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.reveal .common-list {
+  margin: 0 auto;
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #272822;
+  box-shadow:  10px 10px 18px -3px rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 30px;
+  font-family: monospace;
+  text-align: left;
+}

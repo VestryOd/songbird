@@ -1,0 +1,494 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+		<!-- fonts -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@100;300;400;500&display=swap"
+			rel="stylesheet">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-background-image="/images/intro.png" data-background-size="cover" data-background-repeat="no-repeat" data-background-transition="zoom">
+					<aside class="notes">
+						Hello everybody. Today I want to tell you about ECMAScript - what it is and how it relates to Javascript.
+					</aside>
+				</section>
+
+				<section data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white" data-background-transition="zoom">
+					<div class="content-area">
+						<h2 class="colored-title slide-title">What will be discussed</h2>
+						<ul class="plan-list">
+							<li>Couple words about history</li>
+							<li>Deep view</li>
+							<li>Deep look into ES11</li>
+							<li>Perspectives</li>
+							<li>Conclusion</li>
+						</ul> 
+					</div>
+					<aside class="notes">
+						My presentation will consist of several parts - I will tell you a few words about the history of the language, dwell in
+						detail on new features, and briefly mention the development prospects.
+					</aside>
+				</section>
+
+				<!-- History og JS sections -->
+				<section data-background-transition="zoom">
+					<section data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+						<h2 class="colored-title slide-title">History of evolution</h2>
+						<img class="shadowed-img" src="/images/evolution.jpg" width="1024" height="auto">
+						<aside class="notes">
+							Let's say a few words about the history of language development.
+						</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/javascript-evolution-history.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+						<h2 class="slide-title margin-vert" data-id="code-title">Old revisions</h2>
+						<pre class="code-area" data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1,2|3|4|5|6">
+							1997 - Born/Javascript becomes ECMAScript
+							1998 - ES2 released
+							1999 - ES3 released
+							.... - ?..
+							2006 - AJAX & jQery Popularisation
+							2009 - ES5 released
+						</code></pre>
+						<aside class="notes">
+							ECMAScript is the official name for the programming language that we all know under the commercial name Javascript. This
+							language appeared in 1997. The first version was extremely scarce and was not memorable. Only since the second version
+							of the language it began to standardize, and since this time versions of the language standard is commonly called
+							ECMAScript.
+							In the third version, the language received the minimum necessary set of functionality to become like a serious
+							programming language. The fourth version has been developing so long that everyone forgot where they started and
+							abandoned it. The widespread development of Ajax technology and library jQuery forced everyone to gather strength and
+							release the fifth version. It was remembered for all by the huge variety of js libraries for any purpose.
+						</aside>
+					</section>
+					<section data-background-image="/images/javascript-evolution-history.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+						<h2 class="slide-title">Ecmascript 2015 (ES6)</h2>
+						<img class="slide-img fragment fade-right" src="/images/list-of-changes.jpg" alt="ecmascript 2015" width="auto" height="350">
+						<img class="slide-img fragment fade-left" src="/images/joy.gif" alt="ecmascript 2015" width="auto" height="350">
+						<aside class="notes">
+							The language has undergone significant changes since the release of the 6th version in 2015. The standard includes new
+							convenient methods for working with arrays and objects, promises, classes, arrow functions, string patterns, and much
+							more. And all developers were overjoyed from this. The most significant were constructor of promises and classes.
+						</aside>
+					</section>
+					<section data-background-image="/images/javascript-evolution-history.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+						<img src="/images/react.gif" alt="react" width="auto" height="270">
+						<img src="/images/angular.gif" alt="angular" width="auto" height="270">
+						<img src="/images/vue.gif" alt="vue" width="auto" height="270">
+						<aside class="notes">
+							It is thanks to the class constructor JS frameworks began to develop so rapidly, the most famous of which are React,
+							Angular and Vue.
+						</aside>
+					</section>
+					<section data-background-image="/images/javascript-evolution-history.png" data-background-size="cover"
+						data-background-opacity="0.6" data-background-color="white">
+						<div class="r-stack">
+							<img class="fragment fade-out shadowed-img" data-fragment-index="0" src="/images/stack.png" alt="full stack">
+							<img class="fragment current-visible shadowed-img" data-fragment-index="0" src="/images/jstips-animation.gif" alt="animated full stack">
+						</div>
+						<aside class="notes">
+							From a certain point in web development, was appeared the concept of “stack of technology”, i.e. a set
+							of technologies that form a platform, at different levels of which only one language is used - Javascript in this case.
+						</aside>
+					</section>
+				</section>
+				
+				<!-- Deep overview -->
+				<section data-background-transition="zoom">
+					<section data-auto-animate data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+							<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 8, 2017</h2>
+							<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|4">
+								Object.values()
+								Object.entries()
+								Object.getOwnPropertyDescriptors(obj)
+								SharedArrayBuffer
+								async/await
+							</code></pre>
+						<aside class="notes">
+							In the ES7 version, which was released in June 2016, only two innovations appeared - the includes () method and the
+							exponentiation operator.
+							The most promising part of ES8 was the introduction of shared memory and atomic operations. This is the main
+							improvement of the Javascript engine, aimed at introducing some kind of multithreading, so that JS developers could
+							write high-performance parallel programs in the future and manage memory independently.
+						</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+							<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+								const wait = (i, ms) => new Promise(resolve => {
+									return setTimeout(() => resolve(i), ms)
+								});
+								
+								const printNumbers = () => new Promise((resolve) => {
+								let pr = Promise.resolve(0);
+								for (let i = 1; i <= 10; i +=1) { pr=pr.then((val)=> {
+									console.log(val);
+									return wait(i, Math.random() * 1000);
+									});
+									}
+									resolve(pr);
+									});
+							</code></pre>
+							<aside class="notes">
+								The most important part of this version is the concept of async functions. 
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+							<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+								const wait = (i, ms) => new Promise(resolve => {
+									return setTimeout(() => resolve(i), ms)
+								});
+								
+								async function printNumbersUsingAsync() {
+									for (let i = 0; i < 10; i++) {
+										await wait(i, Math.random() * 1000);
+										console.log(i);
+									}
+								}
+							</code></pre>
+							<aside class="notes">
+								Async / await constructs allow you to work with asynchronous code as if it were regular, synchronous code.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+							<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 9, 2018</h2>
+							<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|1|2,3">
+									Rest / Spread properties
+									Promise.prototype.finally()
+									Asynchronous iteration
+									Regular Expression Enhancements
+								</code></pre>
+						<aside class="notes">
+							ES9 version was released in 2018. It added support for rest and spread operators for objects. The Promise.finally () method allows you to run
+							any code, regardless of successful or unsuccessful execution of the promise, and asynchronous iteration in the form of a
+							for-await-of construct, which allows us to call asynchronous functions that return a promise or sets of promises in a
+							loop.
+						</aside>
+					</section>
+					<section data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+					data-background-color="white">
+							<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 10, 2019</h2>
+							<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+									Array.flat()
+									Array.flatMap()
+									String.trimStart() & String.trimEnd(
+									Optional catch binding
+									Well-formed JSON.stringify()
+									Symbol.description
+									Object.fromEntries()
+									Function.prototype.toString()
+								</code></pre>
+						<aside class="notes">
+							The ES10 standard introduced new useful methods to working with arrays, and add useful method for working with iterable
+							objects.
+						</aside>
+					</section>
+				</section>
+
+				<!-- deep look into ES11/2020 -->
+				<section data-background-transition="zoom">
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #matchAll</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|5-7|9-11">
+								const str = "abc";
+								const regexp = /[a-c]/g;
+								const iterator = str.matchAll(regexp);
+								
+								for (result of iterator) {
+									console.log(result);
+								}
+
+								// ["a", index: 0, input: "abc", groups: undefined]
+								// ["b", index: 1, input: "abc", groups: undefined]
+								// ["c", index: 2, input: "abc", groups: undefined]
+							</code></pre>
+							<aside class="notes">
+								The latest and fresh at the moment is the ES11 standard. Let's look at the most significant innovations:
+								matchAll is a new method added to the String prototype that is associated with regular expressions. It returns an
+								iterator, which in turn returns all matching groups one after another. Those. the form in which one match came before
+								(for example, index information) now has all the matches, instead of the usual array of results.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #Dynamic import</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|6|7">
+								// utils.js
+								export function add(a, b) {
+									return a + b;
+								}
+
+								(async function () {
+									const module = await import("./utils");
+									const sum = module.add(2, 3);
+									console.log(sum); // 5
+								})();
+							</code></pre>
+							<aside class="notes">
+								At the moment, we can import files as modules using Babel and Webpack. This function will help you get code on demand
+								(better known as code splitting), without the additional cost of webpack or other module packages. We can also load the
+								code in the if-else block.
+								Dynamic import () returns a promise (Promise). Therefore, import can now be assigned to a variable using async / await.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #BigInt</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|5-7|10">
+								let oldMax = Number.MAX_SAFE_INTEGER; // 9007199254740991
+								++oldMax; // 9007199254740992
+								++oldMax; // 9007199254740992 <- the same value 
+								
+								let newMax=9007199254740992n;
+								++newMax; // 9007199254740993n
+								++newMax; // 9007199254740994n
+
+								typeof 10; // "number";
+								typeof 10n; // "bigint";
+							</code></pre>
+							<aside class="notes">
+								This is a new built-in object that allows you to represent integers greater than n to the power of 53 minus 1. To
+								indicate them, you must add the symbol n at the end of the number.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #Promise.allSettled</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|3,4|8|10-12">
+								const promiseArray = [
+									Promise.resolve(200),
+									Promise.reject(""),
+									Promise.reject(new Error("Error")),
+								];
+								
+								Promise.allSettled(promiseArray).then((result) => {
+									console.log("All Promises Settled", result);
+								}); // All Promises Settled
+								// {status: "fulfilled", value: 200},
+								// {status: "rejected", reason: ""},
+								// {status: "rejected", reason: Error}
+							</code></pre>
+							<aside class="notes">
+								This is a new and very useful addition to the Promise.all function. Unlike the old version, which ended in error, if at
+								least one of the promises was rejected, a new version of this function is executed whenever all the promises end, that
+								is, they were completed successfully or failed. It returns an array that contains both the status of the promise and the
+								value (or error).
+								Thus, allSettled never rejects. It is either on hold or successfully completed.
+							</aside>
+					</section>
+					<section data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #globalThis</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+							const globals = getGlobal();
+							
+							// we can use `globalThis`
+							globalThis === window; // true
+						</code></pre>
+						<aside class="notes">
+							ES2020 brings globalThis, which always refers to a global object, no matter where we execute our code, unlike older
+							versions in which it was impossible to access the window object inside Node.
+						</aside>
+					</section>
+					<section data-background-image="/images/es11.jpg" data-background-size="cover" data-background-opacity="0.3"
+						data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #for-in mechanics</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+								let obj = {a:1, b:2, c:3};
+								
+								for (let prop in obj) {
+									console.log("obj." + prop + " = " + obj[prop]);
+								}
+								
+								// "obj.a = 1"
+								// "obj.b = 2"
+								// "obj.c = 3"
+							</code></pre>
+							<aside class="notes">
+								The ECMA specification did not indicate in which order for (x in y) should be executed. Despite the fact that browsers
+								have implemented a consistent order on their own, it is officially standardized in the ES2020
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover"
+						data-background-opacity="0.3" data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #Optional chaining</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|3-9|12">
+								// before
+								const nameLength =
+									(db
+										? (db.user
+											? (db.user.name
+												? db.user.name.length
+												: undefined)
+											: undefined)
+										: undefined);
+								
+								// now
+								const nameLength = db?.user?.name?.length;
+							</code></pre>
+							<aside class="notes">
+								Optional chaining syntax allows you to access deeply nested object properties without worrying if the property exists or
+								not. If it exists, great! If not, undefined will be returned.
+								This not only works on object properties, but also on function calls and arrays.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover"
+						data-background-opacity="0.3" data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #Nullish coalescing</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|4|7,9-12">
+								const initialValue = 0;
+								
+								// old
+								const myVar1 = initialValue || 10; // 10
+								
+								// new
+								const myVar2 = initialValue ?? 10; // 0
+
+								false ?? "truthy value"; // => false
+								undefined ?? "truthy value"; // => "truthy value"
+								null ?? "truthy value"; // => "truthy value"
+								NaN ?? "truthy value"; // => NaN
+							</code></pre>
+							<aside class="notes">
+								In JS, many values are false. For example: blank lines, number 0, undefined, null, false, NaN, etc.
+								However, in many cases we need to check if the variable is null, that is - undefined or null; for example, when a
+								variable can have an empty string or even false.
+								Unlike the logical OR operator, which always returns the true value, while the null operator ?? returns a non-null
+								value.
+							</aside>
+					</section>
+					<section data-auto-animate data-background-image="/images/es11.jpg" data-background-size="cover"
+						data-background-opacity="0.3" data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #Module namespace exports</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim data-line-numbers="|1,2|4">								
+								import * as utils from "./utils.mjs";
+								export { utils };
+
+								export * as utils from "./utils.mjs";
+							</code></pre>
+							<aside class="notes">
+								Previously, in JavaScript modules, it was possible to import the entire contents of a file using a construction with an
+								asterisk, now this feature has also appeared for export.
+							</aside>
+					</section>
+					<section data-background-image="/images/es11.jpg" data-background-size="cover"
+						data-background-opacity="0.3" data-background-color="#ffffff">
+						<h2 class="colored-title margin-vert" data-id="code-title">ECMAScript 11, #import.meta</h2>
+						<pre class="code-area" data-id="code-animation"><code class="javascript hljs" data-trim>
+								console.log(import.meta);
+
+								// { url: "file:///home/user/my-module.js" }
+							</code></pre>
+							<aside class="notes">
+								The import.meta command allows us to get meta-information about the module as an object containing the module URL as a
+								property.
+							</aside>
+					</section>
+				</section>
+
+				<!-- perspectives -->
+				<section data-background-transition="zoom">
+					<section data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+						data-background-color="white">
+						<h2 class="colored-title margin-vert">web-assembly</h2>
+						<div class="r-stack">
+							<img class="fragment fade-out shadowed-img" data-fragment-index="0" src="/images/web-assembly.png" alt="web-assembly">
+							<img class="fragment current-visible shadowed-img" data-fragment-index="0" src="/images/websight.gif" alt="wasm" width="900" height="auto">
+							<img class="fragment shadowed-img" src="/images/figma.gif" alt="figma">
+						</div>
+						<aside class="notes">
+							Today, the language is developing comprehensively and fairly quickly. One of the most promising areas can be considered
+							WebAssembly (or Wasm). This is a binary format run in a browser, a virtual machine, and the result of compilation from a
+							high-level language. And this means that such a runable block of code has three distinct features - cross-platform,
+							compact and speed.
+							Although the development of this technology began only in 2015, now there are popular ready-made solutions. For example,
+							the popular Figma program for sketching and modeling UI / UX interfaces was developed using WASM. In fact, the Figma
+							editor is written in C ++ and cross-compiled in JavaScript using the emscripten cross-compiler. The emscripten compiler
+							targets asm.js, a subset of JavaScript supported in all modern browsers that allows us to get predictable, compact
+							machine code from the JavaScript JIT compiler.
+						</aside>
+					</section>
+					<section data-background-image="/images/m_learning.png" data-background-size="cover" data-background-opacity="0.6"
+						data-background-color="white">
+						<h2 class="colored-title margin-vert">neural networks</h2>
+							<img class="shadowed-img" src="/images/neural-net.gif"
+								alt="neural-net">
+						<aside class="notes">
+							In addition, since WASM is primarily aimed at processing voluminous computational tasks, with its help it is possible to
+							build neural networks, including Javascript, for example, using the ready-made Brain.js library.
+						</aside>
+					</section>
+				</section>
+
+				<!-- conclusion -->
+				<section data-background-transition="zoom">
+					<section data-background-image="/images/js_bg.png" data-background-size="cover" data-background-opacity="0.6"
+						data-background-color="white">
+						<h2 class="colored-title margin-vert">Conclusion</h2>
+						<div class="r-stack">
+							<img class="fragment fade-out shadowed-img" data-fragment-index="0" src="/images/perspectives.png"
+								alt="web-assembly">
+							<img class="fragment current-visible shadowed-img" data-fragment-index="0" src="/images/stats.gif" alt="wasm">
+							<img class="fragment shadowed-img" src="/images/cat-dev.gif" alt="figma">
+						</div>
+						<aside class="notes">
+							And Couple words in conclusion
+							Simple scripting syntax, having gone a long difficult way, has become a professional tool for Web developers. Thanks to
+							close interaction with a large number of narrowly targeted tools, a modern developer can deploy the environment for
+							almost any task. Moreover, whole “Web Technology Stacks” appeared written in one language.
+							Another advantage of using ECMAScript is its sustainability and pace of development - starting in 2015, regular updates
+							to the standard are annually released, with the addition of new functionality and an extension of the old. And all these
+							innovations are usually supported by all modern browsers.
+							All this has led to the fact that, according to recent polls, Javascript is firmly in first place in the world in the
+							ranking of programming languages, and job opportunities for developers on Javascript are among the most popular on the
+							market.
+							That's all, thank you all for your attention. Bye.
+						</aside>
+					</section>
+				</section>
+			</div>
+		</div>
+		
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				controls: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
