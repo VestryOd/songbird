@@ -1,0 +1,14 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/mixins';
+@import '../../scss-base/placeholders';
+@import '../../scss-base/base';
+@import '../../../node_modules/semantic-ui-css/semantic.min.css';
+
+.weather-container {
+  max-width: $desktop-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+}

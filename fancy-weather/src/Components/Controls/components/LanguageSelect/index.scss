@@ -1,0 +1,18 @@
+@import '../../../../scss-base/constants';
+@import '../../../../scss-base/placeholders';
+@import '../../../../scss-base/base';
+
+.language-select {
+  height: 36px;
+  color: $color-light;
+  & option {
+    box-sizing: border-box;
+    background-color: $color-light-gray;
+    @extend %transition;
+    &:hover {
+      outline: none;
+      border: 1px solid $color-light;
+      background-color: $color-secondary;
+    }
+  }
+}

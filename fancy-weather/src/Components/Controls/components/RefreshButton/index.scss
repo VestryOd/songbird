@@ -1,0 +1,11 @@
+@import '../../../../scss-base/base';
+@import '../../../../scss-base/constants';
+@import '../../../../scss-base/placeholders';
+
+.refresh {
+  height: 36px;
+  color: $color-light;
+  @extend %background-image;
+  background-size: 15px;
+  background-image: url('./refresh_icon.svg');
+}

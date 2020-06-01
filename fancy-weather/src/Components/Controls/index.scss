@@ -1,0 +1,9 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/placeholders';
+
+.controls-container {
+  display: flex;
+  & > * {
+    font-family: 'Open-sans', 'Roboto', sans-serif;
+  }
+}
