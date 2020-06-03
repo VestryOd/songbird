@@ -1,0 +1,129 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/placeholders';
+@import '../../scss-base/mixins';
+
+.today-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 70%;
+  width: 100%;
+  & .today-forecast {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: $color-medium-gray-opacity;
+    @extend %box-shadow-bold;
+  }
+  & > * {
+    width: 100%;
+  }
+  @include media-mobile {
+    flex-direction: column;
+  }
+}
+
+.today-info--wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+  & > * {
+    margin: 0;
+    padding: 0 10px;
+    color: $color-light;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    font-weight: 300;
+  }
+}
+
+.place-datetime {
+  margin: 0;
+  padding: 10px 10px 20px 10px;
+  border-bottom: 1px solid $color-light;
+}
+
+.today-weather-wrapper {
+  display: flex;
+  justify-content: space-between;
+  & > * {
+    color: $color-light;
+  }
+}
+
+.today-temperature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+}
+
+.today-info {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & .today-image--wrapper {
+    width: 300px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.today-details {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  & .info-details-text {
+    letter-spacing: 1.5px;
+    border-right: 1px solid $color-light;
+    @include media-mobile {
+      border-right: none;
+    }
+    &:last-of-type {
+      border-right: none;
+    }
+  }
+  @include media-mobile {
+    flex-direction: column;
+  }
+}
+
+.info-details-text {
+  margin: 0;
+  padding: 0 30px;
+  box-sizing: border-box;
+  color: $color-light;
+  font-size: 1.4em;
+  font-family: 'Open Sans', 'Roboto', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  @extend %text_shadow;
+  &:first-of-type {
+    padding-top: 0;
+  }
+}
+
+.weather-temperature {
+  font-size: 10em;
+  line-height: 160px;
+  font-weight: 700;
+  @extend %text_shadow;
+}
+
+.description {
+  width: 100%;
+  text-align: center;
+  & p {
+    padding: 0 0 20px 0;
+    font-size: 2.4em;
+    font-weight: 300;
+    text-transform: capitalize;
+  }
+}

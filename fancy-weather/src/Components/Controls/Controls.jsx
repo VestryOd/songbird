@@ -11,11 +11,11 @@ const countries = [
   { text: 'BY', value: 'by' },
 ];
 
-export default function Controls() {
+export default function Controls(props) {
   return (
     <div className='controls-container'>
       <RefreshButton />
-      <LanguageSelect countries={countries} language ={'ru'}/>
+      <LanguageSelect countries={countries} language ={props.lang}/>
       <TempToggle />
     </div>
   );
