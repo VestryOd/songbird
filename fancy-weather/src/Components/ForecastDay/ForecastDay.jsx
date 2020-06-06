@@ -1,16 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { checkTemperature } from '../../common/services';
 import icons from '../../common/weather-icons';
 import { weekday } from '../../common/vocabulary';
 import moment from 'moment';
 import './index.scss';
 
-export default function ForecastDay(props) {
-  const { data } = props;
+const ForecastDay = (props) => {
+  const { data, lang } = props;
   const day = data;
   const temp = checkTemperature(day.temp);
   const icon = icons[day.weather.icon];
-  let lang = localStorage.getItem('fancyWeatherLang');
   const dayNumber = moment(day.valid_date).weekday();
 
   return (
@@ -27,3 +27,15 @@ export default function ForecastDay(props) {
     </div>
   )
 }
+
+ForecastDay.propTypes = {
+  lang: PropTypes.string,
+  forecast: PropTypes.object.isRequired,
+}
+
+ForecastDay.defaultProps = {
+  lang: 'en',
+  forecast: {},
+}
+
+export default ForecastDay;

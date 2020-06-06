@@ -1,0 +1,17 @@
+.wallpaper-enter {
+  opacity: 0;
+}
+
+.wallpaper-enter .wallpaper-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.wallpaper-exit {
+  opacity: 1;
+}
+
+.wallpaper-exit .wallpaper-exit-active {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}

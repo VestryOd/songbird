@@ -1,17 +1,17 @@
 const weekday = {
   ru: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  be: ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацьвер', 'Пятніца', 'Субота'],
+  by: ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацьвер', 'Пятніца', 'Субота'],
 };
 
 const months = {
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-  be: ['Студзень', 'Люты', 'Сакавiк', 'Красавiк', 'Май', 'Червень', 'Лiпень', 'Жнiвень', 'Верасень', 'Кастрычнiк', 'Лiстапад', 'Снежань'],
+  by: ['Студзень', 'Люты', 'Сакавiк', 'Красавiк', 'Май', 'Червень', 'Лiпень', 'Жнiвень', 'Верасень', 'Кастрычнiк', 'Лiстапад', 'Снежань'],
 };
 
 const weatherData = {
-  be: {
+  by: {
     200: 'навальніца з невялікім дажджом',
     201: 'навальніца з дажджом',
     202: 'навальніца з моцным дажджом',
@@ -185,24 +185,24 @@ const weatherData = {
 const placeholder = {
   en: 'City',
   ru: 'Город',
-  be: 'Горад',
+  by: 'Горад',
 };
 
 const restText = {
   feels: {
     en: 'feels like',
     ru: 'ощущается как',
-    be: 'адчуваецца як',
+    by: 'адчуваецца як',
   },
   wind: {
     ru: 'ветер',
-    be: 'вецер',
+    by: 'вецер',
     en: 'wind',
   },
   humidity: {
     en: 'humidity',
     ru: 'влажность',
-    be: 'вільготнасць',
+    by: 'вільготнасць',
   },
 };
 
@@ -210,27 +210,33 @@ const location = {
   latitude: {
     ru: 'широта',
     en: 'latitude',
-    be: 'шырата',
+    by: 'шырата',
   },
   longitude: {
     ru: 'долгота',
     en: 'longitude',
-    be: 'даўгата',
+    by: 'даўгата',
   },
 };
 
 const search = {
   ru: 'искать',
   en: 'search',
-  be: 'шукаць',
+  by: 'шукаць',
 }
 
 const noResults = {
-  ru: 'результатов не найдено',
-  en: 'no results found',
-  be: 'нічога не знойдзена',
+  ru: 'Результатов не найдено',
+  en: 'No results found',
+  by: 'Нічога не знойдзена',
+}
+
+const defaultError = {
+  ru: 'Что-то пошло не так, пожалуйста, попробуйте еще раз.',
+  en: 'Something went wrong, please try again.',
+  by: 'Нешта пайшло не так, калі ласка, паспрабуйце яшчэ раз.',
 }
 
 export {
-  weekday, months, weatherData, placeholder, restText, location, search, noResults,
+  weekday, months, weatherData, placeholder, restText, location, search, noResults, defaultError,
 };

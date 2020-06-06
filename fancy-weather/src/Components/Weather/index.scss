@@ -5,8 +5,9 @@
 @import '../../../node_modules/semantic-ui-css/semantic.min.css';
 
 .weather-container {
+  min-width: 320px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .weather-wrapper {
@@ -29,13 +30,3 @@
     flex-direction: column;
   }
 }
-
-// .grid-wrapper .today-wrapper {
-//   max-width: 60%;
-//   width: 100%;
-// }
-
-// .grid-wrapper .map-wrapper {
-//   max-width: 30%;
-//   width: 100%;
-// }

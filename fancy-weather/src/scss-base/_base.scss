@@ -49,10 +49,6 @@
   background-color: $color-light;
   @extend %button-box-shadow;
   @extend %transition;
-  // &:hover {
-  //   border-color: $color-primary;
-  //   @extend %button-box-shadow-hover;
-  // }
 }
 
 .icon-ui {
