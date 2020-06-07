@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 70%;
+  max-width: 65%;
   width: 100%;
   & .today-forecast {
     margin-bottom: 20px;
@@ -17,6 +17,9 @@
   & > * {
     width: 100%;
   }
+  @include media-tablet {
+    max-width: none;
+  }
   @include media-mobile {
     flex-direction: column;
   }
@@ -26,16 +29,25 @@
   display: flex;
   flex-direction: column;
   padding: 20px 20px 0 20px;
+  & .place-title {
+    font-size: 2.4em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
   & > * {
     margin: 0;
     padding: 0 10px;
     color: $color-light;
     font-family: 'Open Sans', 'Roboto', sans-serif;
     font-weight: 300;
+    @include media-tablet {
+      text-align: center;
+    }
   }
 }
 
 .place-datetime {
+  word-spacing: 5px;
   margin: 0;
   padding: 10px 10px 20px 10px;
   border-bottom: 1px solid $color-light;
@@ -47,6 +59,9 @@
   & > * {
     color: $color-light;
   }
+  @include media-mobile {
+    flex-direction: column;
+  }
 }
 
 .today-temperature {
@@ -55,6 +70,9 @@
   align-items: center;
   flex-direction: column;
   width: 60%;
+  @include media-mobile {
+    width: 100%;
+  }
 }
 
 .today-info {
@@ -74,6 +92,9 @@
       height: auto;
     }
   }
+  @include media-mobile {
+    width: 100%;
+  }
 }
 
 .today-details {
@@ -85,6 +106,8 @@
     border-right: 1px solid $color-light;
     @include media-mobile {
       border-right: none;
+      padding: 0 0 10px 0;
+      text-align: center;
     }
     &:last-of-type {
       border-right: none;
@@ -108,6 +131,9 @@
   &:first-of-type {
     padding-top: 0;
   }
+  @include media-mobile {
+    padding: 0;
+  }
 }
 
 .weather-temperature {
@@ -115,6 +141,9 @@
   line-height: 160px;
   font-weight: 700;
   @extend %text_shadow;
+  @include media-mobile {
+    font-size: 9em;
+  }
 }
 
 .description {

@@ -15,3 +15,21 @@
   opacity: 0;
   transition: opacity 0.5s ease-in;
 }
+
+.modal-enter {
+  bottom: -100px;
+}
+
+.modal-enter .modal-enter-active {
+  bottom: 150px;
+  transition: bottom 0.5s ease-in;
+}
+
+.modal-exit {
+  bottom: 150px;
+}
+
+.modal-exit .modal-exit-active {
+  bottom: -100px;
+  transition: bottom 0.5s ease-in;
+}

@@ -1,9 +1,15 @@
 @import '../../scss-base/constants';
 @import '../../scss-base/placeholders';
+@import '../../scss-base/mixins';
 
 .controls-container {
   display: flex;
   & > * {
     font-family: 'Open-sans', 'Roboto', sans-serif;
+  }
+  @include media-mobile {
+    max-width: none;
+    width: 100%;
+    justify-content: center;
   }
 }

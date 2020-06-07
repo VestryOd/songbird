@@ -1,7 +1,16 @@
+@import '../../scss-base/mixins';
+
 .header-wrapper {
-  width: 100%;
-  height: 70px;
-  padding: 30px 0;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  padding: 30px 15px;
+  @include media-mobile {
+    flex-direction: column;
+    & > * {
+      margin: 10px 0;
+      align-items: center;
+    }
+  }
 }

@@ -34,7 +34,7 @@ class Today extends Component {
 
   componentDidMount() {
     const { geo } = this.props;
-    const timezone = geo[0].annotations.timezone.name;
+    const timezone = geo.annotations.timezone.name;
     this.setState({
       timezone: timezone,
     });
@@ -78,14 +78,14 @@ class Today extends Component {
   render() {
     const { weather, lang, geo } = this.props;
     const { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecast, code } = this.prepareWeather(weather);
-    const result = geo[0];
+    const { formatted } = geo;
     
     const { clock } = this.state;
     return (
       <div className="today-wrapper">
         <div className="today-forecast">
           <div className="today-info--wrapper">
-            <h1 className="place-title">{result.formatted}</h1>
+            <h1 className="place-title">{formatted}</h1>
             <h3 className="place-datetime">{clock}</h3>
           </div>
           <div className="today-weather-wrapper">
@@ -118,12 +118,12 @@ class Today extends Component {
 Today.propTypes = {
   lang: PropTypes.string,
   weather: PropTypes.array.isRequired,
-  geo: PropTypes.array.isRequired,
+  geo: PropTypes.object.isRequired,
 }
 
 Today.defaultProps = {
   lang: 'en',
   weather: [],
-  geo: [],
+  geo: {},
 }
 export default Today;

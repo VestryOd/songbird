@@ -10,6 +10,10 @@
     color: $color-light;
     @extend %text_shadow;
   }
+  @include media-mobile {
+    max-width: none;
+    width: 100%;
+  }
 }
 
 .forecast-day {

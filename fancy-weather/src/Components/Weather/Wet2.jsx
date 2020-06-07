@@ -3,12 +3,14 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Header from '../Header/Header';
 import Today from '../Today/Today';
 import Modal from '../Modal/Modal';
+import Map from '../Map/Map';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import defaultImages from './defaultImages';
 import './index.scss';
 import './animation.scss';
 import weatherResponse from './responce.json';
 import geoResponse from './geo-response.json';
+import generate from 'project-name-generator';
 
 import { initialCenterMap } from '../../common/constants';
 // import {
@@ -83,11 +85,13 @@ export default class Weather extends Component {
 
   render() {
     const { isLoading, lang, units, error, weather, geo } = this.state;
+    const { geometry } = geoResponse.results[0];
+    console.log(geometry);
     return (
-      <div>
+      <div className="wrapper">
         <div className="weather-container">
           <div className="weather-wrapper">
-            <Header 
+            <Header
               lang={lang}
               units={units}
               isLoading={isLoading}
@@ -97,22 +101,28 @@ export default class Weather extends Component {
               onAddressChange={this.handleAddressChange}
             />
             <div className="grid-wrapper">
-              <Today weather={weatherResponse.data} geo={geoResponse.results} lang={lang}/>
+              <Today
+                weather={weatherResponse.data}
+                geo={geoResponse.results[0]}
+                lang={lang}
+              />
+              <Map lang={lang} coordinates={geometry} />
             </div>
           </div>
         </div>
-          {error && (
-            <Modal classes={'error-modal'}>
+        {error && (
+            <Modal classes={"error-modal"}>
               <ErrorMessage error={error} />
             </Modal>
-          )}
-        <TransitionGroup>
-          {!isLoading && (
-            <CSSTransition classNames="wallpaper" timeout={500}>
-              <img className="background" src={defaultImages.spring} alt={''}/>
-            </CSSTransition>
-          )}
-        </TransitionGroup>
+        )}
+        {!isLoading && (
+            <img
+              className="background"
+              src={defaultImages.spring}
+              alt={generate({ words: 2 }).spaced}
+              key={generate({ words: 2, number: true }).dashed}
+            />
+        )}
       </div>
     );
   }

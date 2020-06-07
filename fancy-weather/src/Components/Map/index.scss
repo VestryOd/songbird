@@ -1,0 +1,44 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/placeholders';
+@import '../../scss-base/mixins';
+
+.map-section {
+  max-width: 35%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include media-tablet {
+    max-width: none;
+  }
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: $color-medium-gray-opacity;
+  @extend %box-shadow-bold;
+  & > * {
+    width: 100%;
+  }
+}
+
+.map-container {
+  margin: 70px auto 30px auto;
+  width: 320px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url('./mask.svg');
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center right;
+  -webkit-mask-clip: padding-box;
+  @extend %box-shadow-bold;
+  @include media-mobilesmall {
+    width: 300px;
+    height: 300px;
+  }
+}
