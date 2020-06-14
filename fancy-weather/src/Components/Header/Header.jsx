@@ -4,7 +4,9 @@ import Controls from '../Controls';
 import Search from '../Search';
 import style from './Header.module.scss';
 
-const Header = ({ lang, onLangChange, onRefresh, onUnitsChange, isLoading, onAddressChange, units }) => {
+const Header = ({
+  lang, onLangChange, onRefresh, onUnitsChange, isLoading, onAddressChange, units,
+}) => {
   return (
     <div className={style['header-wrapper']}>
       <Controls
@@ -22,7 +24,7 @@ const Header = ({ lang, onLangChange, onRefresh, onUnitsChange, isLoading, onAdd
       />
     </div>
   );
-}
+};
 
 Header.propTypes = {
   lang: PropTypes.string,

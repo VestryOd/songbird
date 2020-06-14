@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { checkTemperature } from '../../common/services';
 import { defaultState } from '../../common/constants';
 import icons from '../../common/weather-icons';
 import { weekday } from '../../common/vocabulary';
-import moment from 'moment';
 import style from './ForecastDay.module.scss';
 
 const ForecastDay = ({ data, lang, units }) => {
@@ -24,19 +24,19 @@ const ForecastDay = ({ data, lang, units }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ForecastDay.propTypes = {
   lang: PropTypes.string,
   units: PropTypes.string.isRequired,
   forecast: PropTypes.object.isRequired,
-}
+};
 
 ForecastDay.defaultProps = {
   lang: defaultState.lang,
   units: defaultState.units,
   forecast: {},
-}
+};
 
 export default ForecastDay;

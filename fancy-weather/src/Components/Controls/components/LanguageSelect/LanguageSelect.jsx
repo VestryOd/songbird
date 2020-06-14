@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defaultState, Lang } from '../../../../common/constants';
 import classNames from 'classnames';
+import { defaultState, Lang } from '../../../../common/constants';
 
 import style from './LanguageSelect.module.scss';
 
 const LanguageSelect = ({ lang, onLangChange }) => {
-
-  const handleLangChange = ({ target: { value } }) =>
-    onLangChange(value.toLowerCase());
+  const handleLangChange = ({ target: { value } }) => onLangChange(value.toLowerCase());
 
   return (
     <select

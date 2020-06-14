@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { MAPBOX_API_KEY, initialCenterMap, defaultState } from '../../common/constants';
-import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
+import PropTypes from 'prop-types';
+import { MAPBOX_API_KEY, initialCenterMap, defaultState } from '../../common/constants';
 import Coordinates from '../Coordinates';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -16,14 +16,14 @@ class Map extends Component {
       mapContainer: null,
       map: null,
       marker: null,
-    }
+    };
   }
 
   componentDidMount() {
     const { lng, lat } = this.props?.mapCoordinates;
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: 11,
       essential: true,

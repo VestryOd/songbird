@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import ErrorBoundary from './Components/ErrorBoundary';
 import defaultBackgraunds from './common/defaultBackgraunds';
 import Loader from './Components/Loader';
@@ -8,7 +9,6 @@ import Map from './Components/Map';
 import Modal from './Components/Modal';
 import ErrorModal from './Components/ErrorModal';
 import style from './App.module.scss';
-import classNames from 'classnames';
 
 import { initialCenterMap, defaultState } from './common/constants';
 
@@ -30,23 +30,19 @@ export default class App extends Component {
   componentDidMount() {
     this.fetchAll();
     if (!localStorage.fancyWeatherLang) {
-      localStorage.setItem("fancyWeatherLang", "en");
+      localStorage.setItem('fancyWeatherLang', 'en');
     } else {
       const lang = localStorage.getItem('fancyWeatherLang');
-      this.setState({
-        lang: lang,
-      });
+      this.setState({ lang });
     }
 
     if (!localStorage.fancyWeatherUnits) {
       localStorage.setItem('fancyWeatherUnits', 'metric');
     } else {
       const units = localStorage.getItem('fancyWeatherUnits');
-      this.setState({
-        units: units,
-      });
+      this.setState({ units });
     }
-  };
+  }
 
   componentDidUpdate(prevState) {
     const { lang, units } = this.state;
@@ -58,14 +54,13 @@ export default class App extends Component {
     }
   }
 
-  handleUnitsChange = units => this.setState({ units }, () => this.fetchAll());
+  handleUnitsChange = (units) => this.setState({ units }, () => this.fetchAll());
 
-  handleLanguageChange = lang => this.setState({ lang }, () => this.fetchAll());
+  handleLanguageChange = (lang) => this.setState({ lang }, () => this.fetchAll());
 
   handleAddressChange = (place) => this.setState({ place }, () => {
-    const { place } = this.state
     if (place) {
-      this.fetchAll(place)
+      this.fetchAll(place);
     }
   });
 
@@ -86,7 +81,7 @@ export default class App extends Component {
         isShowError: false,
       });
     }, 4000);
-    console.error(this.state.error)
+    console.error(this.state.error);
   }
 
   fetchAll = async (place) => {
@@ -98,7 +93,7 @@ export default class App extends Component {
       const getWeather = place
         ? getWeatherByAddress(place, { lang, units })
         : getWeatherByCoords(gottenLocation, { lang, units });
-      const geoPlace = place ? place : gottenLocation;
+      const geoPlace = place || gottenLocation;
       const [weather, background, geo] = await Promise.allSettled([
         getWeather,
         getBackgroundUrl(),
@@ -109,17 +104,6 @@ export default class App extends Component {
         this.handleError();
       } else {
         const info = prepareInfo({ background, weather, geo });
-        // const { backgroundUrl, forecast, timezone, city, country, currentLocation, mapCoordinates, mapInfo } = info;
-        // this.setState({
-        //   backgroundUrl: backgroundUrl,
-        //   forecast: forecast,
-        //   timezone: timezone,
-        //   city: city,
-        //   country: country,
-        //   currentLocation: currentLocation,
-        //   mapCoordinates: mapCoordinates,
-        //   mapInfo: mapInfo,
-        // });
         this.setState({ ...info });
       }
     } catch (error) {
@@ -128,14 +112,14 @@ export default class App extends Component {
       setTimeout(() => {
         this.setState({
           isLoading: false,
-          isFirstLoad: false
+          isFirstLoad: false,
         });
       }, 300);
     }
   };
 
   render() {
-    const { 
+    const {
       isLoading,
       city,
       country,
@@ -154,14 +138,13 @@ export default class App extends Component {
     if (isLoading && isFirstLoad) {
       return (
         <Loader />
-      )
+      );
     }
     return (
       <ErrorBoundary>
         <div className={style.wrapper}>
           <div className={style['weather-container']}>
             <div className={style['weather-wrapper']}>
-              {/* <TransitionGroup> */}
                 {isLoading && (
                   <Loader />
                 )}
@@ -196,11 +179,14 @@ export default class App extends Component {
             style={{ backgroundImage: `url(${backgroundUrl || defaultBackgraunds[getSeason().toLowerCase()]})` }}
           />
           <Modal>
-            <ErrorModal lang={lang} isShowError={isShowError} message={error ? error.message : errorMessage}/>
+            <ErrorModal
+              lang={lang}
+              isShowError={isShowError}
+              message={error?.message || errorMessage}
+            />
           </Modal>
         </div>
       </ErrorBoundary>
     );
   }
 }
-

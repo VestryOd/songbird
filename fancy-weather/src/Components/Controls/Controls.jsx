@@ -7,7 +7,9 @@ import { defaultState } from '../../common/constants';
 
 import style from './Controls.module.scss';
 
-const Controls = ({ lang, onLangChange, onRefresh, onUnitsChange, isLoading, units }) => {
+const Controls = ({
+  lang, onLangChange, onRefresh, onUnitsChange, isLoading, units,
+}) => {
   return (
     <div className={style['controls-container']}>
       <RefreshButton onRefresh={onRefresh} isLoading={isLoading} />
@@ -15,7 +17,7 @@ const Controls = ({ lang, onLangChange, onRefresh, onUnitsChange, isLoading, uni
       <TempToggle onUnitsChange={onUnitsChange} units={units} />
     </div>
   );
-}
+};
 
 Controls.propTypes = {
   lang: PropTypes.string,

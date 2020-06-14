@@ -11,19 +11,19 @@ const Forecast = ({ forecast, lang, units }) => {
         forecast.map((el, i) => <ForecastDay key={i} data={el} lang={lang} units={units} />)
       }
     </div>
-  )
-}
+  );
+};
 
 Forecast.propTypes = {
   lang: PropTypes.string,
   units: PropTypes.string.isRequired,
   forecast: PropTypes.array.isRequired,
-}
+};
 
 Forecast.defaultProps = {
   lang: defaultState.lang,
   units: defaultState.units,
   forecast: [],
-}
+};
 
 export default Forecast;

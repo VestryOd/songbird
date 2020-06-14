@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { defaultState } from '../../common/constants';
 import { search, placeholder } from '../../common/vocabulary';
-import classNames from 'classnames';
 
 import style from './Search.module.scss';
 
@@ -13,8 +13,8 @@ class Search extends Component {
 
   handleReset =() => {
     this.setState({
-      text: ''
-    })
+      text: '',
+    });
   }
 
   handleSubmit = (e) => {
@@ -27,7 +27,7 @@ class Search extends Component {
   handleInputChange = ({ target: { value } }) => {
     this.setState({
       text: value,
-    })
+    });
   }
 
   render() {
@@ -85,12 +85,12 @@ Search.propTypes = {
   lang: PropTypes.string,
   isLoading: PropTypes.bool,
   onAddressChange: PropTypes.func.isRequired,
-}
+};
 
 Search.defaultProps = {
   lang: defaultState.lang,
   isLoading: defaultState.isLoading,
   onAddressChange: () => { },
-}
+};
 
 export default Search;

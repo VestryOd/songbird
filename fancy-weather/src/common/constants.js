@@ -7,12 +7,9 @@ export const unsplashUrl = `https://api.unsplash.com/photos/random?orientation=l
 
 
 export const weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?&key=${API_KEY}`;
-// export const weatherPlaceUrl = `${weatherBaseUrl}?city={city}&units={units}&lang={lang}&key=${API_KEY}`;
-// export const weatherCoordsUrl = `${weatherBaseUrl}?lat={lat}&lon={lon}&lang={lang}&key=${API_KEY}`;
 
 export const initialCenterMap = { lat: 46.4016958, lng: 30.713786799999994 };
 export const geocodingUrl = `https://api.opencagedata.com/geocode/v1/json?&key=${GEO_API_KEY}&pretty=1`;
-// export const geocodingPlaceUrl = `https://api.opencagedata.com/geocode/v1/json?q={place}&key=${GEO_API_KEY}&language={lang}&pretty=1`
 
 export const Units = {
   metric: 'metric',

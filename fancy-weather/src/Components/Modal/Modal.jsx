@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 export default class Modal extends Component {
-
   el = document.createElement('div');
 
   componentDidMount() {
@@ -12,7 +11,8 @@ export default class Modal extends Component {
   componentWillUnmount() {
     document.body.removeChild(this.el);
   }
+
   render() {
-    return ReactDOM.createPortal(this.props.children, this.el)
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }

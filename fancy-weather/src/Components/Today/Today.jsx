@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import classNames from 'classnames';
 import Forecast from '../Forecast';
 import { checkTemperature } from '../../common/services';
 import { weatherData, restText } from '../../common/vocabulary';
 import { defaultState } from '../../common/constants';
-import moment from 'moment';
 import style from './Today.module.scss';
-import classNames from 'classnames';
 import icons from '../../common/weather-icons';
 
 class Today extends Component {
@@ -20,11 +20,10 @@ class Today extends Component {
       const { timerId } = this.state;
       if (timerId) {
         clearInterval(timerId);
-        this.setState({ timerId: null })
+        this.setState({ timerId: null });
       }
       this.refreshTimerInterval();
     }
-
   }
 
   componentDidMount() {
@@ -35,12 +34,8 @@ class Today extends Component {
     const { timerId } = this.state;
     if (!timerId) {
       this.setState({
-        timerId: setInterval(() => this.handleTick(), 1000)
-      })
-      // this.timerId = setInterval(() => {
-      //   this.handleTick();
-      // }, 1000);
-      // this.saveClockId(timerId);
+        timerId: setInterval(() => this.handleTick(), 1000),
+      });
     }
   }
 
@@ -48,11 +43,11 @@ class Today extends Component {
     const { timezone } = this.props;
     // console.log(this.state);
     const date = new Date(
-      new Date().toLocaleString("en-US", { timeZone: timezone })
+      new Date().toLocaleString('en-US', { timeZone: timezone }),
     );
     this.setState({
-      clock: moment(date).format("ddd D MMMM HH:mm:ss")
-    })
+      clock: moment(date).format('ddd D MMMM HH:mm:ss'),
+    });
   }
 
   prepareWeather = (forecast, units) => {
@@ -64,12 +59,18 @@ class Today extends Component {
     const feelsTemp = checkTemperature(((today?.app_min_temp + today?.app_max_temp) / 2), units);
     const forecastTreeDays = [forecast[1], forecast[2], forecast[3]];
     const { code } = today?.weather;
-    return { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code}
+    return {
+      todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code,
+    };
   }
-  
+
   render() {
-    const { forecast, lang, city, country, units } = this.props;
-    const { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code } = this.prepareWeather(forecast, units);
+    const {
+      forecast, lang, city, country, units,
+    } = this.props;
+    const {
+      todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code,
+    } = this.prepareWeather(forecast, units);
 
     const { clock } = this.state;
     return (
@@ -98,9 +99,9 @@ class Today extends Component {
           </div>
 
           <div className={style['today-details']}>
-            <p className={style['info-details-text']}>{`${restText["feels"][lang]}: ${feelsTemp}`}</p>
-            <p className={style['info-details-text']}>{`${restText["wind"][lang]}: ${wind} m/s`}</p>
-            <p className={style['info-details-text']}>{`${restText["humidity"][lang]}: ${humidity}%`}</p>
+            <p className={style['info-details-text']}>{`${restText['feels'][lang]}: ${feelsTemp}`}</p>
+            <p className={style['info-details-text']}>{`${restText['wind'][lang]}: ${wind} m/s`}</p>
+            <p className={style['info-details-text']}>{`${restText['humidity'][lang]}: ${humidity}%`}</p>
           </div>
         </div>
 
@@ -117,7 +118,7 @@ Today.propTypes = {
   country: PropTypes.string.isRequired,
   units: PropTypes.string.isRequired,
   forecast: PropTypes.array.isRequired,
-}
+};
 
 Today.defaultProps = {
   lang: defaultState.lang,
@@ -126,5 +127,6 @@ Today.defaultProps = {
   country: defaultState.country,
   units: defaultState.units,
   forecast: [],
-}
+};
+
 export default Today;

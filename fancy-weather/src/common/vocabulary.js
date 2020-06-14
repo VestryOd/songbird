@@ -244,5 +244,5 @@ const fatalError = {
 };
 
 export {
-  weekday, months, weatherData, placeholder, restText, location, search, noResults, defaultError, fatalError
+  weekday, months, weatherData, placeholder, restText, location, search, noResults, defaultError, fatalError,
 };
