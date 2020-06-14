@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@mapbox/mapbox-gl-language": "^0.10.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
-    "faker": "^4.1.0",
+    "classnames": "^2.2.6",
     "mapbox-gl": "^1.10.1",
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
@@ -16,11 +15,9 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-mapbox-gl": "^4.8.6",
+    "react-epic-spinners": "^0.4.1",
     "react-scripts": "3.4.1",
-    "react-transition-group": "^1.2.1",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
+    "react-transition-group": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

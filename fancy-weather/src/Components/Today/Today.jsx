@@ -1,129 +1,130 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Forecast from '../Forecast/Forecast';
+import Forecast from '../Forecast';
 import { checkTemperature } from '../../common/services';
 import { weatherData, restText } from '../../common/vocabulary';
+import { defaultState } from '../../common/constants';
 import moment from 'moment';
-import './index.scss';
+import style from './Today.module.scss';
+import classNames from 'classnames';
 import icons from '../../common/weather-icons';
 
 class Today extends Component {
   state ={
     clock: null,
     timerId: null,
-    timezone: null,
   }
-
-  // componentWillMount() {
-  //   const { geo } = this.props;
-  //   const timezone = geo[0].annotations.timezone.name;
-  //   this.setState({
-  //     timezone: timezone
-  //   })
-  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       const { timerId } = this.state;
       if (timerId) {
         clearInterval(timerId);
+        this.setState({ timerId: null })
       }
+      this.refreshTimerInterval();
     }
 
   }
 
   componentDidMount() {
-    const { geo } = this.props;
-    const timezone = geo.annotations.timezone.name;
-    this.setState({
-      timezone: timezone,
-    });
+    this.refreshTimerInterval();
+  }
+
+  refreshTimerInterval = () => {
     const { timerId } = this.state;
     if (!timerId) {
-      const timerId = setInterval(() => {
-        this.handleTick();
-      }, 1000);
-      this.saveClockId(timerId);
+      this.setState({
+        timerId: setInterval(() => this.handleTick(), 1000)
+      })
+      // this.timerId = setInterval(() => {
+      //   this.handleTick();
+      // }, 1000);
+      // this.saveClockId(timerId);
     }
   }
 
   handleTick = () => {
-    const { timezone } = this.state;
+    const { timezone } = this.props;
+    // console.log(this.state);
     const date = new Date(
       new Date().toLocaleString("en-US", { timeZone: timezone })
     );
     this.setState({
-      clock: moment(date).format("ddd D MMMM hh:mm:ss")
+      clock: moment(date).format("ddd D MMMM HH:mm:ss")
     })
   }
 
-  saveClockId = (id) => {
-    this.setState({
-      timerId: id
-    })
-  }
-
-  prepareWeather = (weather) => {
-    const today = weather[0];
-    const todayTemp = checkTemperature(today.temp);
-    const todayWeatherIcon = icons[today.weather.icon];
-    const wind = Math.round(today.wind_spd);
+  prepareWeather = (forecast, units) => {
+    const today = forecast[0];
+    const todayTemp = checkTemperature(today?.temp, units);
+    const todayWeatherIcon = icons[today?.weather?.icon];
+    const wind = Math.round(today?.wind_spd);
     const humidity = Math.round(today.rh);
-    const feelsTemp = checkTemperature(Math.round((today.app_min_temp + today.app_max_temp) / 2));
-    const forecast = [weather[1], weather[2], weather[3]];
-    const { code } = today.weather;
-    return { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecast, code}
+    const feelsTemp = checkTemperature(((today?.app_min_temp + today?.app_max_temp) / 2), units);
+    const forecastTreeDays = [forecast[1], forecast[2], forecast[3]];
+    const { code } = today?.weather;
+    return { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code}
   }
   
   render() {
-    const { weather, lang, geo } = this.props;
-    const { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecast, code } = this.prepareWeather(weather);
-    const { formatted } = geo;
-    
+    const { forecast, lang, city, country, units } = this.props;
+    const { todayTemp, todayWeatherIcon, wind, humidity, feelsTemp, forecastTreeDays, code } = this.prepareWeather(forecast, units);
+
     const { clock } = this.state;
     return (
-      <div className="today-wrapper">
-        <div className="today-forecast">
-          <div className="today-info--wrapper">
-            <h1 className="place-title">{formatted}</h1>
-            <h3 className="place-datetime">{clock}</h3>
+      <div className={style['today-wrapper']}>
+        <div className={style['today-forecast']}>
+          <div className={style['today-info--wrapper']}>
+            <h1 className={style['place-title']}>{`${city}, ${country}`}</h1>
+            <h3 className={style['place-datetime']}>{clock}</h3>
           </div>
-          <div className="today-weather-wrapper">
-            <div className="today-temperature">
-              <p className="info-details-text weather-temperature">{todayTemp}</p>
-              <div className="description">
-                <p className="info-details-text weather-type">{weatherData[lang][code]}</p>
+          <div className={style['today-weather-wrapper']}>
+            <div className={style['today-temperature']}>
+              <p className={classNames(style['info-details-text'], style['weather-temperature'])}>
+                {todayTemp}
+              </p>
+              <div className={style.description}>
+                <p className={classNames(style['info-details-text'], style['weather-type'])}>
+                  {weatherData[lang][code]}
+                </p>
               </div>
             </div>
-            <div className="today-info">
-              <div className="today-image--wrapper">
+            <div className={style['today-info']}>
+              <div className={style['today-image--wrapper']}>
                 <img src={todayWeatherIcon} alt={weatherData[lang][code]} />
               </div>
             </div>
           </div>
 
-          <div className="today-details">
-            <p className="info-details-text">{`${restText['feels'][lang]}: ${feelsTemp}`}</p>
-            <p className="info-details-text">{`${restText['wind'][lang]}: ${wind} m/s`}</p>
-            <p className="info-details-text">{`${restText['humidity'][lang]}: ${humidity}%`}</p>
+          <div className={style['today-details']}>
+            <p className={style['info-details-text']}>{`${restText["feels"][lang]}: ${feelsTemp}`}</p>
+            <p className={style['info-details-text']}>{`${restText["wind"][lang]}: ${wind} m/s`}</p>
+            <p className={style['info-details-text']}>{`${restText["humidity"][lang]}: ${humidity}%`}</p>
           </div>
         </div>
 
-        <Forecast forecast={forecast} lang={lang} />
+        <Forecast forecast={forecastTreeDays} lang={lang} units={units}/>
       </div>
-    )
+    );
   }
 }
 
 Today.propTypes = {
   lang: PropTypes.string,
-  weather: PropTypes.array.isRequired,
-  geo: PropTypes.object.isRequired,
+  timezone: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  units: PropTypes.string.isRequired,
+  forecast: PropTypes.array.isRequired,
 }
 
 Today.defaultProps = {
-  lang: 'en',
-  weather: [],
-  geo: {},
+  lang: defaultState.lang,
+  timezone: defaultState.timezone,
+  city: defaultState.city,
+  country: defaultState.country,
+  units: defaultState.units,
+  forecast: [],
 }
 export default Today;

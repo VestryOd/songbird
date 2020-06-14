@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import './index.scss';
+import classNames from 'classnames';
+import { defaultState } from '../../../../common/constants';
+import style from './RefreshButton.module.scss';
 
 const RefreshButton = ({ isLoading, onRefresh }) => {
   const rotate = !isLoading
@@ -10,8 +12,11 @@ const RefreshButton = ({ isLoading, onRefresh }) => {
       transition: "transform 0.5s ease-in",
     };
   return (
-    <button className="button-ui refresh" onClick={() => onRefresh()}>
-      <span className="refresh-icon" style={rotate}></span>
+    <button
+      className={classNames(style['button-ui'], style['refresh'])}
+      onClick={() => onRefresh()}
+    >
+      <span className={style['refresh-icon']} style={rotate}></span>
     </button>
   );
 };
@@ -22,7 +27,7 @@ RefreshButton.propTypes = {
 };
 
 RefreshButton.defaultProps = {
-  isLoading: false,
+  isLoading: defaultState.isLoading,
   onRefresh: () => { },
 };
 

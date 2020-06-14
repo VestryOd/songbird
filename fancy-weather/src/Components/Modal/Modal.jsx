@@ -1,22 +1,18 @@
-import React from 'react';
-import PropTypes from "prop-types";
-import './index.scss';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-const Modal = (props) => {
-  const { classes } = props;
-  return (
-    <div className={`modal-wrapper ${classes}`}>
-      {props.children}
-    </div>
-  )
+export default class Modal extends Component {
+
+  el = document.createElement('div');
+
+  componentDidMount() {
+    document.body.appendChild(this.el);
+  }
+
+  componentWillUnmount() {
+    document.body.removeChild(this.el);
+  }
+  render() {
+    return ReactDOM.createPortal(this.props.children, this.el)
+  }
 }
-
-Modal.propTypes = {
-  classes: PropTypes.string,
-}
-
-Modal.defaultProps = {
-  classes: 'default-modal',
-}
-
-export default Modal;

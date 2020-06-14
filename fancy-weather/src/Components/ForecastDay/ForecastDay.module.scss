@@ -1,0 +1,51 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/placeholders';
+@import '../../scss-base/mixins';
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  & > * {
+    color: $color-light;
+    @extend %text_shadow;
+  }
+  @include media-mobile {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.forecast-day {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  font-family: 'Open Sans', 'Roboto', sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.forecast-weather {
+  display: flex;
+  justify-content: center;
+}
+
+.forecast-temperature {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & p {
+    width: 100%;
+    font-size: 2.4em;
+  }
+}
+
+.forecast-icon {
+  max-width: 50%;
+  width: 100%;
+  & img {
+    width: 100%;
+    height: auto;
+  }
+}

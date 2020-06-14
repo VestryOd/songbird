@@ -1,26 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { checkTemperature } from '../../common/services';
+import { defaultState } from '../../common/constants';
 import icons from '../../common/weather-icons';
 import { weekday } from '../../common/vocabulary';
 import moment from 'moment';
-import './index.scss';
+import style from './ForecastDay.module.scss';
 
-const ForecastDay = (props) => {
-  const { data, lang } = props;
-  const day = data;
-  const temp = checkTemperature(day.temp);
-  const icon = icons[day.weather.icon];
-  const dayNumber = moment(day.valid_date).weekday();
+const ForecastDay = ({ data, lang, units }) => {
+  const temp = checkTemperature(data.temp, units);
+  const icon = icons[data.weather.icon];
+  const dayNumber = moment(data.valid_date).weekday();
 
   return (
-    <div className="forecast-item">
-      <h4 className="forecast-day">{weekday[lang][dayNumber]}</h4>
-      <div className="forecast-weather">
-        <div className="forecast-temperature">
+    <div className={style['forecast-item']}>
+      <h4 className={style['forecast-day']}>{weekday[lang][dayNumber]}</h4>
+      <div className={style['forecast-weather']}>
+        <div className={style['forecast-temperature']}>
           <p>{temp}</p>
         </div>
-        <div className="forecast-icon">
+        <div className={style['forecast-icon']}>
           <img src={icon} alt="sunny" />
         </div>
       </div>
@@ -30,11 +29,13 @@ const ForecastDay = (props) => {
 
 ForecastDay.propTypes = {
   lang: PropTypes.string,
+  units: PropTypes.string.isRequired,
   forecast: PropTypes.object.isRequired,
 }
 
 ForecastDay.defaultProps = {
-  lang: 'en',
+  lang: defaultState.lang,
+  units: defaultState.units,
   forecast: {},
 }
 

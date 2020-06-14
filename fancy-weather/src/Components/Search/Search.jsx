@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { defaultState } from '../../common/constants';
 import { search, placeholder } from '../../common/vocabulary';
+import classNames from 'classnames';
 
-import './index.scss';
+import style from './Search.module.scss';
 
 class Search extends Component {
   state ={
@@ -32,28 +34,46 @@ class Search extends Component {
     const { text } = this.state;
     const { lang, isLoading } = this.props;
     return (
-      <form className="input-ui search-form" id="search-place" onSubmit={this.handleSubmit}>
-        <div className="input-wrapper" >
-          <label htmlFor="place-search">
-            <div className="search-indicator">
-              {!isLoading && <span className="icon-ui icon-search"></span>}
-              {isLoading && <span className="icon-ui icon-loading"></span>}
+      <form
+        className={classNames(style['input-ui'], style['search-form'])}
+        id="search-place"
+        onSubmit={this.handleSubmit}
+      >
+        <div className={style['input-wrapper']}>
+          <label htmlFor={style['place-search']}>
+            <div className={style['search-indicator']}>
+              {!isLoading && (
+                <span
+                  className={classNames(style['icon-ui'], style['icon-search'])}
+                ></span>
+              )}
+              {isLoading && (
+                <span
+                  className={classNames(
+                    style['icon-ui'],
+                    style['icon-loading'],
+                  )}
+                ></span>
+              )}
             </div>
             <input
-              className="search-input"
-              type="search"
+              className={style['search-input']}
               value={text}
               id="place-search"
               autoComplete="off"
               placeholder={placeholder[lang]}
               onChange={this.handleInputChange}
-              />
+            />
           </label>
-          <div className="close-indicator">
-            <button className="icon-ui icon-reset" type="reset" onClick={this.handleReset}/>
+          <div className={style['close-indicator']}>
+            <button
+              className={classNames(style['icon-ui'], style['icon-reset'])}
+              type="reset"
+              onClick={this.handleReset}
+            />
           </div>
         </div>
-        <button className="search-send" type="submit">
+        <button className={style['search-send']} type="submit">
           {search[lang]}
         </button>
       </form>
@@ -68,8 +88,8 @@ Search.propTypes = {
 }
 
 Search.defaultProps = {
-  lang: 'en',
-  isLoading: false,
+  lang: defaultState.lang,
+  isLoading: defaultState.isLoading,
   onAddressChange: () => { },
 }
 

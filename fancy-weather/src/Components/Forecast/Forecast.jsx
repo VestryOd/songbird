@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ForecastDay from '../ForecastDay/ForecastDay';
-import './index.scss';
+import ForecastDay from '../ForecastDay';
+import { defaultState } from '../../common/constants';
+import style from './Forecast.module.scss';
 
-const Forecast = (props) => {
-  const { forecast, lang } = props;
+const Forecast = ({ forecast, lang, units }) => {
   return (
-    <div className="forecast-wrapper">
+    <div className={style['forecast-wrapper']}>
       {
-        forecast.map((el, i) => <ForecastDay key={i} data={el} lang={lang}/>)
+        forecast.map((el, i) => <ForecastDay key={i} data={el} lang={lang} units={units} />)
       }
     </div>
   )
@@ -16,11 +16,13 @@ const Forecast = (props) => {
 
 Forecast.propTypes = {
   lang: PropTypes.string,
+  units: PropTypes.string.isRequired,
   forecast: PropTypes.array.isRequired,
 }
 
 Forecast.defaultProps = {
-  lang: 'en',
+  lang: defaultState.lang,
+  units: defaultState.units,
   forecast: [],
 }
 

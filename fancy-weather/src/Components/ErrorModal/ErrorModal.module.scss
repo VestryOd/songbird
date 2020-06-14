@@ -1,0 +1,47 @@
+@import '../../scss-base/constants';
+@import '../../scss-base/placeholders';
+
+.wrapper {
+  position: fixed;
+  left: 50%;
+  bottom: -100px;
+  transform: translateX(-50%);
+  max-width: 300px;
+  width: 100%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: $color-gray;
+  opacity: 0;
+  @extend %button-box-shadow-hover;
+  @extend %transition;
+}
+
+.show {
+  opacity: 1;
+  bottom: 100px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background-image: url('../../assets/icons/ErrorModal/cancel.svg');
+  @extend %background-image;
+}
+
+.message {
+  flex-grow: 1;
+  & > * {
+    text-align: center;
+    word-wrap: break-word;
+    color: $color-light;
+    @extend %text_shadow;
+  }
+}

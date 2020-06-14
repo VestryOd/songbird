@@ -1,13 +1,16 @@
 import React from 'react';
-import loading from './fw_loading.svg';
-import './index.scss';
+import { TrinityRingsSpinner } from 'react-epic-spinners';
+import style from './Loader.module.scss';
 
-export default function Loader() {
-  return (
-    <div className="loader-wrapper">
-      <div className="animation-wrapper">
-        <img src={loading} alt={'Weather is loading...'}/>
-      </div>
-    </div>
-  )
-}
+const spinnerOptions = {
+  color: '#ffffff',
+  size: 150,
+};
+
+const Loader = () => (
+  <div className={style.loader}>
+    <TrinityRingsSpinner color={spinnerOptions.color} size={spinnerOptions.size} />
+  </div>
+);
+
+export default Loader;

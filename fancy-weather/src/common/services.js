@@ -6,13 +6,14 @@ import moment from 'moment';
 export const getBackgroundUrl = async (place) => {
   const quarter = getSeason().toLowerCase();
   const time = getDayTime();
-  const query = `${quarter}, ${time}, ${place || ''}`;
+  const query = `${quarter},${time},${place || ''}`;
   const finalQuery = unsplashUrl.replace('{query}', query);
-  console.log(finalQuery);
   try {
-    const json = await fetch(finalQuery);
-    const backgroundData = await json.json();
-    return backgroundData?.urls?.regular;
+    return await axios.get(finalQuery)
+    .then((response) => {
+      const background = response.data.urls.regular;
+      return background;
+    });
   } catch (error) {
     console.error(error);
   }
@@ -23,8 +24,8 @@ export const getCurrentLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude: lat, longitude: lon } = position.coords;
-          resolve({ lat, lon });
+          const { latitude: lat, longitude: lng } = position.coords;
+          resolve({ lat, lng });
         },
         (error) => reject(error)
       );
@@ -36,21 +37,29 @@ export const getCurrentLocation = () => {
 
 export const getWeatherByAddress = async (place, options) => {
   const { units, lang } = options
-  const url = `${weatherUrl}&q=${place}&units=${units}&lang=${lang.toLowerCase()}`
+  const url = `${weatherUrl}&city=${place}&units=${units}&lang=${lang.toLowerCase()}`;
   try {
-    const json = await axios(url);
-    return (await json.json())
+    return await axios
+      .get(url)
+      .then((response) => {
+        const weatherData = response.data;
+        return weatherData;
+      });
   } catch (error) {
     console.error(error)
   }
 }
 
-export const getWeatherByCoords = async ({ lat, lon }, options) => {
+export const getWeatherByCoords = async ({ lat, lng }, options) => {
   const { units, lang } = options;
-  const url = `${weatherUrl}&lat=${lat}&lon=${lon}&units=${units}&lang=${lang.toLowerCase()}`;
+  const url = `${weatherUrl}&lat=${lat}&lon=${lng}&units=${units}&lang=${lang.toLowerCase()}`;
   try {
-    const json = await axios(url);
-    return await json.json();
+    return await axios
+      .get(url)
+      .then((response) => {
+        const weatherData = response.data;
+        return weatherData;
+      });
   } catch (error) {
     console.error(error);
   }
@@ -59,20 +68,46 @@ export const getWeatherByCoords = async ({ lat, lon }, options) => {
 export const getGeolocation = async (place, lang) => {
   const url = typeof place === 'string'
     ? `${geocodingUrl}&language=${lang.toLowerCase()}&q=${place}`
-    : `${geocodingUrl}&language=${lang.toLowerCase()}&q=${place.lat+place.lon}`;
+    : `${geocodingUrl}&language=${lang.toLowerCase()}&q=${place.lat}+${place.lng}`;
   try {
-    const json = await axios(url);
-    return (await json.json());
+    return await axios
+      .get(url)
+      .then((response) => {
+        const geocodingData = response.data.results;
+        return geocodingData;
+      });
   } catch (error) {
     console.error(error);
   }
 }
 
-export const checkTemperature = (temp) => {
+export const prepareInfo = (fetchedData) => {
+    const { background, weather, geo } = fetchedData;
+    const result = {};
+    result.backgroundUrl = background.value;
+    result.forecast = weather.value.data.slice(0, 4);
+    result.timezone = weather.value.timezone;
+    const { value } = geo;
+    const arr = value[0];
+    const { city, state, town, village, county } = arr.components;
+    result.city = city || state || town || village || county;
+    result.country = arr.components.country;
+    result.currentLocation = arr.geometry;
+    result.mapCoordinates = arr.geometry;
+    result.mapInfo = arr.annotations.DMS;
+    return result;
+  }
+
+const convertTemperature = (temp, units) => {
+  return units === 'metric' ? temp : (temp * 9) / 5 + 32;
+};
+
+export const checkTemperature = (temp, units) => {
+
   if (temp === 0) {
     return `${temp}°`;
   }
-  const rounded = Math.round(temp);
+  const rounded = Math.round(convertTemperature(temp, units));
   return rounded > 0 ? `+${rounded}°` : `-${rounded}°`;
 }
 

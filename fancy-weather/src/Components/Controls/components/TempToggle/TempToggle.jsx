@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.scss';
+import { defaultState } from '../../../../common/constants';
+import style from './TempToggle.module.scss';
 
 const TempToggle = ({ units, onUnitsChange }) => {
 
@@ -14,12 +15,18 @@ const TempToggle = ({ units, onUnitsChange }) => {
   };
 
   return (
-    <div className="button-toggler">
-      <input type="checkbox" className="checkbox" onClick={handleUnitsChange}/>
-      <div className="knobs"><span>°C</span></div>
-      <div className="layer"></div>
+    <div className={style['button-toggler']}>
+      <input
+        type="checkbox"
+        className={style['checkbox']}
+        onClick={handleUnitsChange}
+      />
+      <div className={style['knobs']}>
+        <span>°C</span>
+      </div>
+      <div className={style['layer']}></div>
     </div>
-  )
+  );
 }
 
 TempToggle.propTypes = {
@@ -28,7 +35,7 @@ TempToggle.propTypes = {
 }
 
 TempToggle.defaultProps = {
-  units: 'metric',
+  units: defaultState.units,
   onUnitsChange: () => { },
 }
 

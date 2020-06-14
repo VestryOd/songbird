@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defaultState, Lang } from '../../../../common/constants';
+import classNames from 'classnames';
 
-import './index.scss';
-import { Lang } from '../../../../common/constants';
+import style from './LanguageSelect.module.scss';
 
 const LanguageSelect = ({ lang, onLangChange }) => {
 
@@ -10,9 +11,18 @@ const LanguageSelect = ({ lang, onLangChange }) => {
     onLangChange(value.toLowerCase());
 
   return (
-    <select className="controls-ui language-select" id="language" value={lang.toLowerCase()} onChange={handleLangChange}>
+    <select
+      className={classNames(style['controls-ui'], style['language-select'])}
+      id="language"
+      value={lang.toLowerCase()}
+      onChange={handleLangChange}
+    >
       {Object.keys(Lang).map((key) => {
-        return <option key={key} value={key}>{Lang[key]}</option>
+        return (
+          <option key={key} value={key}>
+            {Lang[key]}
+          </option>
+        );
       })}
     </select>
   );
@@ -24,7 +34,7 @@ LanguageSelect.propTypes = {
 };
 
 LanguageSelect.defaultProps = {
-  lang: "en",
+  lang: defaultState.lang,
   onLangChange: () => { },
 };
 

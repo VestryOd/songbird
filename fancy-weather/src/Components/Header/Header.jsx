@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Controls from '../Controls/Controls';
-import Search from '../Search/Search';
-import './index.scss';
+import Controls from '../Controls';
+import Search from '../Search';
+import style from './Header.module.scss';
 
 const Header = ({ lang, onLangChange, onRefresh, onUnitsChange, isLoading, onAddressChange, units }) => {
   return (
-    <div className="header-wrapper">
+    <div className={style['header-wrapper']}>
       <Controls
         lang={lang}
         units={units}

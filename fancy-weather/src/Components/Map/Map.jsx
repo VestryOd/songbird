@@ -1,69 +1,62 @@
 import React, { Component } from 'react';
-import { MAPBOX_API_KEY } from '../../common/constants';
+import { MAPBOX_API_KEY, initialCenterMap, defaultState } from '../../common/constants';
 import PropTypes from 'prop-types';
-import { initialCenterMap } from '../../common/constants';
 import mapboxgl from 'mapbox-gl';
-import MapboxLanguage from '@mapbox/mapbox-gl-language';
-import LatLon from '../LatLon/LatLon';
-import { CSSTransitionGroup } from "react-transition-group";
+import Coordinates from '../Coordinates';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './index.scss';
+import style from './Map.module.scss';
 
 mapboxgl.accessToken = MAPBOX_API_KEY;
 class Map extends Component {
-  state = {
-    map: null,
-    container: null,
-    marker: null,
-    coordinates: null,
-  };
-
-  addMarker = () => {
-    const { coordinates } = this.state;
-    const marker = new mapboxgl.Marker().setLngLat(coordinates).addTo(this.map);
-    this.setState({
-      marker: marker
-    })
-  };
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = {
+      mapContainer: null,
+      map: null,
+      marker: null,
+    }
+  }
 
   componentDidMount() {
-    const { coordinates } = this.props;
-    this.setState({
-      coordinates: coordinates,
-    });
-    const map = new mapboxgl.Map({
-      container: this.container,
-      style: "mapbox://styles/mapbox/streets-v10",
-      center: coordinates,
-      zoom: 12,
+    const { lng, lat } = this.props?.mapCoordinates;
+    this.map = new mapboxgl.Map({
+      container: this.mapContainer,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [lng, lat],
+      zoom: 11,
       essential: true,
-      logoPosition: 'bottom-left'
-    });
-    this.setState({
-      map: map
     });
   }
 
+  addMarker() {
+    const { lng, lat } = this.props?.mapCoordinates;
+    this.marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(this.map);
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.coordinates !== prevProps.coordinates) {
-      this.map.flyTo({ center: this.props.coordinates });
+    if (
+      this.props?.mapCoordinates !== prevProps.mapCoordinates
+    ) {
+      const { mapCoordinates } = this.props;
+      this.map.flyTo({ center: mapCoordinates });
       this.addMarker();
     }
   }
 
   render() {
-    const { lang, coordinates } = this.props;
+    const { lang, mapInfo } = this.props;
     return (
-      <div className="map-section">
-        <div className="map-wrapper">
+      <div className={style['map-section']}>
+        <div className={style['map-wrapper']}>
           <div
-            className="map-container"
+            className={style['map-container']}
             ref={(el) => {
-              this.container = el;
+              this.mapContainer = el;
             }}
           />
-          <LatLon lang={lang} coordinates={coordinates} />
+          <Coordinates lang={lang} mapInfo={mapInfo} />
         </div>
       </div>
     );
@@ -72,12 +65,14 @@ class Map extends Component {
 
 Map.propTypes = {
   lang: PropTypes.string,
-  coordinates: PropTypes.object.isRequired,
+  mapCoordinates: PropTypes.object.isRequired,
+  mapInfo: PropTypes.object.isRequired,
 };
 
 Map.defaultProps = {
-  lang: "en",
-  coordinates: initialCenterMap,
+  lang: defaultState.lang,
+  mapCoordinates: [initialCenterMap.lng, initialCenterMap.lat],
+  mapInfo: initialCenterMap,
 };
 
 export default Map;
