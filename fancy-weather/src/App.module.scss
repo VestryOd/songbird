@@ -30,18 +30,24 @@
 .grid-wrapper {
   margin: 20px 0 50px 0;
   display: flex;
+  width: 100%;
   & > * {
     padding: 15px;
     @include media-tablet {
-      width: 100%;
+      width: calc(100% - 30px);
     }
   }
+  @include media-laptop {
+    width: calc(100% - 30px);
+  }
   @include media-tablet {
-    max-width: none;
+    max-width: calc(100% - 30px);
     flex-direction: column;
   }
   @include media-mobile {
     padding-top: 30px;
+    max-width: none;
+    width: 100%;
   }
 }
 
@@ -57,9 +63,6 @@
   background-position: center;
   opacity: 1;
   @extend %transition;
-  @include media-tablet {
-    width: auto;
-  }
 }
 
 .hide {

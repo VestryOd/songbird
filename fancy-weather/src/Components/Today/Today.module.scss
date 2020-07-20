@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 65%;
+  max-width: calc(65% - 30px);
   width: 100%;
   & .today-forecast {
     margin-bottom: 20px;
@@ -18,7 +18,7 @@
     width: 100%;
   }
   @include media-tablet {
-    max-width: none;
+    max-width: calc(100% - 30px);
   }
   @include media-mobile {
     flex-direction: column;
@@ -87,7 +87,6 @@
   flex-direction: column;
   align-items: center;
   & .today-image--wrapper {
-    width: 300px;
     height: 90%;
     display: flex;
     flex-direction: column;

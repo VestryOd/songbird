@@ -17,6 +17,9 @@
     font-weight: 300;
     color: $color-light;
     @extend %text_shadow;
+    @include media-mobile {
+      font-size: 1.2em;
+    }
   }
   @include media-mobile {
     padding-bottom: 20px;

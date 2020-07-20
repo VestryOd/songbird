@@ -14,7 +14,7 @@
     max-width: 45%;
   }
   @include media-mobile {
-    max-width: none;
+    max-width: calc(100% - 30px);
     width: 100%;
     justify-content: center;
   }

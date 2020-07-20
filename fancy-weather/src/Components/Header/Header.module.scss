@@ -3,11 +3,15 @@
 .header-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 30px);
   height: 70px;
   padding: 30px 15px;
+  @include media-tablet {
+    width: calc(100% - 60px);
+  }
   @include media-mobile {
     flex-direction: column;
+    width: 100%;
     & > * {
       margin: 10px 0;
       align-items: center;
