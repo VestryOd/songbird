@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './App.module.scss';
 import Header from '../Header';
 import moviesData from '../../assets/films/movies';
@@ -17,6 +17,7 @@ const dataSets = prepareAllData(moviesData, quotesData);
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [userData, setUserData] = useState(initialUserData);
+  const [isFinish, setIsFinish] = useState(false);
   const [groupCount, setGroupCount] = useState(0);
   const [score, setScore] = useState(0);
 
@@ -30,12 +31,23 @@ function App() {
   };
 
   const onScoreChange = (value) => {
-    setScore((prevScore) => prevScore + value);
+    const newValue = value < 0 ? 0 : value;
+    setScore((prevScore) => prevScore + newValue);
   };
 
   const onGroupChange = () => {
     setGroupCount((prevGroup) => prevGroup + 1);
   };
+
+  useEffect(() => {
+    if (score === 3) {
+      setIsFinish(true);
+    }
+  }, [score]);
+
+  if (isFinish) {
+    console.log('finish');
+  }
 
   // const mainOutput = !isPlaying ? (
   //   <WelcomePage onUserDataChange={onUserDataChange} />

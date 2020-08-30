@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import style from './GamePage.module.scss';
 import GameHeader from './GameHeader';
@@ -8,6 +8,12 @@ import audios from '../../assets/audios';
 import posters from '../../assets/posters';
 
 const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
+  const [isGuessed, setIsGuessed] = useState(false);
+
+  const onGuessed = (value) => {
+    setIsGuessed(value);
+  };
+
   const { filmsData, gameDataSets } = dataSets;
   const current = gameDataSets[groupCount];
   const { nameRu, nameEn } = current?.currentFilm;
@@ -18,13 +24,15 @@ const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
         <>
           <GameHeader categories={gameDataSets} groupCount={groupCount} />
           <div className={style.game}>
-            <CurrentAudio audio={audios[name]} nameRu={nameRu} poster={posters[nameEn]} isGuessed={false} />
+            <CurrentAudio audio={audios[name]} nameRu={nameRu} poster={posters[nameEn]} isGuessed={isGuessed} />
             <TrackList
               filmsData={filmsData}
               tracks={current.data}
               gussedTrackId={filmId}
               onScoreChange={onScoreChange}
               onGroupChange={onGroupChange}
+              isGuessed={isGuessed}
+              onGuessed={onGuessed}
             />
           </div>
         </>

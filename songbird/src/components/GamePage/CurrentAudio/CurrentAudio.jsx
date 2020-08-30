@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Player from '../Player';
 import style from './CurrentAudio.module.scss';
-import noPoster from './no_poster.jpg';
+import noPoster from '../../../assets/pictures/no_poster.jpg';
 
 const CurrentAudio = ({ audio, nameRu, poster, isGuessed = true }) => {
   const title = isGuessed ? nameRu : new Array(nameRu.length).fill('*').join('');

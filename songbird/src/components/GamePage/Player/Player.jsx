@@ -10,6 +10,7 @@ const Player = ({ isPlaying, audio = '' }) => {
     src: audio,
     showSkipControls: false,
     showJumpControls: false,
+    autoPlayAfterSrcChange: false,
   };
 
   return (

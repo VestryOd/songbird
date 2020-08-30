@@ -2,6 +2,7 @@ import humanNames from 'human-names';
 
 const audiosBase = '../assets/audios/';
 const audioDivider = '_-_';
+const statsObjectName = 'songbirdStats';
 
 const getRandomName = () => {
   const choise = Math.floor(Math.random() * 2) + 1;
@@ -35,4 +36,35 @@ const kipoiskUrl = 'https://www.kinopoisk.ru/film/{filmId}/';
 
 const getTrack = (filmName, name) => `${audiosBase}${filmName}${audioDivider}${name}.mp3`;
 
-export { getRandomName, prepareFilmsData, getRandomInt, shuffleArray, getTrack, kipoiskUrl };
+const playAudio = (src) => {
+  const audio = new Audio(src);
+  audio.play();
+};
+
+const generateTracksStyles = (arr, placeHolder) => new Array(arr.length).fill(placeHolder);
+
+const saveStats = (obj) => {
+  const stats = JSON.parse(localStorage.getItem(statsObjectName)) || [];
+  localStorage.setItem(statsObjectName, {
+    ...stats,
+    ...obj,
+  });
+};
+
+const getStats = () => {
+  const stats = JSON.parse(localStorage.getItem(statsObjectName));
+  return stats || [];
+};
+
+export {
+  getRandomName,
+  prepareFilmsData,
+  getRandomInt,
+  shuffleArray,
+  getTrack,
+  kipoiskUrl,
+  playAudio,
+  generateTracksStyles,
+  saveStats,
+  getStats,
+};

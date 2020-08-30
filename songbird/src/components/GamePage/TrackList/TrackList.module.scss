@@ -4,7 +4,12 @@
 
 .wrapper {
   display: flex;
+  flex-direction: column;
   padding-bottom: 30px;
+}
+
+.content {
+  display: flex;
   & > div {
     width: 50%;
   }
@@ -49,8 +54,7 @@
   text-align: left;
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
-  @include font(2.4rem, 0, 500);
-  // @extend %text-shadow;
+  @include font(2.4rem, normal, 500);
   @extend %transition;
   &:hover {
     background-color: $color-main-lighter;
@@ -61,8 +65,11 @@
   display: contents;
   height: 100%;
   padding-right: 10px;
-  color: $color-gray;
   font-size: 3rem;
+}
+
+.unmarked {
+  color: $color-gray;
 }
 
 .error {

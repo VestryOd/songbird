@@ -6,6 +6,7 @@ import { moreAboutFilm } from '../../../../assets/text-data';
 import Player from '../../Player';
 import posters from '../../../../assets/posters';
 import audios from '../../../../assets/audios';
+import noPoster from '../../../../assets/pictures/no_poster.jpg';
 
 const Details = ({ film, name }) => {
   console.log(film, name);
@@ -15,7 +16,7 @@ const Details = ({ film, name }) => {
     <>
       <div className={style.details}>
         <div className={style.poster}>
-          <img src={posters[nameEn]} alt={nameRu} />
+          <img src={posters[nameEn] || noPoster} alt={nameRu} />
         </div>
         <div className={style.info}>
           <h3 className={style.title}>{nameRu}</h3>

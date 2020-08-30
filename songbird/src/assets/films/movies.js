@@ -186,7 +186,7 @@ const moviesData = [
   {
     filmId: 77202,
     nameRu: 'Место встречи изменить нельзя',
-    nameEn: 'mesto_vstrechi_izmenit_nelya',
+    nameEn: 'mesto_vstrechi_izmenit_nelza',
     year: 1979,
     rating: 9.0,
     genres: ['криминал', 'детектив', 'боевик'],

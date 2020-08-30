@@ -48,4 +48,8 @@ const moreAboutFilm = {
   ru: 'Подробнее...',
 };
 
-export { errorPage, score, welcomePage, noCategories, noTrackChoised, moreAboutFilm };
+const nextButton = {
+  ru: 'Далее',
+};
+
+export { errorPage, score, welcomePage, noCategories, noTrackChoised, moreAboutFilm, nextButton };
