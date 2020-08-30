@@ -50,22 +50,16 @@ function App() {
     }
   }, [groupCount]);
 
+  let mainOutput = null;
+
   if (isFinish) {
-    console.log('finish');
+    mainOutput = <ResultsPage userData={userData} scoreSets={scoreSets} score={score} />;
   }
 
-  // const mainOutput = !isPlaying ? (
-  //   <WelcomePage onUserDataChange={onUserDataChange} />
-  // ) : (
-  //   <GamePage />
-  // );
-
-  // const mainOutput = (
-  //   <GamePage dataSets={dataSets} groupCount={groupCount} onScoreChange={onScoreChange} onGroupChange={onGroupChange} />
-  // );
-
-  const mainOutput = (
-    <ResultsPage userData={{ gender: 'Мужской', name: 'Андрей' }} scoreSets={[5, 4, 5, 3]} score={43} />
+  mainOutput = !isPlaying ? (
+    <WelcomePage onUserDataChange={onUserDataChange} />
+  ) : (
+    <GamePage dataSets={dataSets} groupCount={groupCount} onScoreChange={onScoreChange} onGroupChange={onGroupChange} />
   );
 
   return (

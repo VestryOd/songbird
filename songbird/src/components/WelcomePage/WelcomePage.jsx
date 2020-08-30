@@ -74,7 +74,7 @@ const WelcomePage = ({ onUserDataChange }) => {
           </button>
         </div>
       </form>
-      <p className={style.details}>{ru.details}</p>
+      {/* <p className={style.details}>{ru.details}</p> */}
     </div>
   );
 };

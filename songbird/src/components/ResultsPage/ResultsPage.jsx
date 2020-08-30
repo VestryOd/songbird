@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import style from './ResultsPage.module.scss';
 import { defineAge, getAvatarImage, prepareTitle, getResultsStatus } from '../../helpers/services';
 import avatars from '../../assets/avatars';
@@ -15,7 +14,6 @@ const ResultsPage = ({ userData: { gender, name }, scoreSets, score }) => {
 
   const age = defineAge(scoreSets);
   const avatar = getAvatarImage(gender, age, avatars);
-  console.log(avatar, avatars);
   const preparedStatus = getResultsStatus(gender, age, status);
 
   const mainOutput = !isCalculated ? (
@@ -36,6 +34,11 @@ const ResultsPage = ({ userData: { gender, name }, scoreSets, score }) => {
       <button className={style.again}>{buttonLabel}</button>
     </div>
   );
+
+  setTimeout(() => {
+    setIsCalculated(true);
+  }, 3000);
+
   return (
     <div className={style.wrapper}>
       <h1 className={style.title}>{preparedTitle}</h1>
