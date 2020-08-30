@@ -31,8 +31,9 @@ const TrackList = ({ filmsData, tracks, gussedTrackId }) => {
     const { filmId, name } = item;
     const { nameRu } = filmsData[filmId];
     return (
-      <div key={`${filmId}-${idx}`} className="item" onClick={() => handleTrackClick(name)}>
-        {nameRu}
+      <div key={`${filmId}-${idx}`} className={style.item} onClick={() => handleTrackClick(name)}>
+        <span className={style.marker}>●</span>
+        <span>{nameRu}</span>
       </div>
     );
   });
@@ -42,7 +43,9 @@ const TrackList = ({ filmsData, tracks, gussedTrackId }) => {
 
   return (
     <div className={style.wrapper}>
-      <div className={style.tracks}>{trackList}</div>
+      <div className={style.tracks}>
+        <ul className={style.list}>{trackList}</ul>
+      </div>
       <div className={style.details}>{details}</div>
     </div>
   );
