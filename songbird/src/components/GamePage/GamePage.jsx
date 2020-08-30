@@ -7,11 +7,11 @@ import TrackList from './TrackList';
 import audios from '../../assets/audios';
 import posters from '../../assets/posters';
 
-const GamePage = ({ dataSets, groupCount }) => {
+const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
   const { filmsData, gameDataSets } = dataSets;
   const current = gameDataSets[groupCount];
   const { nameRu, nameEn } = current?.currentFilm;
-  const { name } = current?.currentAudio;
+  const { filmId, name } = current?.currentAudio;
   return (
     <div className={style.wrapper}>
       {gameDataSets && (
@@ -19,7 +19,13 @@ const GamePage = ({ dataSets, groupCount }) => {
           <GameHeader categories={gameDataSets} groupCount={groupCount} />
           <div className={style.game}>
             <CurrentAudio audio={audios[name]} nameRu={nameRu} poster={posters[nameEn]} isGuessed={false} />
-            <TrackList filmsData={filmsData} tracks={current.data} />
+            <TrackList
+              filmsData={filmsData}
+              tracks={current.data}
+              gussedTrackId={filmId}
+              onScoreChange={onScoreChange}
+              onGroupChange={onGroupChange}
+            />
           </div>
         </>
       )}
@@ -30,6 +36,8 @@ const GamePage = ({ dataSets, groupCount }) => {
 GamePage.propTypes = {
   dataSets: PropTypes.object,
   groupCount: PropTypes.number,
+  onScoreChange: PropTypes.func,
+  onGroupChange: PropTypes.func,
 };
 
 export default GamePage;

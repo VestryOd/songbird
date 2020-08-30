@@ -31,6 +31,8 @@ const shuffleArray = (array) => {
   return result;
 };
 
+const kipoiskUrl = 'https://www.kinopoisk.ru/film/{filmId}/';
+
 const getTrack = (filmName, name) => `${audiosBase}${filmName}${audioDivider}${name}.mp3`;
 
-export { getRandomName, prepareFilmsData, getRandomInt, shuffleArray, getTrack };
+export { getRandomName, prepareFilmsData, getRandomInt, shuffleArray, getTrack, kipoiskUrl };

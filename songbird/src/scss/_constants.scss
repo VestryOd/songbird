@@ -4,14 +4,17 @@ $mobile-big-width: 415px;
 $mobile-small-width: 320px;
 
 $color-light-text: #ffffff;
-$color-item-bg: #b3b3b3;
+$color-item-bg: #ffffff;
 $color-border: #a8a7a7;
-$color-gray: #777777;
+$color-gray: #444444;
 $color-main-bg: rgba(255, 255, 255, 0.4);
 $color-main: #f6d04d;
-$color-main-lighter: #f6df8c;
+$color-main-lighter: #f3b058;
 $color-main-accent: #f29c2b;
-$color-main-accent-lighter: #f5b056;
+$color-main-accent-lighter: #e46939;
 $color-success: #8bc24c;
 $color-error: #de4307;
 $color-transparent: transparent;
+
+$font-family-standart: 'Montserrat Alternates', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+  'Droid Sans', 'Helvetica Neue', sans-serif;

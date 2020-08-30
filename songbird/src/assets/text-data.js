@@ -44,4 +44,8 @@ const welcomePage = {
   },
 };
 
-export { errorPage, score, welcomePage, noCategories, noTrackChoised };
+const moreAboutFilm = {
+  ru: 'Подробнее...',
+};
+
+export { errorPage, score, welcomePage, noCategories, noTrackChoised, moreAboutFilm };

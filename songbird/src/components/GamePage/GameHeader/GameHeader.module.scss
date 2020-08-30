@@ -20,9 +20,10 @@
 .item {
   width: 25%;
   height: 40px;
+  font-family: 'Poiret One', cursive;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: linear-gradient(180deg, $color-main-accent 0%, $color-main 100%);
+  background: linear-gradient(180deg, #de4307 0%, $color-main-accent 100%);
   @include font(2rem, 4rem, 300);
   @extend %text-shadow;
   @extend %transition;

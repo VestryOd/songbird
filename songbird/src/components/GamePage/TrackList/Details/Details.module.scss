@@ -1,0 +1,70 @@
+@import '../../../../scss/constants';
+@import '../../../../scss/placeholders';
+@import '../../../../scss/mixins';
+
+.poster {
+  width: 180px;
+  height: auto;
+  & img {
+    width: calc(100% - 10px);
+    border-radius: 10px;
+    @extend %box-shadow-thin;
+  }
+}
+
+.details {
+  display: flex;
+  padding: 20px 20px 0 20px;
+}
+
+.info {
+  padding-left: 20px;
+  text-align: left;
+}
+
+.title {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  color: $color-main-accent;
+  font-family: $font-family-standart;
+  text-align: left;
+  border-bottom: 1px solid $color-main-accent;
+  @include font(2rem, 4rem, 700);
+}
+
+.rating,
+.year,
+.genres,
+.kinopoisk {
+  margin: 10px 0;
+  color: $color-gray;
+  font-size: 1.8rem;
+}
+
+.track {
+  width: calc(100% - 40px);
+  padding: 0 20px;
+}
+
+.kinopoisk {
+  text-decoration: none;
+  @extend %transition;
+  & span {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-image: url('./kinopoisk.png');
+    transform: rotate(0);
+    @extend %background-image;
+    @extend %transition;
+  }
+}
+
+.kinopoisk:hover {
+  color: $color-main-accent;
+  & span {
+    margin-right: 20px;
+    transform: rotate(360deg);
+  }
+}
