@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import getRandomName from '../../helpers/services';
+import { getRandomName } from '../../helpers/services';
 import { welcomePage } from '../../assets/text-data';
 import style from './WelcomePage.module.scss';
 import image from './old_movies.png';

@@ -1,0 +1,32 @@
+@import '../../../scss/constants';
+@import '../../../scss/placeholders';
+@import '../../../scss/mixins';
+
+.wrapper {
+  display: flex;
+  padding: 20px;
+}
+
+.poster {
+  width: 180px;
+  height: 300px;
+  & img {
+    width: calc(100% - 10px);
+    border-radius: 10px;
+    @extend %box-shadow-thin;
+  }
+}
+
+.track {
+  flex-grow: 1;
+  padding: 0 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+  border-bottom: 1px solid $color-main-accent;
+  @include font(2.4rem, 4rem);
+  @extend %text-shadow;
+}

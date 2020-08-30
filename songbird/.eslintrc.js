@@ -2,12 +2,9 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    jest : true
+    jest: true,
   },
-  extends: [
-    'airbnb-base',
-    'plugin:react/recommended',
-  ],
+  extends: ['airbnb-base', 'plugin:react/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -20,8 +17,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
-  rules: {},
+  plugins: ['react'],
+  rules: {
+    'object-curly-newline': 'off',
+  },
 };

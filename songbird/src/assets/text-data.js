@@ -9,12 +9,19 @@ const score = {
   ru: 'Счёт',
 };
 
+const noCategories = {
+  ru: 'Угадывай всё подряд',
+};
+
+const noTrackChoised = {
+  ru: 'Послушайте плеер. Выберите фильм из списка',
+};
+
 const welcomePage = {
   ru: {
     title: 'Давайте определим Ваш возраст по знанию фильмов на слух!',
     imageAlt: 'Прослушайте запись',
-    description:
-      'Вспоминайте и угадывайте популярные фильмы по крылатым фразам и запоминающимся выражениям. Готовы?',
+    description: 'Вспоминайте и угадывайте популярные фильмы по крылатым фразам и запоминающимся выражениям. Готовы?',
     genderLabel: 'Ваш пол?',
     nameLabel: 'Ваше имя?*',
     gender: [
@@ -37,4 +44,4 @@ const welcomePage = {
   },
 };
 
-export { errorPage, score, welcomePage };
+export { errorPage, score, welcomePage, noCategories, noTrackChoised };
