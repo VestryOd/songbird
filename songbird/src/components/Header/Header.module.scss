@@ -1,0 +1,18 @@
+@import '../../scss/placeholders';
+@import '../../scss/mixins';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 240px;
+  height: 80px;
+  background-image: url('../../assets/pictures/sb_logo.svg');
+  @extend %background-image;
+}
+
+.score {
+  @include font(2.4rem, 8rem, 300);
+}

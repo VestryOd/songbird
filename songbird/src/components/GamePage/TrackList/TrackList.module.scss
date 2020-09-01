@@ -1,0 +1,104 @@
+@import '../../../scss/constants';
+@import '../../../scss/placeholders';
+@import '../../../scss/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.content {
+  display: flex;
+  & > div {
+    width: 50%;
+  }
+}
+
+.tracks {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.list {
+  height: 100%;
+  margin: 0;
+  padding-left: 0;
+  // font-family: 'Poiret One', cursive;
+  letter-spacing: 1px;
+  background-color: $color-item-bg;
+  border-radius: 10px;
+  cursor: pointer;
+  & > li:last-of-type {
+    border-bottom: 1px solid transparent;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  & > li:first-of-type {
+    border-top: 1px solid transparent;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% / 6);
+  min-height: 50px;
+  padding-left: 20px;
+  color: $color-gray;
+  text-align: left;
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+  @include font(2.4rem, normal, 500);
+  @extend %transition;
+  &:hover {
+    background-color: $color-main-lighter;
+  }
+}
+
+.marker {
+  display: contents;
+  height: 100%;
+  padding-right: 10px;
+  font-size: 3rem;
+}
+
+.unmarked {
+  color: $color-gray;
+}
+
+.error {
+  color: $color-error;
+}
+
+.success {
+  color: $color-success;
+}
+
+.details {
+  // display: flex;
+  padding: 0 20px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  padding: 10px;
+  background-color: $color-item-bg;
+  background-image: url('./Details/plenka_2.png');
+  border-radius: 10px;
+  @extend %background-image;
+  & span {
+    padding-top: 20px;
+    color: $color-gray;
+    font-size: 3rem;
+    font-family: 'Poiret One', cursive;
+  }
+}

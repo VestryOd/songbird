@@ -1,0 +1,1148 @@
+{
+  "films": [
+    {
+      "filmId": 89540,
+      "nameRu": "Семнадцать мгновений весны (сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1973",
+      "description": "СССР, Татьяна Лиознова(военный)",
+      "filmLength": "1:09",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "военный"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "приключения"
+        }
+      ],
+      "rating": "8.9",
+      "ratingVoteCount": 67756,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/89540.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/89540.jpg"
+    },
+    {
+      "filmId": 46066,
+      "nameRu": "Белое солнце пустыни",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1969",
+      "description": "СССР, Владимир Мотыль(боевик)",
+      "filmLength": "1:24",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "боевик"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "мелодрама"
+        }
+      ],
+      "rating": "8.0",
+      "ratingVoteCount": 125920,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46066.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46066.jpg"
+    },
+    {
+      "filmId": 46089,
+      "nameRu": "Берегись автомобиля",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1966",
+      "description": "СССР, Эльдар Рязанов(мелодрама)",
+      "filmLength": "1:34",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 122697,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46089.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46089.jpg"
+    },
+    {
+      "filmId": 41519,
+      "nameRu": "Брат",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1997",
+      "description": "Россия, Алексей Балабанов(боевик)",
+      "filmLength": "1:40",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "боевик"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 614029,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/41519.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/41519.jpg"
+    },
+    {
+      "filmId": 41520,
+      "nameRu": "Брат 2",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "2000",
+      "description": "Россия, Алексей Балабанов(боевик)",
+      "filmLength": "2:07",
+      "countries": [
+        {
+          "country": "Россия"
+        },
+        {
+          "country": "США"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "боевик"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 555784,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/41520.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/41520.jpg"
+    },
+    {
+      "filmId": 46225,
+      "nameRu": "Бриллиантовая рука",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1968",
+      "description": "СССР, Леонид Гайдай(комедия)",
+      "filmLength": "1:34",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.5",
+      "ratingVoteCount": 453380,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46225.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46225.jpg"
+    },
+    {
+      "filmId": 79450,
+      "nameRu": "Чародеи (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1982",
+      "description": "СССР, Константин Бромберг(мюзикл)",
+      "filmLength": "2:27",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "фантастика"
+        },
+        {
+          "genre": "мелодрама"
+        }
+      ],
+      "rating": "7.9",
+      "ratingVoteCount": 71095,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/79450.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/79450.jpg"
+    },
+    {
+      "filmId": 45463,
+      "nameRu": "Человек с бульвара Капуцинов",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1987",
+      "description": "СССР, Алла Сурикова(комедия)",
+      "filmLength": "1:38",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "вестерн"
+        },
+        {
+          "genre": "мюзикл"
+        }
+      ],
+      "rating": "8.0",
+      "ratingVoteCount": 80988,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/45463.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/45463.jpg"
+    },
+    {
+      "filmId": 44076,
+      "nameRu": "Д`Артаньян и три мушкетера (мини-сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1979",
+      "description": "СССР, Георгий Юнгвальд-Хилькевич(мюзикл)",
+      "filmLength": "4:10",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "история"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 68102,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44076.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44076.jpg"
+    },
+    {
+      "filmId": 41149,
+      "nameRu": "Даун Хаус",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "2001",
+      "description": "Россия, Роман Качанов(комедия)",
+      "filmLength": "1:20",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "7.3",
+      "ratingVoteCount": 28047,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/41149.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/41149.jpg"
+    },
+    {
+      "filmId": 41133,
+      "nameRu": "ДМБ",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "2000",
+      "description": "Россия, Роман Качанов(комедия)",
+      "filmLength": "1:25",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "7.8",
+      "ratingVoteCount": 43292,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/41133.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/41133.jpg"
+    },
+    {
+      "filmId": 46789,
+      "nameRu": "12 стульев",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1971",
+      "description": "СССР, Леонид Гайдай(комедия)",
+      "filmLength": "2:33",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 179736,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46789.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46789.jpg"
+    },
+    {
+      "filmId": 44386,
+      "nameRu": "Джентльмены удачи",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1971",
+      "description": "СССР, Александр Серый(драма)",
+      "filmLength": "1:24",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.5",
+      "ratingVoteCount": 442589,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44386.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44386.jpg"
+    },
+    {
+      "filmId": 81432,
+      "nameRu": "Формула любви (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1984",
+      "description": "СССР, Марк Захаров(мелодрама)",
+      "filmLength": "1:30",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 45985,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/81432.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/81432.jpg"
+    },
+    {
+      "filmId": 77331,
+      "nameRu": "Ирония судьбы, или С легким паром! (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1975",
+      "description": "СССР, Эльдар Рязанов(мелодрама)",
+      "filmLength": "3:04",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 258515,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/77331.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/77331.jpg"
+    },
+    {
+      "filmId": 42664,
+      "nameRu": "Иван Васильевич меняет профессию",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1973",
+      "description": "СССР, Леонид Гайдай(фантастика)",
+      "filmLength": "1:28",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "фантастика"
+        },
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "приключения"
+        }
+      ],
+      "rating": "8.8",
+      "ratingVoteCount": 635424,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/42664.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/42664.jpg"
+    },
+    {
+      "filmId": 44691,
+      "nameRu": "Калина красная",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1973",
+      "description": "СССР, Василий Шукшин(драма)",
+      "filmLength": "1:50",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "драма"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 28489,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44691.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44691.jpg"
+    },
+    {
+      "filmId": 44745,
+      "nameRu": "Кавказская пленница, или Новые приключения Шурика",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1966",
+      "description": "СССР, Леонид Гайдай(комедия)",
+      "filmLength": "1:22",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "мелодрама"
+        }
+      ],
+      "rating": "8.5",
+      "ratingVoteCount": 421885,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44745.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44745.jpg"
+    },
+    {
+      "filmId": 44811,
+      "nameRu": "Кин-дза-дза!",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1986",
+      "description": "СССР, Георгий Данелия(фантастика)",
+      "filmLength": "2:15",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "фантастика"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "7.9",
+      "ratingVoteCount": 112056,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44811.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44811.jpg"
+    },
+    {
+      "filmId": 45146,
+      "nameRu": "Любовь и голуби",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1984",
+      "description": "СССР, Владимир Меньшов(мелодрама)",
+      "filmLength": "1:47",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.3",
+      "ratingVoteCount": 442069,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/45146.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/45146.jpg"
+    },
+    {
+      "filmId": 251884,
+      "nameRu": "Малыш и Карлсон",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1968",
+      "description": "СССР, Борис Степанцев(мультфильм)",
+      "filmLength": "0:20",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "короткометражка"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.4",
+      "ratingVoteCount": 77025,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/251884.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/251884.jpg"
+    },
+    {
+      "filmId": 79429,
+      "nameRu": "Мастер и Маргарита (мини-сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "2005",
+      "description": "Россия, Владимир Бортко(триллер)",
+      "filmLength": "8:20",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "триллер"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "мелодрама"
+        }
+      ],
+      "rating": "7.8",
+      "ratingVoteCount": 83291,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/79429.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/79429.jpg"
+    },
+    {
+      "filmId": 77202,
+      "nameRu": "Место встречи изменить нельзя (мини-сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1979",
+      "description": "СССР, Станислав Говорухин(криминал)",
+      "filmLength": "1:00",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "криминал"
+        },
+        {
+          "genre": "детектив"
+        },
+        {
+          "genre": "боевик"
+        }
+      ],
+      "rating": "9.0",
+      "ratingVoteCount": 199268,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/77202.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/77202.jpg"
+    },
+    {
+      "filmId": 46638,
+      "nameRu": "Мимино",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1977",
+      "description": "СССР, Георгий Данелия(драма)",
+      "filmLength": "1:32",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 82636,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46638.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46638.jpg"
+    },
+    {
+      "filmId": 46708,
+      "nameRu": "Москва слезам не верит",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1979",
+      "description": "СССР, Владимир Меньшов(драма)",
+      "filmLength": "2:30",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.4",
+      "ratingVoteCount": 369191,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46708.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46708.jpg"
+    },
+    {
+      "filmId": 46420,
+      "nameRu": "Неуловимые мстители",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1966",
+      "description": "СССР, Эдмонд Кеосаян(приключения)",
+      "filmLength": "1:14",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "боевик"
+        }
+      ],
+      "rating": "8.0",
+      "ratingVoteCount": 44313,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/46420.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/46420.jpg"
+    },
+    {
+      "filmId": 42782,
+      "nameRu": "Операция «Ы» и другие приключения Шурика",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1965",
+      "description": "СССР, Леонид Гайдай(комедия)",
+      "filmLength": "1:35",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "криминал"
+        }
+      ],
+      "rating": "8.7",
+      "ratingVoteCount": 554565,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/42782.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/42782.jpg"
+    },
+    {
+      "filmId": 573759,
+      "nameRu": "Остров сокровищ (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1988",
+      "description": "СССР, Давид Черкасский(мультфильм)",
+      "filmLength": "1:47",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "приключения"
+        },
+        {
+          "genre": "мюзикл"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 95632,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/573759.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/573759.jpg"
+    },
+    {
+      "filmId": 42866,
+      "nameRu": "Падал прошлогодний снег (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1983",
+      "description": "СССР, Александр Татарский(мультфильм)",
+      "filmLength": "0:20",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "короткометражка"
+        },
+        {
+          "genre": "фэнтези"
+        }
+      ],
+      "rating": "8.8",
+      "ratingVoteCount": 59553,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/42866.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/42866.jpg"
+    },
+    {
+      "filmId": 77301,
+      "nameRu": "Приключения Буратино (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1975",
+      "description": "СССР, Леонид Нечаев(детский)",
+      "filmLength": "2:10",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "детский"
+        },
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "фэнтези"
+        }
+      ],
+      "rating": "7.9",
+      "ratingVoteCount": 51446,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/77301.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/77301.jpg"
+    },
+    {
+      "filmId": 43254,
+      "nameRu": "Приключения капитана Врунгеля (сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1976-1979",
+      "description": "СССР, Давид Черкасский(мультфильм)",
+      "filmLength": "2:08",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "приключения"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 45969,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/43254.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/43254.jpg"
+    },
+    {
+      "filmId": 417755,
+      "nameRu": "Следствие ведут Колобки (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1986",
+      "description": "СССР, Александр Татарский(мультфильм)",
+      "filmLength": "0:21",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "короткометражка"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.1",
+      "ratingVoteCount": 25507,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/417755.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/417755.jpg"
+    },
+    {
+      "filmId": 43869,
+      "nameRu": "Служебный роман",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1977",
+      "description": "СССР, Эльдар Рязанов(драма)",
+      "filmLength": "2:39",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "мелодрама"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.3",
+      "ratingVoteCount": 298716,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/43869.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/43869.jpg"
+    },
+    {
+      "filmId": 77335,
+      "nameRu": "Собачье сердце (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1988",
+      "description": "СССР, Владимир Бортко(фантастика)",
+      "filmLength": "2:16",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "фантастика"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.3",
+      "ratingVoteCount": 209159,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/77335.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/77335.jpg"
+    },
+    {
+      "filmId": 44045,
+      "nameRu": "Свадьба в Малиновке",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1967",
+      "description": "СССР, Андрей Тутышкин(мюзикл)",
+      "filmLength": "1:35",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "военный"
+        }
+      ],
+      "rating": "8.0",
+      "ratingVoteCount": 64281,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/44045.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/44045.jpg"
+    },
+    {
+      "filmId": 42326,
+      "nameRu": "Трое из Простоквашино",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1978",
+      "description": "СССР, Владимир Попов(мультфильм)",
+      "filmLength": "0:19",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "короткометражка"
+        },
+        {
+          "genre": "семейный"
+        }
+      ],
+      "rating": "8.8",
+      "ratingVoteCount": 228121,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/42326.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/42326.jpg"
+    },
+    {
+      "filmId": 45880,
+      "nameRu": "Возвращение блудного попугая (мини-сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1984",
+      "description": "СССР, Валентин Караваев(мультфильм)",
+      "filmLength": "0:10",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мультфильм"
+        },
+        {
+          "genre": "комедия"
+        },
+        {
+          "genre": "семейный"
+        }
+      ],
+      "rating": "8.0",
+      "ratingVoteCount": 50647,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/45880.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/45880.jpg"
+    },
+    {
+      "filmId": 45389,
+      "nameRu": "Золотой телёнок",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1968",
+      "description": "СССР, Михаил Швейцер(комедия)",
+      "filmLength": "2:44",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 87772,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/45389.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/45389.jpg"
+    },
+    {
+      "filmId": 378244,
+      "nameRu": "Ликвидация (сериал)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "2007",
+      "description": "Россия, Сергей Урсуляк(детектив)",
+      "filmLength": "0:45",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "детектив"
+        },
+        {
+          "genre": "криминал"
+        },
+        {
+          "genre": "триллер"
+        }
+      ],
+      "rating": "8.4",
+      "ratingVoteCount": 68759,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/378244.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/378244.jpg"
+    },
+    {
+      "filmId": 77203,
+      "nameRu": "Покровские ворота (ТВ)",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1982",
+      "description": "СССР, Михаил Козаков(мюзикл)",
+      "filmLength": "2:20",
+      "countries": [
+        {
+          "country": "СССР"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "мюзикл"
+        },
+        {
+          "genre": "драма"
+        },
+        {
+          "genre": "мелодрама"
+        }
+      ],
+      "rating": "8.2",
+      "ratingVoteCount": 87341,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/77203.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/77203.jpg"
+    },
+    {
+      "filmId": 7653,
+      "nameRu": "Особенности национальной охоты",
+      "nameEn": "",
+      "type": "UNKNOWN",
+      "year": "1995",
+      "description": "Россия, Александр Рогожкин(комедия)",
+      "filmLength": "1:33",
+      "countries": [
+        {
+          "country": "Россия"
+        }
+      ],
+      "genres": [
+        {
+          "genre": "комедия"
+        }
+      ],
+      "rating": "7.6",
+      "ratingVoteCount": 89457,
+      "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/7653.jpg",
+      "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/7653.jpg"
+    }
+  ]
+}

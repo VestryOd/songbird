@@ -1,0 +1,35 @@
+@import '../../../scss/constants';
+@import '../../../scss/placeholders';
+@import '../../../scss/mixins';
+
+.header {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 10px;
+  & div:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  & div:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.item {
+  width: 25%;
+  height: 40px;
+  font-family: 'Poiret One', cursive;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #de4307 0%, $color-main-accent 100%);
+  @include font(2rem, 4rem, 300);
+  @extend %text-shadow;
+  @extend %transition;
+}
+
+.active {
+  font-weight: 400;
+  background: linear-gradient(180deg, $color-main-accent-lighter 0%, $color-main-lighter 100%);
+}
