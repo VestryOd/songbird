@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import style from './TrackList.module.scss';
@@ -10,11 +10,10 @@ import success from './audios/success.mp3';
 import error from './audios/error.mp3';
 
 const TrackList = ({ filmsData, tracks, gussedTrackId, onScoreChange, onGroupChange, isGuessed, onGuessed }) => {
-  const initTracksStyles = generateTracksStyles(tracks, 'unmarked');
+  const initTracksStyles = useMemo(() => generateTracksStyles(tracks, 'unmarked'), [tracks]);
 
   const [current, setCurrent] = useState(null);
   const [score, setScore] = useState(5);
-  // const [isGuessed, setIsGuessed] = useState(false);
   const [trackStyles, setTrackStyles] = useState(initTracksStyles);
 
   const markTrack = (idx, nameOfClass) => {
@@ -29,7 +28,7 @@ const TrackList = ({ filmsData, tracks, gussedTrackId, onScoreChange, onGroupCha
     setTrackStyles(initTracksStyles);
     setScore(5);
     setCurrent(null);
-  }, [filmsData, tracks]);
+  }, [filmsData, tracks, initTracksStyles]);
 
   const handleTrackClick = (item, idx) => {
     const { filmId, name } = item;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import style from './GamePage.module.scss';
 import GameHeader from './GameHeader';
@@ -15,8 +15,8 @@ const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
   };
 
   const { filmsData, gameDataSets } = dataSets;
-  const current = gameDataSets[groupCount];
-  console.log(current);
+  const current = useMemo(() => gameDataSets[groupCount], [gameDataSets, groupCount]);
+  console.log(current, groupCount);
   const { nameRu, nameEn } = current?.currentFilm;
   const { filmId, name } = current?.currentAudio;
   return (

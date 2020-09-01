@@ -11,6 +11,7 @@ const Player = ({ isPlaying, audio = '' }) => {
     showSkipControls: false,
     showJumpControls: false,
     autoPlayAfterSrcChange: false,
+    volume: 0.5,
   };
 
   return (

@@ -15,7 +15,7 @@ const GenderChoice = ({ genders }) => (
           id={`gender-${el.value}`}
           name="gender"
           value={el.label}
-          defaultChecked={el.value === 'notSure'}
+          defaultChecked={el.value === 'person'}
         />
         <label className={style.label} htmlFor={`gender-${el.value}`}>
           {el.label}

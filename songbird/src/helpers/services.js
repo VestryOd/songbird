@@ -60,6 +60,7 @@ const getStats = () => {
 const ageBreakPoinst = [12, 13, 20, 15];
 
 const defineAge = (scoreLevels) => {
+  console.log('defineAge');
   let age = 0;
   scoreLevels.forEach((point, idx) => {
     const calculated = point === 0 ? 0 : ageBreakPoinst[idx] * (point / 5);
@@ -69,6 +70,7 @@ const defineAge = (scoreLevels) => {
 };
 
 const defineAgeGroup = (age) => {
+  console.log('defineAgeGroup');
   if (!age) return 0;
 
   if (age >= 0 && age <= 12) {
@@ -93,6 +95,7 @@ const defineAgeGroup = (age) => {
 };
 
 const defineGenderGroup = (gender) => {
+  console.log('defineGenderGroup');
   if (!gender || gender.length === 0) {
     return 'person';
   }
@@ -103,40 +106,37 @@ const defineGenderGroup = (gender) => {
 
 const rand = (max, min = 0) => {
   const offset = min;
-  const range = max - min + 1;
+  const range = max - min;
   return Math.floor(Math.random() * range) + offset;
 };
 
 const getAvatarImage = (gender, age, avatars) => {
+  console.log('getAvatarImage');
   const ageGroup = defineAgeGroup(age);
-  console.log(ageGroup);
   const genderGroup = defineGenderGroup(gender);
-  console.log(genderGroup);
 
   const isNoGender = gender === welcomePage.ru.gender[2].label;
-  console.log(isNoGender);
   const avatarPack = isNoGender ? avatars[genderGroup] : avatars[genderGroup][ageGroup];
-  console.log(avatarPack);
 
   if (isNoGender) {
-    console.log('isNoGender');
     return ageGroup >= 2 ? avatarPack[2] : avatarPack[ageGroup];
   }
 
   if (avatarPack.length === 1) {
-    console.log(avatarPack.length === 1);
     return avatarPack[0];
   }
 
   const index = rand(avatarPack.length);
-  console.log(index);
   return index >= avatarPack.length ? avatarPack[index - 1] : avatarPack[index];
 };
 
 const getResultsStatus = (gender, age, statusLabels) => {
+  console.log('getResultsStatus');
   const ageGroup = defineAgeGroup(age);
   const genderGroup = defineGenderGroup(gender);
-  return statusLabels[genderGroup][ageGroup];
+  const labelsPack = statusLabels[genderGroup];
+  console.log(ageGroup, genderGroup);
+  return ageGroup >= labelsPack.length ? labelsPack[labelsPack.length - 1] : labelsPack[ageGroup];
 };
 
 const getRandomSet = (arr, howMatchToGet) => {
@@ -156,6 +156,7 @@ const getRandomSet = (arr, howMatchToGet) => {
 };
 
 const prepareTitle = (title, name, score) => {
+  console.log('prepareTitle');
   const replacedName = title.replace('{name}', name);
   const replaceScore = replacedName.replace('{score}', score);
   return replaceScore;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './App.module.scss';
 import Header from '../Header';
 import moviesData from '../../assets/films/movies';
@@ -18,7 +18,6 @@ const dataSets = prepareAllData(moviesData, quotesData);
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [userData, setUserData] = useState(initialUserData);
-  const [isFinish, setIsFinish] = useState(false);
   const [groupCount, setGroupCount] = useState(0);
   const [score, setScore] = useState(0);
   const [scoreSets, setScoreSets] = useState([]);
@@ -44,28 +43,37 @@ function App() {
     setGroupCount((prevGroup) => prevGroup + 1);
   };
 
-  useEffect(() => {
-    if (groupCount === 3) {
-      setIsFinish(true);
-    }
-  }, [groupCount]);
+  const onGameAgain = () => {
+    setUserData(initialUserData);
+    setIsPlaying(false);
+    setGroupCount(0);
+    setScore(0);
+    setScoreSets([]);
+  };
 
   let mainOutput = null;
 
-  if (isFinish) {
-    mainOutput = <ResultsPage userData={userData} scoreSets={scoreSets} score={score} />;
+  if (groupCount < 4) {
+    console.log('!isFinish');
+    mainOutput = !isPlaying ? (
+      <WelcomePage onUserDataChange={onUserDataChange} />
+    ) : (
+      <GamePage
+        dataSets={dataSets}
+        groupCount={groupCount}
+        onScoreChange={onScoreChange}
+        onGroupChange={onGroupChange}
+      />
+    );
+  } else {
+    console.log('isFinish');
+    mainOutput = <ResultsPage userData={userData} scoreSets={scoreSets} score={score} onGameAgain={onGameAgain} />;
   }
-
-  mainOutput = !isPlaying ? (
-    <WelcomePage onUserDataChange={onUserDataChange} />
-  ) : (
-    <GamePage dataSets={dataSets} groupCount={groupCount} onScoreChange={onScoreChange} onGroupChange={onGroupChange} />
-  );
 
   return (
     <div className={style.app}>
       <div className={style.container}>
-        <Header scorePoints={score} />
+        <Header scorePoints={score} isPlaying={isPlaying} />
         {mainOutput}
       </div>
       <div className={style.bg}></div>
