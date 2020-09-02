@@ -7,8 +7,6 @@ const prepareDataSets = (quotesArray, filmsData) => {
     const data = getRandomSet(el.data, 6);
     const rndIdx = rand(data.length);
     const currentAudio = data[rndIdx];
-    // console.log(data, rndIdx, currentAudio);
-    // const { filmId } = currentAudio;
     const currentFilm = filmsData[currentAudio?.filmId];
     result.push({
       title: groups[el.title],

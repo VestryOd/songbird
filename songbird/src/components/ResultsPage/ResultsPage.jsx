@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import style from './ResultsPage.module.scss';
 import { defineAge, getAvatarImage, prepareTitle, getResultsStatus } from '../../helpers/services';
@@ -15,11 +15,6 @@ const ResultsPage = ({ userData: { gender, name }, scoreSets, score, onGameAgain
   const age = useMemo(() => defineAge(scoreSets), [scoreSets]);
   const avatar = useMemo(() => getAvatarImage(gender, age, avatars), [gender, age]);
   const preparedStatus = useMemo(() => getResultsStatus(gender, age, status), [gender, age, status]);
-  const logger = useCallback(() => {
-    console.log(age, avatar, preparedStatus);
-  }, [age, avatar, preparedStatus]);
-
-  logger();
 
   const mainOutput = !isCalculated ? (
     <div className={style.result}>

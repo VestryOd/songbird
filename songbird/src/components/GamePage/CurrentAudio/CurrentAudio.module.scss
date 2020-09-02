@@ -5,11 +5,18 @@
 .wrapper {
   display: flex;
   padding: 20px;
+  @include media-mobile {
+    flex-direction: column;
+  }
 }
 
 .poster {
   width: 180px;
   height: auto;
+  @include media-mobile {
+    width: 100%;
+    margin: 0 auto;
+  }
   & img {
     width: calc(100% - 10px);
     border-radius: 10px;
@@ -23,6 +30,9 @@
   flex-grow: 1;
   justify-content: center;
   padding: 0 20px;
+  @include media-mobile {
+    padding: 0;
+  }
 }
 
 .title {
@@ -32,4 +42,7 @@
   border-bottom: 1px solid $color-main-accent;
   @include font(2.4rem, 4rem);
   @extend %text-shadow;
+  @include media-mobile {
+    text-align: center;
+  }
 }

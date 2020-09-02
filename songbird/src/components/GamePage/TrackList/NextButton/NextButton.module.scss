@@ -3,7 +3,7 @@
 @import '../../../../scss/mixins';
 
 .wrapper {
-  margin-top: 30px;
+  margin: 20px 0;
 }
 
 .next {
@@ -29,8 +29,4 @@
 .unguessed {
   background-color: $color-gray;
   pointer-events: none;
-  // &:hover {
-  //   background-color: $color-gray;
-  //   box-shadow: inherit;
-  // }
 }

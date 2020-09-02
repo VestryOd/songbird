@@ -1,7 +1,15 @@
 @import '../../scss/constants';
+@import '../../scss/mixins';
 
 .wrapper {
   margin-bottom: 30px;
+  @include media-tablet {
+    max-width: 640px;
+    margin: 30px auto;
+  }
+  @include media-mobile {
+    padding: 0 20px;
+  }
 }
 
 .game {

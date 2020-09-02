@@ -7,6 +7,9 @@
   width: 100%;
   margin: 20px 0;
   border-radius: 10px;
+  @include media-mobile {
+    justify-content: center;
+  }
   & div:first-of-type {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -24,12 +27,26 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   background: linear-gradient(180deg, #de4307 0%, $color-main-accent 100%);
+  visibility: visible;
   @include font(2rem, 4rem, 300);
   @extend %text-shadow;
   @extend %transition;
+  @include media-mobile {
+    width: 0;
+    font-size: 1px;
+    visibility: hidden;
+  }
 }
 
 .active {
   font-weight: 400;
   background: linear-gradient(180deg, $color-main-accent-lighter 0%, $color-main-lighter 100%);
+  visibility: visible;
+  @include media-mobile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 2.2rem;
+    border-radius: 10px;
+  }
 }

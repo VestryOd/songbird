@@ -9,7 +9,6 @@ import audios from '../../../../assets/audios';
 import noPoster from '../../../../assets/pictures/no_poster.jpg';
 
 const Details = ({ film, name }) => {
-  console.log(film, name);
   const { nameEn, nameRu, year, rating, genres, filmId } = film;
   const link = kipoiskUrl.replace('{filmId}', filmId);
   return (

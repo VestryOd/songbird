@@ -3,22 +3,36 @@
 @import '../../scss/mixins';
 
 .wrapper {
-  width: 100%;
+  width: calc(100% - 80px);
+  min-width: 280px;
   max-width: $desktop-width;
   margin: 50px auto;
   padding: 20px;
   background-color: $color-main-bg;
   border-radius: 20px;
   @extend %box-shadow-bold;
+  @include media-laptop {
+    padding: 0 20px;
+  }
+  @include media-tablet {
+    padding: 20px 0;
+  }
+  & > p {
+    margin: 5px 0;
+  }
 }
 
 .title {
   margin: 20px 0;
-  padding: 10px 0 30px 0;
+  padding: 10px 10px 30px 10px;
   letter-spacing: 1px;
   border-bottom: 1px solid $color-main;
   @include font(4rem, 4rem, 300);
   @extend %text-shadow;
+  @include media-laptop {
+    font-size: 3.4rem;
+    line-height: 4.5rem;
+  }
 }
 
 .result {
@@ -43,9 +57,18 @@
 .calculate-label,
 .age-label,
 .status {
-  padding: 20px 0;
+  padding: 20px 10px;
   @include font(3rem, 3rem, 300);
   @extend %text-shadow;
+}
+
+.age-label,
+.status {
+  @include media-mobile {
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    word-spacing: 1px;
+  }
 }
 
 .age {
@@ -63,7 +86,7 @@
 
 .again {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   height: 50px;
   margin-bottom: 30px;
   color: $color-light-text;
@@ -76,6 +99,11 @@
   @extend %text-shadow;
   @extend %transition;
   @extend %button-box-shadow;
+  @include media-mobile {
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    word-spacing: 1px;
+  }
   &:hover {
     background-color: $color-success-lighter;
     @extend %button-box-shadow-hover;

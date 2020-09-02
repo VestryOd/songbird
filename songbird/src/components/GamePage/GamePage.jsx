@@ -16,7 +16,6 @@ const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
 
   const { filmsData, gameDataSets } = dataSets;
   const current = useMemo(() => gameDataSets[groupCount], [gameDataSets, groupCount]);
-  console.log(current, groupCount);
   const { nameRu, nameEn } = current?.currentFilm;
   const { filmId, name } = current?.currentAudio;
   return (

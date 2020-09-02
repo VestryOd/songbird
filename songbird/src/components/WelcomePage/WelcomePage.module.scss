@@ -3,13 +3,17 @@
 @import '../../scss/placeholders';
 
 .wrapper {
-  width: 100%;
+  width: calc(100% - 100px);
+  min-width: 260px;
   max-width: $desktop-width;
   margin: 50px auto;
   padding: 20px;
   background-color: $color-main-bg;
   border-radius: 20px;
   @extend %box-shadow-bold;
+  @include media-mobile {
+    padding: 0 10px;
+  }
   & p {
     margin: 20px 0;
     padding: 0 20px;
@@ -28,12 +32,19 @@
   border-bottom: 1px solid $color-main;
   @include font(4rem, 4rem, 300);
   @extend %text-shadow;
+  @include media-mobile {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
 }
 
 .description,
 .label {
   letter-spacing: 1px;
   @include font(2rem, 3rem, 400);
+  @include media-mobile {
+    font-size: 1.8rem;
+  }
 }
 
 .label {
@@ -52,10 +63,16 @@
 .user {
   display: flex;
   justify-content: center;
+  @include media-mobile {
+    flex-direction: column;
+  }
 }
 
 .form-item {
   padding: 10px 20px;
+  @include media-mobile {
+    padding: 10px 0;
+  }
 }
 
 fieldset {
@@ -79,6 +96,9 @@ legend {
   font-size: 1.6rem;
   border-radius: 5px;
   @extend %transition;
+  @include media-mobile {
+    min-width: 195px;
+  }
 }
 
 .details {

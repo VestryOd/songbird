@@ -6,26 +6,43 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 30px;
+  @include media-tablet {
+    padding: 0 20px;
+  }
 }
 
 .content {
   display: flex;
+  @include media-tablet {
+    flex-direction: column;
+  }
   & > div {
     width: 50%;
+    @include media-tablet {
+      width: 100%;
+    }
   }
 }
 
-.tracks {
+.tracks,
+.details {
   display: flex;
   flex-direction: column;
   padding: 0 20px;
+  @include media-tablet {
+    max-width: 500px;
+    margin: 30px auto;
+  }
+  @include media-mobile {
+    min-height: 250px;
+    padding: 0;
+  }
 }
 
 .list {
   height: 100%;
   margin: 0;
   padding-left: 0;
-  // font-family: 'Poiret One', cursive;
   letter-spacing: 1px;
   background-color: $color-item-bg;
   border-radius: 10px;
@@ -56,6 +73,10 @@
   border-bottom: 1px solid $color-border;
   @include font(2.4rem, normal, 500);
   @extend %transition;
+  @include media-mobile {
+    padding: 0 10px;
+    font-size: 1.8rem;
+  }
   &:hover {
     background-color: $color-main-lighter;
   }
@@ -81,8 +102,10 @@
 }
 
 .details {
-  // display: flex;
   padding: 0 20px;
+  @include media-mobile {
+    padding: 0;
+  }
 }
 
 .inner {
@@ -93,8 +116,19 @@
   padding: 10px;
   background-color: $color-item-bg;
   background-image: url('./Details/plenka_2.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;
   border-radius: 10px;
-  @extend %background-image;
+  @include media-tablet {
+    min-height: 300px;
+    background-position: center 70%;
+    background-size: 100%;
+  }
+  @include media-mobile {
+    min-height: 250px;
+    background-position: center 95%;
+  }
   & span {
     padding-top: 20px;
     color: $color-gray;

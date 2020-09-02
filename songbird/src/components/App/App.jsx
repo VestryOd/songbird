@@ -13,7 +13,7 @@ const initialUserData = Object.freeze({
   name: '',
 });
 
-const dataSets = prepareAllData(moviesData, quotesData);
+const initSets = prepareAllData(moviesData, quotesData);
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -21,6 +21,7 @@ function App() {
   const [groupCount, setGroupCount] = useState(0);
   const [score, setScore] = useState(0);
   const [scoreSets, setScoreSets] = useState([]);
+  const [dataSets, setDataSets] = useState(initSets);
 
   const onUserDataChange = (target) => {
     const { gender, name } = target;
@@ -49,12 +50,13 @@ function App() {
     setGroupCount(0);
     setScore(0);
     setScoreSets([]);
+    const newSets = prepareAllData(moviesData, quotesData);
+    setDataSets(newSets);
   };
 
   let mainOutput = null;
 
   if (groupCount < 4) {
-    console.log('!isFinish');
     mainOutput = !isPlaying ? (
       <WelcomePage onUserDataChange={onUserDataChange} />
     ) : (
@@ -66,7 +68,6 @@ function App() {
       />
     );
   } else {
-    console.log('isFinish');
     mainOutput = <ResultsPage userData={userData} scoreSets={scoreSets} score={score} onGameAgain={onGameAgain} />;
   }
 
