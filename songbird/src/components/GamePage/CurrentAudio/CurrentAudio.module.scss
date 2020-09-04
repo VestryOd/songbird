@@ -40,9 +40,17 @@
   padding-bottom: 10px;
   text-align: left;
   border-bottom: 1px solid $color-main-accent;
-  @include font(2.4rem, 4rem);
+  @include font(3rem, 4rem);
   @extend %text-shadow;
   @include media-tablet {
     text-align: center;
   }
+}
+
+.player-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-item-bg;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
 }

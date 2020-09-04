@@ -3,30 +3,32 @@
 @import '../../../../scss/mixins';
 
 .wrapper {
-  margin: 0;
+  margin-bottom: 20px;
 }
 
 .next {
   width: 100%;
-  max-width: 320px;
-  height: 50px;
+  max-width: 250px;
+  height: 40px;
   color: $color-light-text;
   font-family: 'Poiret One', cursive;
-  background-color: $color-success;
+  background-color: $color-success-lighter;
   border-color: transparent;
   border-radius: 20px;
   cursor: pointer;
   @include font(3rem);
-  @extend %text-shadow;
   @extend %transition;
-  @extend %button-box-shadow;
   &:hover {
-    background-color: $color-success-lighter;
+    background-color: $color-success;
+    @extend %text-shadow;
     @extend %button-box-shadow-hover;
   }
 }
 
 .unguessed {
-  background-color: $color-gray;
+  color: $color-gray-light;
+  text-shadow: none;
+  background-color: transparent;
+  box-shadow: none;
   pointer-events: none;
 }

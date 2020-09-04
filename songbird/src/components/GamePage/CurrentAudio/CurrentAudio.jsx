@@ -16,8 +16,10 @@ const CurrentAudio = ({ audio, nameRu, poster, onGroupChange, onGuessed, isGuess
       </div>
       <div className={style.track}>
         <h3 className={style.title}>{title}</h3>
-        <Player isPlaying={false} audio={audio} isStopped={isGuessed} />
-        <NextButton isGuessed={isGuessed} onGroupChange={onGroupChange} onGuessed={onGuessed} />
+        <div className={style['player-wrapper']}>
+          <Player isPlaying={false} audio={audio} isStopped={isGuessed} />
+          <NextButton isGuessed={isGuessed} onGroupChange={onGroupChange} onGuessed={onGuessed} />
+        </div>
       </div>
     </div>
   );
