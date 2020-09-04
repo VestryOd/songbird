@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import style from './TrackList.module.scss';
 import Details from './Details';
-import NextButton from './NextButton';
 import { noTrackChoised } from '../../../assets/text-data';
 import { playAudio, generateTracksStyles } from '../../../helpers/services';
 import success from './audios/success.mp3';
 import error from './audios/error.mp3';
 
-const TrackList = ({ filmsData, tracks, gussedTrackId, onScoreChange, onGroupChange, isGuessed, onGuessed }) => {
+const TrackList = ({ filmsData, tracks, gussedTrackId, onScoreChange, isGuessed, onGuessed }) => {
   const initTracksStyles = useMemo(() => generateTracksStyles(tracks, 'unmarked'), [tracks]);
 
   const [current, setCurrent] = useState(null);
@@ -78,7 +77,6 @@ const TrackList = ({ filmsData, tracks, gussedTrackId, onScoreChange, onGroupCha
           <div className={style.inner}>{details}</div>
         </div>
       </div>
-      <NextButton isGuessed={isGuessed} onGroupChange={onGroupChange} onGuessed={onGuessed} />
     </div>
   );
 };
@@ -88,7 +86,6 @@ TrackList.propTypes = {
   tracks: PropTypes.array,
   gussedTrackId: PropTypes.number,
   onScoreChange: PropTypes.func,
-  onGroupChange: PropTypes.func,
   isGuessed: PropTypes.bool,
   onGuessed: PropTypes.func,
 };

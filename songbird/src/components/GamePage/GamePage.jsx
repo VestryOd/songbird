@@ -24,13 +24,19 @@ const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
         <>
           <GameHeader categories={gameDataSets} groupCount={groupCount} />
           <div className={style.game}>
-            <CurrentAudio audio={audios[name]} nameRu={nameRu} poster={posters[nameEn]} isGuessed={isGuessed} />
+            <CurrentAudio
+              audio={audios[name]}
+              nameRu={nameRu}
+              poster={posters[nameEn]}
+              isGuessed={isGuessed}
+              onGroupChange={onGroupChange}
+              onGuessed={onGuessed}
+            />
             <TrackList
               filmsData={filmsData}
               tracks={current.data}
               gussedTrackId={filmId}
               onScoreChange={onScoreChange}
-              onGroupChange={onGroupChange}
               isGuessed={isGuessed}
               onGuessed={onGuessed}
             />

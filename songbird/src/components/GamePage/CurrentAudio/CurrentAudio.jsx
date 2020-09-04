@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Player from '../Player';
+import NextButton from './NextButton';
 import style from './CurrentAudio.module.scss';
 import noPoster from '../../../assets/pictures/no_poster.jpg';
 
-const CurrentAudio = ({ audio, nameRu, poster, isGuessed = true }) => {
+const CurrentAudio = ({ audio, nameRu, poster, onGroupChange, onGuessed, isGuessed = true }) => {
   const title = isGuessed ? nameRu : new Array(nameRu.length).fill('*').join('');
   const image = isGuessed ? poster : noPoster;
   console.log(`Правильный ответ: ${nameRu}`);
@@ -16,6 +17,7 @@ const CurrentAudio = ({ audio, nameRu, poster, isGuessed = true }) => {
       <div className={style.track}>
         <h3 className={style.title}>{title}</h3>
         <Player isPlaying={false} audio={audio} isStopped={isGuessed} />
+        <NextButton isGuessed={isGuessed} onGroupChange={onGroupChange} onGuessed={onGuessed} />
       </div>
     </div>
   );
@@ -26,6 +28,8 @@ CurrentAudio.propTypes = {
   nameRu: PropTypes.string,
   poster: PropTypes.string,
   isGuessed: PropTypes.bool,
+  onGroupChange: PropTypes.func,
+  onGuessed: PropTypes.func,
 };
 
 export default CurrentAudio;
