@@ -2,7 +2,12 @@
 @import '../../scss/mixins';
 
 .wrapper {
-  margin-bottom: 30px;
+  width: calc(100% - 40px);
+  min-width: 260px;
+  max-width: $desktop-width;
+  margin: 0 auto 30px auto;
+  padding: 20px;
+  // margin-bottom: 30px;
   @include media-tablet {
     max-width: 640px;
     margin: 30px auto;

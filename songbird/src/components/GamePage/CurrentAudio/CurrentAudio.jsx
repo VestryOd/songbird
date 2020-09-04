@@ -7,6 +7,7 @@ import noPoster from '../../../assets/pictures/no_poster.jpg';
 const CurrentAudio = ({ audio, nameRu, poster, isGuessed = true }) => {
   const title = isGuessed ? nameRu : new Array(nameRu.length).fill('*').join('');
   const image = isGuessed ? poster : noPoster;
+  console.log(`Правильный ответ: ${nameRu}`);
   return (
     <div className={style.wrapper}>
       <div className={style.poster}>
@@ -14,7 +15,7 @@ const CurrentAudio = ({ audio, nameRu, poster, isGuessed = true }) => {
       </div>
       <div className={style.track}>
         <h3 className={style.title}>{title}</h3>
-        <Player isPlaying={false} audio={audio} />
+        <Player isPlaying={false} audio={audio} isStopped={isGuessed} />
       </div>
     </div>
   );

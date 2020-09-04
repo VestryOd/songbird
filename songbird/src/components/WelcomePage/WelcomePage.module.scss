@@ -63,7 +63,7 @@
 .user {
   display: flex;
   justify-content: center;
-  @include media-mobile {
+  @include media-tablet {
     flex-direction: column;
   }
 }
