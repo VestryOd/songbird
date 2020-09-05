@@ -85,6 +85,10 @@
   }
 }
 
+.guessed {
+  background-color: $color-main-lighter;
+}
+
 .marker {
   display: contents;
   height: 100%;

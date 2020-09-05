@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import style from './App.module.scss';
 import Header from '../Header';
 import moviesData from '../../assets/films/movies';
@@ -55,12 +56,15 @@ function App() {
   };
 
   let mainOutput = null;
+  let mainKey = null;
 
   if (groupCount < 4) {
+    mainKey = !isPlaying ? 'welcomepage' : `gamepage-${groupCount}`;
     mainOutput = !isPlaying ? (
-      <WelcomePage onUserDataChange={onUserDataChange} />
+      <WelcomePage key={'welcomepage'} onUserDataChange={onUserDataChange} />
     ) : (
       <GamePage
+        key={'gamepage'}
         dataSets={dataSets}
         groupCount={groupCount}
         onScoreChange={onScoreChange}
@@ -68,14 +72,37 @@ function App() {
       />
     );
   } else {
-    mainOutput = <ResultsPage userData={userData} scoreSets={scoreSets} score={score} onGameAgain={onGameAgain} />;
+    mainKey = 'resultspage';
+    mainOutput = (
+      <ResultsPage
+        key={'resultspage'}
+        userData={userData}
+        scoreSets={scoreSets}
+        score={score}
+        onGameAgain={onGameAgain}
+      />
+    );
   }
 
   return (
     <div className={style.app}>
       <div className={style.container}>
         <Header scorePoints={score} isPlaying={isPlaying} />
-        {mainOutput}
+        <SwitchTransition mode={'out-in'}>
+          <CSSTransition
+            key={mainKey}
+            enter={true}
+            addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+            classNames={{
+              enter: style.transitionEnter,
+              enterActive: style.transitionEnterActive,
+              exit: style.transitionExit,
+              exitActive: style.transitionExitActive,
+            }}
+          >
+            <div>{mainOutput}</div>
+          </CSSTransition>
+        </SwitchTransition>
       </div>
       <div className={style.bg}></div>
     </div>

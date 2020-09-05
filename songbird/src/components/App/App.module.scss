@@ -31,3 +31,18 @@
     color: $color-light-text;
   }
 }
+
+.transitionEnter {
+  opacity: 0;
+}
+.transitionEnterActive {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.transitionExit {
+  opacity: 1;
+}
+.transitionExitActive {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
