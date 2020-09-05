@@ -48,6 +48,7 @@
   background-color: $color-item-bg;
   border-radius: 10px;
   cursor: pointer;
+  @extend %box-shadow-bold;
   & > li:last-of-type {
     border-bottom: 1px solid transparent;
     border-bottom-right-radius: 10px;
@@ -113,6 +114,7 @@
 .inner {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   width: calc(100% - 40px);
   height: calc(100% - 20px);
   margin: 0 auto;
@@ -123,6 +125,7 @@
   background-position: center bottom;
   background-size: contain;
   border-radius: 10px;
+  @extend %box-shadow-bold;
   @include media-laptop {
     min-height: 300px;
     background-position: center 70%;
