@@ -64,7 +64,7 @@ function App() {
       <WelcomePage key={'welcomepage'} onUserDataChange={onUserDataChange} />
     ) : (
       <GamePage
-        key={'gamepage'}
+        key={`gamepage-${groupCount}`}
         dataSets={dataSets}
         groupCount={groupCount}
         onScoreChange={onScoreChange}
@@ -100,7 +100,7 @@ function App() {
               exitActive: style.transitionExitActive,
             }}
           >
-            <div>{mainOutput}</div>
+            <div key={mainKey}>{mainOutput}</div>
           </CSSTransition>
         </SwitchTransition>
       </div>
