@@ -26,15 +26,15 @@ const welcomePage = {
     nameLabel: 'Ваше имя?*',
     gender: [
       {
-        value: 'man',
+        value: 'male',
         label: 'Мужской',
       },
       {
-        value: 'woman',
+        value: 'female',
         label: 'Женский',
       },
       {
-        value: 'notSure',
+        value: 'person',
         label: 'Еще не определился',
       },
     ],
@@ -52,4 +52,30 @@ const nextButton = {
   ru: 'Далее',
 };
 
-export { errorPage, score, welcomePage, noCategories, noTrackChoised, moreAboutFilm, nextButton };
+const resultPage = {
+  ru: {
+    title: 'Поздравляем {name}, баллов Вы набрали целых {score}!',
+    calculateLabel: 'Сейчас подсчитаем Ваш возраст...',
+    ageLabel: 'Итак Ваш возраст:',
+    status: {
+      male: [
+        'Мальченка, подтяни памперс',
+        'Школота, бегом уроки делать',
+        'Сессию уже сдал, студент ?',
+        'Мужик, угости сигареткой',
+        'Дедуля, где твоя вставная челюсть ?',
+      ],
+      female: [
+        'Ну и где твои куклы ?',
+        'После школы сразу домой!',
+        'Девушка, что Вы делаете сегодня после пар ?',
+        'Прожжённая мамаша',
+        'Когда в собес, бабуля ?',
+      ],
+      person: ['Какой чудный карапуз, совсем юный', 'Непонятный подросток', 'Взрослое существо'],
+    },
+    buttonLabel: 'Попробовать снова?',
+  },
+};
+
+export { errorPage, score, welcomePage, noCategories, noTrackChoised, moreAboutFilm, nextButton, resultPage };

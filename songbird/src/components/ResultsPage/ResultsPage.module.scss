@@ -1,3 +1,81 @@
+@import '../../scss/constants';
+@import '../../scss/placeholders';
+@import '../../scss/mixins';
+
 .wrapper {
-  //
+  width: 100%;
+  max-width: $desktop-width;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: $color-main-bg;
+  border-radius: 20px;
+  @extend %box-shadow-bold;
+}
+
+.title {
+  margin: 20px 0;
+  padding: 10px 0 30px 0;
+  letter-spacing: 1px;
+  border-bottom: 1px solid $color-main;
+  @include font(4rem, 4rem, 300);
+  @extend %text-shadow;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculate {
+  width: 90%;
+  max-width: 560px;
+  height: auto;
+  padding: 30px 0;
+  & img {
+    width: 100%;
+    border-radius: 5px;
+    @extend %box-shadow-bold;
+  }
+}
+
+.calculate-label,
+.age-label,
+.status {
+  padding: 20px 0;
+  @include font(3rem, 3rem, 300);
+  @extend %text-shadow;
+}
+
+.age {
+  padding-left: 5px;
+  color: $color-main;
+  font-weight: bold;
+}
+
+.avatar {
+  width: 90%;
+  max-width: 320px;
+  border-radius: 50%;
+  @extend %box-shadow-bold;
+}
+
+.again {
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  color: $color-light-text;
+  font-family: 'Poiret One', cursive;
+  background-color: $color-success;
+  border-color: transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  @include font(3rem);
+  @extend %text-shadow;
+  @extend %transition;
+  @extend %button-box-shadow;
+  &:hover {
+    background-color: $color-success-lighter;
+    @extend %button-box-shadow-hover;
+  }
 }

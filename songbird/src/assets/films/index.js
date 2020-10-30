@@ -1,12 +1,13 @@
 import { groups } from './movies';
-import { prepareFilmsData, shuffleArray, getRandomInt } from '../../helpers/services';
+import { prepareFilmsData, getRandomSet, rand } from '../../helpers/services';
 
 const prepareDataSets = (quotesArray, filmsData) => {
   const result = [];
   quotesArray.forEach((el) => {
-    const data = shuffleArray(el.data).slice(0, 6);
-    const currentAudio = data[getRandomInt(data.length)];
-    // console.log(data, currentAudio);
+    const data = getRandomSet(el.data, 6);
+    const rndIdx = rand(data.length);
+    const currentAudio = data[rndIdx];
+    // console.log(data, rndIdx, currentAudio);
     // const { filmId } = currentAudio;
     const currentFilm = filmsData[currentAudio?.filmId];
     result.push({

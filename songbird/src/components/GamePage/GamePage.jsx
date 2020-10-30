@@ -16,6 +16,7 @@ const GamePage = ({ dataSets, groupCount, onScoreChange, onGroupChange }) => {
 
   const { filmsData, gameDataSets } = dataSets;
   const current = gameDataSets[groupCount];
+  console.log(current);
   const { nameRu, nameEn } = current?.currentFilm;
   const { filmId, name } = current?.currentAudio;
   return (

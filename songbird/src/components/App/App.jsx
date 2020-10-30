@@ -6,6 +6,7 @@ import quotesData from '../../assets/films/quotes';
 import WelcomePage from '../WelcomePage';
 import GamePage from '../GamePage';
 import prepareAllData from '../../assets/films';
+import ResultsPage from '../ResultsPage';
 
 const initialUserData = Object.freeze({
   gender: '',
@@ -20,6 +21,7 @@ function App() {
   const [isFinish, setIsFinish] = useState(false);
   const [groupCount, setGroupCount] = useState(0);
   const [score, setScore] = useState(0);
+  const [scoreSets, setScoreSets] = useState([]);
 
   const onUserDataChange = (target) => {
     const { gender, name } = target;
@@ -33,6 +35,9 @@ function App() {
   const onScoreChange = (value) => {
     const newValue = value < 0 ? 0 : value;
     setScore((prevScore) => prevScore + newValue);
+    const newScoreSets = [...scoreSets];
+    newScoreSets[groupCount] = value;
+    setScoreSets(newScoreSets);
   };
 
   const onGroupChange = () => {
@@ -40,10 +45,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (score === 3) {
+    if (groupCount === 3) {
       setIsFinish(true);
     }
-  }, [score]);
+  }, [groupCount]);
 
   if (isFinish) {
     console.log('finish');
@@ -55,9 +60,14 @@ function App() {
   //   <GamePage />
   // );
 
+  // const mainOutput = (
+  //   <GamePage dataSets={dataSets} groupCount={groupCount} onScoreChange={onScoreChange} onGroupChange={onGroupChange} />
+  // );
+
   const mainOutput = (
-    <GamePage dataSets={dataSets} groupCount={groupCount} onScoreChange={onScoreChange} onGroupChange={onGroupChange} />
+    <ResultsPage userData={{ gender: 'Мужской', name: 'Андрей' }} scoreSets={[5, 4, 5, 3]} score={43} />
   );
+
   return (
     <div className={style.app}>
       <div className={style.container}>
